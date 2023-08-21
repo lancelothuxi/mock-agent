@@ -25,7 +25,7 @@ public class RandomString extends AbstractFunction {
         String charsToUse = null;
         if (values.length >= CHARS) {
             charsToUse = values[CHARS - 1].execute().trim();
-            if (charsToUse.length() <= 0) { // empty chars, return to null
+            if (charsToUse.length() <= 0) {
                 charsToUse = null;
             }
         }

@@ -17,11 +17,11 @@ public class MockServerOperationTest {
     @org.testng.annotations.Test
     public void testRegisterAndGet4Dubbo() {
 
-        System.setProperty("mock.agent.log.enabled","true");
+        System.setProperty("mock.agent.log.enabled", "true");
 
         MockConfig mockConfig = new MockConfig("a1", "b1", "", "");
 
-        MockConfigRegistry.add(new MockConfig("a","b","",""));
+        MockConfigRegistry.add(new MockConfig("a", "b", "", ""));
         MockConfigRegistry.add(mockConfig);
 
         MockConfig queryResult = MockConfigRegistry.getMockConfig(mockConfig);
@@ -35,9 +35,9 @@ public class MockServerOperationTest {
         Assert.assertNull(queryResultnotExist);
 
 
-        List<MockConfig> list=new ArrayList<>();
-        list.add(new MockConfig("a","b","",""));
-        list.add(new MockConfig("a3","b3","",""));
+        List<MockConfig> list = new ArrayList<>();
+        list.add(new MockConfig("a", "b", "", ""));
+        list.add(new MockConfig("a3", "b3", "", ""));
     }
 
     @org.testng.annotations.Test

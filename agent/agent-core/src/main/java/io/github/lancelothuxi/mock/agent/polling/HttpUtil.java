@@ -78,11 +78,11 @@ public class HttpUtil {
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            throw new RuntimeException("http请求URL格式错误 message="+e.getMessage());
+            throw new RuntimeException("http请求URL格式错误 message=" + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             LogUtil.log("long polling service error", e);
-            throw new RuntimeException("http请求异常 message="+e.getMessage());
+            throw new RuntimeException("http请求异常 message=" + e.getMessage());
         } finally {
             // 关闭资源
             if (null != br) {

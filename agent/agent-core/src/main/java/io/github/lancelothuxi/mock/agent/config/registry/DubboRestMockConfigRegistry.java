@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DubboRestMockConfigRegistry{
+public class DubboRestMockConfigRegistry {
 
     public static String lastMd5;
     private static Map<Key, MockConfig> registry = new ConcurrentHashMap<>();
@@ -38,19 +38,19 @@ public class DubboRestMockConfigRegistry{
     }
 
 
-    public static void sync(List<MockConfig> configs){
+    public static void sync(List<MockConfig> configs) {
 
-        if(configs==null || configs.size()==0){
+        if (configs == null || configs.size() == 0) {
             registry.clear();
         }
 
-        Map<Key,MockConfig> tmp=new HashMap<>();
+        Map<Key, MockConfig> tmp = new HashMap<>();
         for (MockConfig config : configs) {
             Key key = new Key(config.getInterfaceName(), config.getMethodName(), config.getGroupName(), config.getVersion());
-            tmp.put(key,config );
+            tmp.put(key, config);
         }
 
-        MapCompare.compareMaps(registry,tmp);
+        MapCompare.compareMaps(registry, tmp);
     }
 
 
@@ -64,7 +64,7 @@ public class DubboRestMockConfigRegistry{
 
         final MockConfig mockConfig = registry.get(key);
 
-        if(mockConfig==null){
+        if (mockConfig == null) {
             LogUtil.log("mock agent query mock config from registry interfaceName={} methodName={} " +
                             "group={} version={}  current keys size ={}",
                     query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(), MockConfigRegistry.keys().size());

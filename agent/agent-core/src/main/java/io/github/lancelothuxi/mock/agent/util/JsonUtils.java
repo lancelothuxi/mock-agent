@@ -31,7 +31,7 @@ public class JsonUtils {
         objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
 
         //增加java8 time序列化
-        if(Util.isJavaVersionThanJdk7()){
+        if (Util.isJavaVersionThanJdk7()) {
             objectMapper.registerModule(new JavaTimeModule());
         }
     }

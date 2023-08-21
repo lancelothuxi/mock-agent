@@ -1,5 +1,6 @@
-package io.github.lancelothuxi.mock.agent;
+package io.github.lancelothuxi.mock.agent.spring;
 
+import io.github.lancelothuxi.mock.agent.Global;
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import org.springframework.context.support.AbstractApplicationContext;
 

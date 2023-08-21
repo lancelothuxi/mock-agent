@@ -19,7 +19,7 @@ public class Dubbo26StartInterceptor implements Interceptor {
     public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) throws Exception {
         try {
 
-            ReferenceBean referenceBean= (ReferenceBean)self;
+            ReferenceBean referenceBean = (ReferenceBean) self;
             final String interfaceName = referenceBean.getInterface();
             final String groupName = referenceBean.getGroup();
             final String version = referenceBean.getVersion();
@@ -27,17 +27,17 @@ public class Dubbo26StartInterceptor implements Interceptor {
                 return supercall.call();
             }
 
-            if(StringUtils.isEmpty(Global.applicationName) ){
+            if (StringUtils.isEmpty(Global.applicationName)) {
                 final String nameFromProperty = System.getProperty("mock.agent.applicationName");
-                Global.applicationName= nameFromProperty;
+                Global.applicationName = nameFromProperty;
             }
 
             for (Method dubboMethod : referenceBean.getInterfaceClass().getMethods()) {
                 MockConfig mockConfig = new MockConfig();
                 mockConfig.setInterfaceName(interfaceName);
                 mockConfig.setMethodName(dubboMethod.getName());
-                mockConfig.setGroupName(StringUtils.isEmpty(groupName)?"":groupName);
-                mockConfig.setVersion(StringUtils.isEmpty(version)?"":version);
+                mockConfig.setGroupName(StringUtils.isEmpty(groupName) ? "" : groupName);
+                mockConfig.setVersion(StringUtils.isEmpty(version) ? "" : version);
                 mockConfig.setAppliactionName(Global.applicationName);
 
                 LogUtil.log("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}", interfaceName, dubboMethod.getName(), groupName, version);

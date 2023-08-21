@@ -1,8 +1,8 @@
-package io.github.lancelothuxi.mock.agent.dubbo.openfeign;
+package io.github.lancelothuxi.mock.agent.openfeign;
 
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import feign.Headers;
 import feign.RequestLine;
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
 
 /**
  * @author lancelot

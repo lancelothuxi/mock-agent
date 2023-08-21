@@ -19,11 +19,10 @@ import static net.bytebuddy.matcher.ElementMatchers.named;
  */
 public class Transformer implements AgentBuilder.Transformer {
 
-    private List<Enhance> enhances =new ArrayList<>();
+    private List<Enhance> enhances = new ArrayList<>();
 
 
     public Transformer() {
-
 
 
     }

@@ -21,7 +21,7 @@ public class CommonInterceptor {
     }
 
 
-    public Class loadClass(String clazzName){
+    public Class loadClass(String clazzName) {
         try {
             return loader.findClass(clazzName);
         } catch (ClassNotFoundException e) {

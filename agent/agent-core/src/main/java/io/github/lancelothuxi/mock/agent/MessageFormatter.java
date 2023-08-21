@@ -470,7 +470,7 @@ final class MessageFormatter {
     }
 
     private static Set<Object> createDejaVu() {
-        return  Collections.newSetFromMap(new IdentityHashMap<Object, Boolean>() {
+        return Collections.newSetFromMap(new IdentityHashMap<Object, Boolean>() {
             @Override
             public Boolean put(Object key, Boolean value) {
                 return true;

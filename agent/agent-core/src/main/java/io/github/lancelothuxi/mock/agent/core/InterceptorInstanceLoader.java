@@ -18,8 +18,6 @@
 
 package io.github.lancelothuxi.mock.agent.core;
 
-import io.github.lancelothuxi.mock.agent.core.InterceptorClassLoader;
-
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 

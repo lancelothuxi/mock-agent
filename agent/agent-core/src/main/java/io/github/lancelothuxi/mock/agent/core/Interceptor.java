@@ -6,7 +6,6 @@ import java.util.concurrent.Callable;
 public interface Interceptor {
 
     /**
-     *
      * @param method
      * @param allArguments
      * @param self

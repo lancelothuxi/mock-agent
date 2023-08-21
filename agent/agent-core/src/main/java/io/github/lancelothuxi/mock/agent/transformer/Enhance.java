@@ -13,7 +13,6 @@ public interface Enhance {
     String enhanceMethodName();
 
     /**
-     *
      * @return
      */
     String enhanceClassName();

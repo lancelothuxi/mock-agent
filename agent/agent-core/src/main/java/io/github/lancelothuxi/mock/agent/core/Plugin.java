@@ -10,18 +10,21 @@ import net.bytebuddy.matcher.ElementMatcher;
 public interface Plugin {
     /**
      * classMatcher
+     *
      * @return
      */
     ElementMatcher classMatcher();
 
     /**
      * methodMatcher
+     *
      * @return
      */
     ElementMatcher methodMatcher();
 
     /**
      * 织入类
+     *
      * @return
      */
     Class<? extends Interceptor> interceptor();

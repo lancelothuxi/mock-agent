@@ -38,24 +38,24 @@ public class MockConfigRegistry {
         return registry.values();
     }
 
-    public static Set<Key> keys(){
+    public static Set<Key> keys() {
         return registry.keySet();
     }
 
 
-    public static void sync(List<MockConfig> configs){
+    public static void sync(List<MockConfig> configs) {
 
-        if(configs==null || configs.size()==0){
+        if (configs == null || configs.size() == 0) {
             registry.clear();
         }
 
-        Map<Key,MockConfig> tmp=new HashMap<>();
+        Map<Key, MockConfig> tmp = new HashMap<>();
         for (MockConfig config : configs) {
             Key key = new Key(config.getInterfaceName(), config.getMethodName(), config.getGroupName(), config.getVersion());
-            tmp.put(key,config );
+            tmp.put(key, config);
         }
 
-        MapCompare.compareMaps(registry,tmp);
+        MapCompare.compareMaps(registry, tmp);
     }
 
 
@@ -69,10 +69,10 @@ public class MockConfigRegistry {
 
         final MockConfig mockConfig = registry.get(key);
 
-        if(mockConfig==null){
+        if (mockConfig == null) {
             LogUtil.log("mock agent query mock config from registry interfaceName={} methodName={} " +
                             "group={} version={}  current keys size ={}",
-                    query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(),keys().size());
+                    query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(), keys().size());
         }
 
         return mockConfig;

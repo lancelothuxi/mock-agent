@@ -16,6 +16,7 @@ public class Util {
 
     /**
      * 判断class是否存在
+     *
      * @param className
      * @param classLoader
      * @return
@@ -30,7 +31,7 @@ public class Util {
     }
 
 
-    public static boolean isJavaVersionThanJdk7(){
+    public static boolean isJavaVersionThanJdk7() {
         String javaVersion = System.getProperty("java.version");
         int majorVersion = Integer.parseInt(javaVersion.split("\\.")[0]);
         if (majorVersion > 1 || (majorVersion == 1 && Integer.parseInt(javaVersion.split("\\.")[1]) > 7)) {
@@ -40,19 +41,19 @@ public class Util {
         }
     }
 
-    public static String collectionToString(Collection collection){
-        if(collection==null || collection.size()==0){
+    public static String collectionToString(Collection collection) {
+        if (collection == null || collection.size() == 0) {
             return "[]";
         }
 
-        StringBuffer stringBuffer=new StringBuffer("[");
+        StringBuffer stringBuffer = new StringBuffer("[");
         for (Object o : collection) {
-            if(o==null){
+            if (o == null) {
                 stringBuffer.append("null");
                 continue;
             }
             stringBuffer.append(o.toString())
-            .append(",");
+                    .append(",");
         }
 
         stringBuffer.append("]");

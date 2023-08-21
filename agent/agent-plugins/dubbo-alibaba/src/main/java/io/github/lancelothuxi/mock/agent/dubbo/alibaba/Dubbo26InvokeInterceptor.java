@@ -92,8 +92,8 @@ public class Dubbo26InvokeInterceptor implements Interceptor {
                         referenceConfig.setRegistry(registryConfig);
                         referenceConfig.setProtocol("dubbo");
                         referenceConfig.setGeneric(false);
-                        ApplicationConfig applicationConfig=new ApplicationConfig();
-                        applicationConfig.setName(StringUtils.isEmpty(Global.applicationName)?"unknown":Global.applicationName);
+                        ApplicationConfig applicationConfig = new ApplicationConfig();
+                        applicationConfig.setName(StringUtils.isEmpty(Global.applicationName) ? "unknown" : Global.applicationName);
                         referenceConfig.setApplication(applicationConfig);
                         commonDubboMockService = referenceConfig.get();
                     }
@@ -107,10 +107,10 @@ public class Dubbo26InvokeInterceptor implements Interceptor {
                 mockRequest.setArgs(argsString);
                 mockRequest.setAppName(mockConfig.getAppliactionName());
 
-                LogUtil.log("mock-agent call mock request interfaceName={} methodName={} args={}", interfaceName, methodName,argsString);
+                LogUtil.log("mock-agent call mock request interfaceName={} methodName={} args={}", interfaceName, methodName, argsString);
                 MockResponse mockResponse = commonDubboMockService.doMockRequest(mockRequest);
 
-                if (mockResponse == null ) {
+                if (mockResponse == null) {
                     LogUtil.log("mock-agent call mock response is null interfaceName={} methodName={} response={}", interfaceName, methodName, mockResponse.getData());
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
@@ -163,10 +163,10 @@ public class Dubbo26InvokeInterceptor implements Interceptor {
             Object mockValue = MockInvoker.parseMockValue(data, new Class[]{returnType});
             return new RpcResult(mockValue);
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}",Global.agentMandatory, e);
-            if(Global.agentMandatory){
+            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", Global.agentMandatory, e);
+            if (Global.agentMandatory) {
                 throw e;
-            }else {
+            } else {
                 return supercall.call();
             }
         }

@@ -24,6 +24,7 @@
         <module>dubbo-alibaba</module>
         <module>dubbo-apache</module>
         <module>openfeign</module>
+        <module>spring</module>
     </modules>
 
 

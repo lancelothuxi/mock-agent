@@ -1,17 +1,6 @@
-package io.github.lancelothuxi.mock.agent.dubbo.openfeign;
+package io.github.lancelothuxi.mock.agent.openfeign;
 
 import com.alibaba.fastjson.JSON;
-import io.github.lancelothuxi.mock.agent.Global;
-import io.github.lancelothuxi.mock.agent.core.Interceptor;
-import io.github.lancelothuxi.mock.agent.LogUtil;
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.config.MockData;
-import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
-import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
-import io.github.lancelothuxi.mock.agent.config.registry.FeignMockConfigRegistry;
-import io.github.lancelothuxi.mock.agent.polling.Util;
-import io.github.lancelothuxi.mock.agent.util.CollectionUtils;
-import io.github.lancelothuxi.mock.agent.util.ParseUtil;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +9,17 @@ import feign.Contract;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
+import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
+import io.github.lancelothuxi.mock.agent.config.MockData;
+import io.github.lancelothuxi.mock.agent.config.registry.FeignMockConfigRegistry;
+import io.github.lancelothuxi.mock.agent.core.Interceptor;
+import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
+import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
+import io.github.lancelothuxi.mock.agent.polling.Util;
+import io.github.lancelothuxi.mock.agent.util.CollectionUtils;
+import io.github.lancelothuxi.mock.agent.util.ParseUtil;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -91,9 +91,9 @@ public class FeignInvokeInterceptor implements Interceptor {
                 }
 
                 MockFeignResponse mockFeignResponse = commonMockFeignClient.doMock(mockConfig);
-                LogUtil.log("mock-agent feign mock request interfaceName={} methodName={} args={}", interfacename, methodName,argsString);
+                LogUtil.log("mock-agent feign mock request interfaceName={} methodName={} args={}", interfacename, methodName, argsString);
 
-                if (mockFeignResponse == null ) {
+                if (mockFeignResponse == null) {
                     LogUtil.log("mock-agent feign mock response is null interfaceName={} methodName={}", interfacename, methodName);
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
@@ -145,10 +145,10 @@ public class FeignInvokeInterceptor implements Interceptor {
             final Object result = ParseUtil.parseMockValue(data, javaType);
             return result;
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}",Global.agentMandatory, e);
-            if(Global.agentMandatory){
+            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", Global.agentMandatory, e);
+            if (Global.agentMandatory) {
                 throw e;
-            }else {
+            } else {
                 return supercall.call();
             }
         }

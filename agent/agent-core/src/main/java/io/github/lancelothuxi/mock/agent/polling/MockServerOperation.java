@@ -3,9 +3,9 @@ package io.github.lancelothuxi.mock.agent.polling;
 import com.alibaba.fastjson.JSON;
 import io.github.lancelothuxi.mock.agent.Global;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.config.registry.DubboRestMockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.config.registry.FeignMockConfigRegistry;
+import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.util.DigestUtils;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class MockServerOperation {
     public static void registerAndGet4Dubbo() {
         final Request request = register("dubbo", MockConfigRegistry.registryValues());
         syncDubboConfigsFromServer(request);
-        if(dubboTaskStarted){
+        if (dubboTaskStarted) {
             return;
         }
 
@@ -43,7 +43,7 @@ public class MockServerOperation {
             }
         }, 0, 5000L);
 
-        dubboTaskStarted=true;
+        dubboTaskStarted = true;
     }
 
 
@@ -54,7 +54,7 @@ public class MockServerOperation {
         final Request request = register("dubborest", DubboRestMockConfigRegistry.registryValues());
         syncDubboRestConfigsFromServer(request);
 
-        if(dubboRestTaskStarted){
+        if (dubboRestTaskStarted) {
             return;
         }
         timer.schedule(new TimerTask() {
@@ -64,7 +64,7 @@ public class MockServerOperation {
             }
         }, 0L, 5000L);
 
-        dubboRestTaskStarted=true;
+        dubboRestTaskStarted = true;
 
     }
 
@@ -74,7 +74,7 @@ public class MockServerOperation {
      */
     public static void registerAndGet4Feign() {
 
-        if(feignTaskStarted){
+        if (feignTaskStarted) {
             return;
         }
         final Request request = register("feign", FeignMockConfigRegistry.registryValues());
@@ -87,7 +87,7 @@ public class MockServerOperation {
             }
         }, 0, 5000L);
 
-        feignTaskStarted=true;
+        feignTaskStarted = true;
     }
 
 
@@ -119,8 +119,6 @@ public class MockServerOperation {
     }
 
 
-
-
     private static void syncFeignConfigsFromServer(Request request) {
         final String result = HttpUtil.doPost(request, queryAll, 3000);
         String md5Hex = DigestUtils
@@ -135,7 +133,7 @@ public class MockServerOperation {
     }
 
 
-    private static Request register(String type,List<MockConfig> mockConfigs) {
+    private static Request register(String type, List<MockConfig> mockConfigs) {
         Request request = new Request();
         request.setType(type);
         request.setAppName(Global.applicationName);
@@ -144,8 +142,8 @@ public class MockServerOperation {
         try {
             //注册
             HttpUtil.doPost(request, register, 3000);
-        }catch (Exception ex){
-            if(Global.agentMandatory){
+        } catch (Exception ex) {
+            if (Global.agentMandatory) {
                 throw new RuntimeException("注册请求失败，mock.agent.mandatory 设置为true, 程序将退出");
             }
         }

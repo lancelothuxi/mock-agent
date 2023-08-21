@@ -37,7 +37,7 @@ public class RandomStringUtils {
      * <p>Characters will be chosen from the set of Latin alphabetic
      * characters (a-z, A-Z).</p>
      *
-     * @param count  the length of random string to create
+     * @param count the length of random string to create
      * @return the random string
      */
     public static String randomAlphabetic(final int count) {
@@ -51,11 +51,11 @@ public class RandomStringUtils {
      * <p>Characters will be chosen from the set of alpha-numeric
      * characters as indicated by the arguments.</p>
      *
-     * @param count  the length of random string to create
-     * @param letters  if {@code true}, generated string may include
-     *  alphabetic characters
-     * @param numbers  if {@code true}, generated string may include
-     *  numeric characters
+     * @param count   the length of random string to create
+     * @param letters if {@code true}, generated string may include
+     *                alphabetic characters
+     * @param numbers if {@code true}, generated string may include
+     *                numeric characters
      * @return the random string
      */
     public static String random(final int count, final boolean letters, final boolean numbers) {
@@ -69,13 +69,13 @@ public class RandomStringUtils {
      * <p>Characters will be chosen from the set of alpha-numeric
      * characters as indicated by the arguments.</p>
      *
-     * @param count  the length of random string to create
-     * @param start  the position in set of chars to start at
-     * @param end  the position in set of chars to end before
-     * @param letters  if {@code true}, generated string may include
-     *  alphabetic characters
-     * @param numbers  if {@code true}, generated string may include
-     *  numeric characters
+     * @param count   the length of random string to create
+     * @param start   the position in set of chars to start at
+     * @param end     the position in set of chars to end before
+     * @param letters if {@code true}, generated string may include
+     *                alphabetic characters
+     * @param numbers if {@code true}, generated string may include
+     *                numeric characters
      * @return the random string
      */
     public static String random(final int count, final int start, final int end, final boolean letters, final boolean numbers) {
@@ -102,18 +102,18 @@ public class RandomStringUtils {
      * the same random sequence of strings can be generated repeatedly
      * and predictably.</p>
      *
-     * @param count  the length of random string to create
-     * @param start  the position in set of chars to start at (inclusive)
-     * @param end  the position in set of chars to end before (exclusive)
-     * @param letters  only allow letters?
-     * @param numbers  only allow numbers?
-     * @param chars  the set of chars to choose randoms from, must not be empty.
-     *  If {@code null}, then it will use the set of all chars.
+     * @param count   the length of random string to create
+     * @param start   the position in set of chars to start at (inclusive)
+     * @param end     the position in set of chars to end before (exclusive)
+     * @param letters only allow letters?
+     * @param numbers only allow numbers?
+     * @param chars   the set of chars to choose randoms from, must not be empty.
+     *                If {@code null}, then it will use the set of all chars.
      * @param random  a source of randomness.
      * @return the random string
      * @throws ArrayIndexOutOfBoundsException if there are not
-     *  {@code (end - start) + 1} characters in the set array.
-     * @throws IllegalArgumentException if {@code count} &lt; 0 or the provided chars array is empty.
+     *                                        {@code (end - start) + 1} characters in the set array.
+     * @throws IllegalArgumentException       if {@code count} &lt; 0 or the provided chars array is empty.
      * @since 2.0
      */
     public static String random(int count, int start, int end, final boolean letters, final boolean numbers,
@@ -204,9 +204,9 @@ public class RandomStringUtils {
      * specified by the string, must not be empty.
      * If null, the set of all characters is used.</p>
      *
-     * @param count  the length of random string to create
-     * @param chars  the String containing the set of characters to use,
-     *  may be null, but must not be empty
+     * @param count the length of random string to create
+     * @param chars the String containing the set of characters to use,
+     *              may be null, but must not be empty
      * @return the random string
      * @throws IllegalArgumentException if {@code count} &lt; 0 or the string is empty.
      */
@@ -223,9 +223,9 @@ public class RandomStringUtils {
      *
      * <p>Characters will be chosen from the set of characters specified.</p>
      *
-     * @param count  the length of random string to create
-     * @param chars  the character array containing the set of characters to use,
-     *  may be null
+     * @param count the length of random string to create
+     * @param chars the character array containing the set of characters to use,
+     *              may be null
      * @return the random string
      * @throws IllegalArgumentException if {@code count} &lt; 0.
      */

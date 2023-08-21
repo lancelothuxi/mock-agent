@@ -31,14 +31,12 @@
     </properties>
 
 
-
     <dependencies>
         <dependency>
             <groupId>io.github.lancelothuxi</groupId>
             <artifactId>mock-api</artifactId>
             <version>1.0.0</version>
         </dependency>
-
 
 
         <dependency>

@@ -2,20 +2,20 @@ package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
 
 import com.alibaba.fastjson.JSON;
-import io.github.lancelothuxi.mock.agent.Global;
-import io.github.lancelothuxi.mock.agent.core.Interceptor;
-import io.github.lancelothuxi.mock.agent.LogUtil;
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.config.MockData;
-import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
-import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
-import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
-import io.github.lancelothuxi.mock.agent.util.ParseUtil;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
+import io.github.lancelothuxi.mock.agent.config.MockData;
+import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
+import io.github.lancelothuxi.mock.agent.core.Interceptor;
+import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
+import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
 import io.github.lancelothuxi.mock.agent.polling.Util;
+import io.github.lancelothuxi.mock.agent.util.ParseUtil;
 import io.github.lancelothuxi.mock.api.CommonDubboMockService;
 import io.github.lancelothuxi.mock.api.MockRequest;
 import io.github.lancelothuxi.mock.api.MockResponse;
@@ -49,6 +49,7 @@ public class DubboInvokeInterceptor implements Interceptor {
 
     private volatile CommonDubboMockService commonDubboMockService;
 
+    @Override
     public Object intercept(@Origin Method method, @AllArguments Object[] allArguments,
                             @This Object self, @SuperCall Callable supercall) throws Exception {
 
@@ -112,10 +113,10 @@ public class DubboInvokeInterceptor implements Interceptor {
                 mockRequest.setArgs(argsString);
                 mockRequest.setAppName(mockConfig.getAppliactionName());
 
-                LogUtil.log("mock-agent call mock request interfaceName={} methodName={} args={}", interfaceName, methodName,argsString);
+                LogUtil.log("mock-agent call mock request interfaceName={} methodName={} args={}", interfaceName, methodName, argsString);
                 MockResponse mockResponse = commonDubboMockService.doMockRequest(mockRequest);
 
-                if (mockResponse == null ) {
+                if (mockResponse == null) {
                     LogUtil.log("mock-agent call mock response is null interfaceName={} methodName={} response={}", interfaceName, methodName, mockResponse.getData());
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
@@ -169,11 +170,11 @@ public class DubboInvokeInterceptor implements Interceptor {
             return AsyncRpcResult.newDefaultAsyncResult(result, invocation);
 
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}",Global.agentMandatory, e);
+            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", Global.agentMandatory, e);
 
-            if(Global.agentMandatory){
+            if (Global.agentMandatory) {
                 throw e;
-            }else {
+            } else {
                 return supercall.call();
             }
         }

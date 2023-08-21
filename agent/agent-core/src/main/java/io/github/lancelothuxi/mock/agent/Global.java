@@ -7,7 +7,7 @@ public class Global {
     public static volatile String mockServerURL;
     public static volatile String zkAddress;
     public static volatile String applicationName;
-    public static boolean agentMandatory=true;
+    public static boolean agentMandatory = true;
 
 
     static {
@@ -18,31 +18,31 @@ public class Global {
     private static void getServerUrl() {
 
         String mockServerUrlFromEnv = getPropertyFromEnvOrSystemProperty("MOCK_SERVER_URL");
-        if(StringUtils.isNotEmpty(mockServerUrlFromEnv)){
+        if (StringUtils.isNotEmpty(mockServerUrlFromEnv)) {
             mockServerURL = mockServerUrlFromEnv;
             System.out.println("read mockServerUrlFromEnv = " + mockServerUrlFromEnv);
-        }else {
+        } else {
             throw new RuntimeException("get MOCK_SERVER_URL from env failed");
         }
 
         String zkAddressFromEnv = getPropertyFromEnvOrSystemProperty("ZK_ADDRESS");
-        if(StringUtils.isNotEmpty(zkAddressFromEnv)){
+        if (StringUtils.isNotEmpty(zkAddressFromEnv)) {
             zkAddress = zkAddressFromEnv;
             System.out.println("read zkAddressFromEnv = " + zkAddressFromEnv);
-        }else {
+        } else {
             throw new RuntimeException("get ZK_ADDRESS from env failed");
         }
     }
 
 
-    private static String getPropertyFromEnvOrSystemProperty(String key){
+    private static String getPropertyFromEnvOrSystemProperty(String key) {
         String value = System.getenv(key);
-        if(StringUtils.isNotEmpty(value)){
+        if (StringUtils.isNotEmpty(value)) {
             return value;
         }
 
         String propertyValue = System.getProperty(key);
-        if(StringUtils.isNotEmpty(propertyValue)){
+        if (StringUtils.isNotEmpty(propertyValue)) {
             return propertyValue;
         }
 

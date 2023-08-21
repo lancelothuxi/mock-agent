@@ -17,7 +17,7 @@ public class LogUtil {
     private static boolean logEnabled = Objects.equals("true", System.getProperty("mock.agent.log.enabled"));
 
     public static void log(String message, Object... args) {
-        if(!logEnabled){
+        if (!logEnabled) {
             return;
         }
 

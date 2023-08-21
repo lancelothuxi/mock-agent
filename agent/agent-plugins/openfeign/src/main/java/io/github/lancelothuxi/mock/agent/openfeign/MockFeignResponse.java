@@ -1,4 +1,4 @@
-package io.github.lancelothuxi.mock.agent.dubbo.openfeign;
+package io.github.lancelothuxi.mock.agent.openfeign;
 
 import java.io.Serializable;
 

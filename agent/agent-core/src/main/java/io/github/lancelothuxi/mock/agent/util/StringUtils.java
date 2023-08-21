@@ -9,7 +9,6 @@ public class StringUtils {
 
     public static final String EMPTY = "";
 
-
     public static boolean isEmpty(final CharSequence cs) {
         return cs == null || cs.length() == 0;
     }

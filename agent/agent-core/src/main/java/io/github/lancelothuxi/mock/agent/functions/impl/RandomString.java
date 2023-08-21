@@ -2,7 +2,7 @@ package io.github.lancelothuxi.mock.agent.functions.impl;
 
 import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
-import org.apache.commons.lang3.RandomStringUtils;
+import io.github.lancelothuxi.mock.agent.util.RandomStringUtils;
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
 import java.util.Collection;
@@ -18,12 +18,6 @@ public class RandomString extends AbstractFunction {
         super();
     }
 
-    public static void main(String[] args) {
-        final String s = RandomStringUtils.randomAlphabetic(10);
-
-        System.out.println("s = " + s);
-
-    }
 
     @Override
     public String execute(Object... args) {

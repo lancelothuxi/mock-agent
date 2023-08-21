@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JavaType;
 
 public class ParseUtil {
 
-    public static Object parseMockValue(String mock, JavaType type) throws Exception {
+    public static Object parseMockValue(String mock, JavaType type) {
         Object value;
         if ("null".equals(mock)) {
             value = null;

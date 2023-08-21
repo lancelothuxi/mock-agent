@@ -14,16 +14,6 @@ public class Util {
         return v;
     }
 
-    public static <V> V getOrDefault(V v, V defValue) {
-
-        if (v == null) {
-            return defValue;
-        }
-
-        return v;
-    }
-
-
     /**
      * 判断class是否存在
      * @param className

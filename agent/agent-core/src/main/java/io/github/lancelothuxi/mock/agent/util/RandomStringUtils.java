@@ -5,28 +5,9 @@ package io.github.lancelothuxi.mock.agent.util;
  * @version 1.0
  * @date 2023/7/25 下午1:40
  */
-import org.apache.commons.lang3.RandomUtils;
 
 import java.util.Random;
 
-/**
- * <p>Operations for random {@code String}s.</p>
- * <p>Currently <em>private high surrogate</em> characters are ignored.
- * These are Unicode characters that fall between the values 56192 (db80)
- * and 56319 (dbff) as we don't know how to handle them.
- * High and low surrogates are correctly dealt with - that is if a
- * high surrogate is randomly chosen, 55296 (d800) to 56191 (db7f)
- * then it is followed by a low surrogate. If a low surrogate is chosen,
- * 56320 (dc00) to 57343 (dfff) then it is placed after a randomly
- * chosen high surrogate.</p>
- * <p>RandomStringUtils is intended for simple use cases. For more advanced
- * use cases consider using commons-text
- * <a href="https://commons.apache.org/proper/commons-text/javadocs/api-release/org/apache/commons/text/RandomStringGenerator.html">
- * RandomStringGenerator</a> instead.</p>
- *
- * <p>#ThreadSafe#</p>
- * @since 1.0
- */
 public class RandomStringUtils {
 
     /**
@@ -48,50 +29,6 @@ public class RandomStringUtils {
         super();
     }
 
-    // Random
-    //-----------------------------------------------------------------------
-    /**
-     * <p>Creates a random string whose length is the number of characters
-     * specified.</p>
-     *
-     * <p>Characters will be chosen from the set of all characters.</p>
-     *
-     * @param count  the length of random string to create
-     * @return the random string
-     */
-    public static String random(final int count) {
-        return random(count, false, false);
-    }
-
-    /**
-     * <p>Creates a random string whose length is the number of characters
-     * specified.</p>
-     *
-     * <p>Characters will be chosen from the set of characters whose
-     * ASCII value is between {@code 32} and {@code 126} (inclusive).</p>
-     *
-     * @param count  the length of random string to create
-     * @return the random string
-     */
-    public static String randomAscii(final int count) {
-        return random(count, 32, 127, false, false);
-    }
-
-    /**
-     * <p>Creates a random string whose length is between the inclusive minimum and
-     * the exclusive maximum.</p>
-     *
-     * <p>Characters will be chosen from the set of characters whose
-     * ASCII value is between {@code 32} and {@code 126} (inclusive).</p>
-     *
-     * @param minLengthInclusive the inclusive minimum length of the string to generate
-     * @param maxLengthExclusive the exclusive maximum length of the string to generate
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomAscii(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomAscii(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
-    }
 
     /**
      * <p>Creates a random string whose length is the number of characters
@@ -105,140 +42,6 @@ public class RandomStringUtils {
      */
     public static String randomAlphabetic(final int count) {
         return random(count, true, false);
-    }
-
-    /**
-     * <p>Creates a random string whose length is between the inclusive minimum and
-     * the exclusive maximum.</p>
-     *
-     * <p>Characters will be chosen from the set of Latin alphabetic characters (a-z, A-Z).</p>
-     *
-     * @param minLengthInclusive the inclusive minimum length of the string to generate
-     * @param maxLengthExclusive the exclusive maximum length of the string to generate
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomAlphabetic(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomAlphabetic(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
-    }
-
-    /**
-     * <p>Creates a random string whose length is the number of characters
-     * specified.</p>
-     *
-     * <p>Characters will be chosen from the set of Latin alphabetic
-     * characters (a-z, A-Z) and the digits 0-9.</p>
-     *
-     * @param count  the length of random string to create
-     * @return the random string
-     */
-    public static String randomAlphanumeric(final int count) {
-        return random(count, true, true);
-    }
-
-    /**
-     * <p>Creates a random string whose length is between the inclusive minimum and
-     * the exclusive maximum.</p>
-     *
-     * <p>Characters will be chosen from the set of Latin alphabetic
-     * characters (a-z, A-Z) and the digits 0-9.</p>
-     *
-     * @param minLengthInclusive the inclusive minimum length of the string to generate
-     * @param maxLengthExclusive the exclusive maximum length of the string to generate
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomAlphanumeric(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomAlphanumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
-    }
-
-    /**
-     * <p>Creates a random string whose length is the number of characters specified.</p>
-     *
-     * <p>Characters will be chosen from the set of characters which match the POSIX [:graph:]
-     * regular expression character class. This class contains all visible ASCII characters
-     * (i.e. anything except spaces and control characters).</p>
-     *
-     * @param count  the length of random string to create
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomGraph(final int count) {
-        return random(count, 33, 126, false, false);
-    }
-
-    /**
-     * <p>Creates a random string whose length is between the inclusive minimum and
-     * the exclusive maximum.</p>
-     *
-     * <p>Characters will be chosen from the set of \p{Graph} characters.</p>
-     *
-     * @param minLengthInclusive the inclusive minimum length of the string to generate
-     * @param maxLengthExclusive the exclusive maximum length of the string to generate
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomGraph(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomGraph(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
-    }
-
-    /**
-     * <p>Creates a random string whose length is the number of characters
-     * specified.</p>
-     *
-     * <p>Characters will be chosen from the set of numeric
-     * characters.</p>
-     *
-     * @param count  the length of random string to create
-     * @return the random string
-     */
-    public static String randomNumeric(final int count) {
-        return random(count, false, true);
-    }
-
-    /**
-     * <p>Creates a random string whose length is between the inclusive minimum and
-     * the exclusive maximum.</p>
-     *
-     * <p>Characters will be chosen from the set of \p{Digit} characters.</p>
-     *
-     * @param minLengthInclusive the inclusive minimum length of the string to generate
-     * @param maxLengthExclusive the exclusive maximum length of the string to generate
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomNumeric(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomNumeric(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
-    }
-
-    /**
-     * <p>Creates a random string whose length is the number of characters specified.</p>
-     *
-     * <p>Characters will be chosen from the set of characters which match the POSIX [:print:]
-     * regular expression character class. This class includes all visible ASCII characters and spaces
-     * (i.e. anything except control characters).</p>
-     *
-     * @param count  the length of random string to create
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomPrint(final int count) {
-        return random(count, 32, 126, false, false);
-    }
-
-    /**
-     * <p>Creates a random string whose length is between the inclusive minimum and
-     * the exclusive maximum.</p>
-     *
-     * <p>Characters will be chosen from the set of \p{Print} characters.</p>
-     *
-     * @param minLengthInclusive the inclusive minimum length of the string to generate
-     * @param maxLengthExclusive the exclusive maximum length of the string to generate
-     * @return the random string
-     * @since 3.5
-     */
-    public static String randomPrint(final int minLengthInclusive, final int maxLengthExclusive) {
-        return randomPrint(RandomUtils.nextInt(minLengthInclusive, maxLengthExclusive));
     }
 
     /**
@@ -279,29 +82,6 @@ public class RandomStringUtils {
         return random(count, start, end, letters, numbers, null, RANDOM);
     }
 
-    /**
-     * <p>Creates a random string based on a variety of options, using
-     * default source of randomness.</p>
-     *
-     * <p>This method has exactly the same semantics as
-     * {@link #random(int,int,int,boolean,boolean,char[],Random)}, but
-     * instead of using an externally supplied source of randomness, it uses
-     * the internal static {@link Random} instance.</p>
-     *
-     * @param count  the length of random string to create
-     * @param start  the position in set of chars to start at
-     * @param end  the position in set of chars to end before
-     * @param letters  only allow letters?
-     * @param numbers  only allow numbers?
-     * @param chars  the set of chars to choose randoms from.
-     *  If {@code null}, then it will use the set of all chars.
-     * @return the random string
-     * @throws ArrayIndexOutOfBoundsException if there are not
-     *  {@code (end - start) + 1} characters in the set array.
-     */
-    public static String random(final int count, final int start, final int end, final boolean letters, final boolean numbers, final char... chars) {
-        return random(count, start, end, letters, numbers, chars, RANDOM);
-    }
 
     /**
      * <p>Creates a random string based on a variety of options, using

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>io.github.lancelothuxi</groupId>
-    <artifactId>mock-agent-plugin-openfeign</artifactId>
+    <artifactId>mock-agent-plugin-spring</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

@@ -24,6 +24,6 @@ public class RegisterPlugin implements Plugin {
 
     @Override
     public Class interceptor() {
-        return null;
+        return DubboStartInterceptor.class;
     }
 }

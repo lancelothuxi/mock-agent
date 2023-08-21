@@ -1,7 +1,7 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
 import com.alibaba.dubbo.common.Constants;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
@@ -36,7 +36,7 @@ public class DubboStartInterceptor {
                 }
 
 
-                final String appName = Global.applicationName;
+                final String appName = GlobalConfig.applicationName;
 
                 final String[] methodNames = Util.mapGetOrDefault(map, Constants.METHODS_KEY, "").split(",");
                 final String groupName = Util.mapGetOrDefault(map, Constants.GROUP_KEY, "");

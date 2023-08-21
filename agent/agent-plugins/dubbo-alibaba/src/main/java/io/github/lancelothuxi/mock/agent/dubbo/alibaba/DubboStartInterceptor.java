@@ -1,7 +1,7 @@
 package io.github.lancelothuxi.mock.agent.dubbo.alibaba;
 
 import com.alibaba.dubbo.config.spring.ReferenceBean;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
 
-public class Dubbo26StartInterceptor implements Interceptor {
+public class DubboStartInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) throws Exception {
@@ -28,9 +28,9 @@ public class Dubbo26StartInterceptor implements Interceptor {
                 return supercall.call();
             }
 
-            if (StringUtils.isEmpty(Global.applicationName)) {
+            if (StringUtils.isEmpty(GlobalConfig.applicationName)) {
                 final String nameFromProperty = System.getProperty("mock.agent.applicationName");
-                Global.applicationName = nameFromProperty;
+                GlobalConfig.applicationName = nameFromProperty;
             }
 
             for (Method dubboMethod : referenceBean.getInterfaceClass().getMethods()) {
@@ -39,7 +39,7 @@ public class Dubbo26StartInterceptor implements Interceptor {
                 mockConfig.setMethodName(dubboMethod.getName());
                 mockConfig.setGroupName(StringUtils.isEmpty(groupName) ? "" : groupName);
                 mockConfig.setVersion(StringUtils.isEmpty(version) ? "" : version);
-                mockConfig.setAppliactionName(Global.applicationName);
+                mockConfig.setAppliactionName(GlobalConfig.applicationName);
 
                 LogUtil.log("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}", interfaceName, dubboMethod.getName(), groupName, version);
                 MockConfigRegistry.add4Register(mockConfig);

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
@@ -95,7 +95,7 @@ public class DubboInvokeInterceptor implements Interceptor {
             if (mockConfig.mockFromServer()) {
                 if (commonDubboMockService == null) {
                     synchronized (DubboInvokeInterceptor.class) {
-                        RegistryConfig registryConfig = new RegistryConfig(Global.zkAddress);
+                        RegistryConfig registryConfig = new RegistryConfig(GlobalConfig.zkAddress);
                         ReferenceConfig<CommonDubboMockService> referenceConfig = new ReferenceConfig<CommonDubboMockService>();
                         referenceConfig.setInterface(CommonDubboMockService.class);
                         referenceConfig.setRegistry(registryConfig);
@@ -170,9 +170,9 @@ public class DubboInvokeInterceptor implements Interceptor {
             return AsyncRpcResult.newDefaultAsyncResult(result, invocation);
 
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", Global.agentMandatory, e);
+            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", GlobalConfig.agentMandatory, e);
 
-            if (Global.agentMandatory) {
+            if (GlobalConfig.agentMandatory) {
                 throw e;
             } else {
                 return supercall.call();

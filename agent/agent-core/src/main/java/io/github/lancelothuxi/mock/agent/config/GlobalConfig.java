@@ -1,13 +1,25 @@
-package io.github.lancelothuxi.mock.agent;
+package io.github.lancelothuxi.mock.agent.config;
 
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
-public class Global {
+/**
+ * @author lancelot
+ */
+public class GlobalConfig {
 
     public static volatile String mockServerURL;
     public static volatile String zkAddress;
     public static volatile String applicationName;
-    public static boolean agentMandatory = true;
+
+    /**
+     * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
+     */
+    public static boolean degrade = false;
+
+
+    public static void init(){
+        degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
+    }
 
 
     static {
@@ -20,7 +32,6 @@ public class Global {
         String mockServerUrlFromEnv = getPropertyFromEnvOrSystemProperty("MOCK_SERVER_URL");
         if (StringUtils.isNotEmpty(mockServerUrlFromEnv)) {
             mockServerURL = mockServerUrlFromEnv;
-            System.out.println("read mockServerUrlFromEnv = " + mockServerUrlFromEnv);
         } else {
             throw new RuntimeException("get MOCK_SERVER_URL from env failed");
         }
@@ -28,7 +39,6 @@ public class Global {
         String zkAddressFromEnv = getPropertyFromEnvOrSystemProperty("ZK_ADDRESS");
         if (StringUtils.isNotEmpty(zkAddressFromEnv)) {
             zkAddress = zkAddressFromEnv;
-            System.out.println("read zkAddressFromEnv = " + zkAddressFromEnv);
         } else {
             throw new RuntimeException("get ZK_ADDRESS from env failed");
         }
@@ -36,6 +46,7 @@ public class Global {
 
 
     private static String getPropertyFromEnvOrSystemProperty(String key) {
+
         String value = System.getenv(key);
         if (StringUtils.isNotEmpty(value)) {
             return value;

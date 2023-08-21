@@ -1,7 +1,7 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
 import com.alibaba.fastjson.JSON;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.DubboRestMockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.config.registry.FeignMockConfigRegistry;
@@ -136,14 +136,14 @@ public class MockServerOperation {
     private static Request register(String type, List<MockConfig> mockConfigs) {
         Request request = new Request();
         request.setType(type);
-        request.setAppName(Global.applicationName);
+        request.setAppName(GlobalConfig.applicationName);
         request.setMockConfigList(mockConfigs);
 
         try {
             //注册
             HttpUtil.doPost(request, register, 3000);
         } catch (Exception ex) {
-            if (Global.agentMandatory) {
+            if (GlobalConfig.agentMandatory) {
                 throw new RuntimeException("注册请求失败，mock.agent.mandatory 设置为true, 程序将退出");
             }
         }

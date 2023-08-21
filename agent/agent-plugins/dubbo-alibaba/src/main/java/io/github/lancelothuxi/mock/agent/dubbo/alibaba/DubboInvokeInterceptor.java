@@ -11,7 +11,7 @@ import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker;
 import com.alibaba.dubbo.rpc.support.MockInvoker;
 import com.alibaba.fastjson.JSON;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
@@ -37,7 +37,7 @@ import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
 /**
  *
  */
-public class Dubbo26InvokeInterceptor implements Interceptor {
+public class DubboInvokeInterceptor implements Interceptor {
 
     private volatile CommonDubboMockService commonDubboMockService;
 
@@ -86,15 +86,15 @@ public class Dubbo26InvokeInterceptor implements Interceptor {
 
             if (mockConfig.mockFromServer()) {
                 if (commonDubboMockService == null) {
-                    synchronized (Dubbo26InvokeInterceptor.class) {
-                        RegistryConfig registryConfig = new RegistryConfig(Global.zkAddress);
+                    synchronized (DubboInvokeInterceptor.class) {
+                        RegistryConfig registryConfig = new RegistryConfig(GlobalConfig.zkAddress);
                         ReferenceConfig<CommonDubboMockService> referenceConfig = new ReferenceConfig<CommonDubboMockService>();
                         referenceConfig.setInterface(CommonDubboMockService.class);
                         referenceConfig.setRegistry(registryConfig);
                         referenceConfig.setProtocol("dubbo");
                         referenceConfig.setGeneric(false);
                         ApplicationConfig applicationConfig = new ApplicationConfig();
-                        applicationConfig.setName(StringUtils.isEmpty(Global.applicationName) ? "unknown" : Global.applicationName);
+                        applicationConfig.setName(StringUtils.isEmpty(GlobalConfig.applicationName) ? "unknown" : GlobalConfig.applicationName);
                         referenceConfig.setApplication(applicationConfig);
                         commonDubboMockService = referenceConfig.get();
                     }
@@ -164,8 +164,8 @@ public class Dubbo26InvokeInterceptor implements Interceptor {
             Object mockValue = MockInvoker.parseMockValue(data, new Class[]{returnType});
             return new RpcResult(mockValue);
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", Global.agentMandatory, e);
-            if (Global.agentMandatory) {
+            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", GlobalConfig.agentMandatory, e);
+            if (GlobalConfig.agentMandatory) {
                 throw e;
             } else {
                 return supercall.call();

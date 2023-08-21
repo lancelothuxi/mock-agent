@@ -9,7 +9,7 @@ import feign.Contract;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
@@ -72,7 +72,7 @@ public class FeignInvokeInterceptor implements Interceptor {
             query.setVersion("");
             query.setType("feign");
             query.setData(argsString);
-            query.setAppliactionName(Global.applicationName);
+            query.setAppliactionName(GlobalConfig.applicationName);
 
             final MockConfig mockConfig = FeignMockConfigRegistry.getMockConfig(query);
             if (mockConfig == null) {
@@ -87,7 +87,7 @@ public class FeignInvokeInterceptor implements Interceptor {
                                 .decoder(new JacksonDecoder())
 //                                .client(Global.feignClient)
                                 .contract(new Contract.Default())
-                                .target(CommonMockFeignClient.class, Global.mockServerURL);
+                                .target(CommonMockFeignClient.class, GlobalConfig.mockServerURL);
                     }
                 }
 
@@ -146,8 +146,8 @@ public class FeignInvokeInterceptor implements Interceptor {
             final Object result = ParseUtil.parseMockValue(data, javaType);
             return result;
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", Global.agentMandatory, e);
-            if (Global.agentMandatory) {
+            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", GlobalConfig.agentMandatory, e);
+            if (GlobalConfig.agentMandatory) {
                 throw e;
             } else {
                 return supercall.call();

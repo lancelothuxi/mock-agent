@@ -24,6 +24,6 @@ public class InvokerPlugin implements Plugin {
 
     @Override
     public Class interceptor() {
-        return null;
+        return DubboInvokeInterceptor.class;
     }
 }

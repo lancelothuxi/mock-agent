@@ -2,7 +2,7 @@ package io.github.lancelothuxi.mock.agent.polling;
 
 import com.alibaba.fastjson.JSON;
 import io.github.lancelothuxi.mock.agent.CharStreams;
-import io.github.lancelothuxi.mock.agent.Global;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.util.ConfigUtil;
 
@@ -36,7 +36,7 @@ public class HttpUtil {
         BufferedReader br = null;
         String result = null;
         try {
-            URL url = new URL(Global.mockServerURL + method);
+            URL url = new URL(GlobalConfig.mockServerURL + method);
             // 通过远程url连接对象打开连接、
             try {
                 connection = (HttpURLConnection) url.openConnection();

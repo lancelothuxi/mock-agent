@@ -32,10 +32,19 @@
 
 
     <dependencies>
+
         <dependency>
-            <groupId>io.github.lancelothuxi</groupId>
-            <artifactId>mock-api</artifactId>
-            <version>1.0.0</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+
+        <!-- SLF4J Simple Implementation (for testing/logging to console) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.32</version>
+            <scope>test</scope>
         </dependency>
 
 

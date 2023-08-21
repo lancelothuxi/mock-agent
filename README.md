@@ -27,11 +27,7 @@
 
 #### 测试拦截dubbo请求
 ```
-    dubbo-provider image:
-    registry.eptok.com/yspay-test/mock/provider
-    
-    dubbo-consumer image:
-    registry.eptok.com/yspay-test/mock/consumer
+  
     
 ```
 

@@ -1,6 +1,6 @@
 package io.github.lancelothuxi.mock.agent.transformer;
 
-import io.github.lancelothuxi.mock.agent.CommonInterceptor;
+import io.github.lancelothuxi.mock.agent.core.CommonInterceptor;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;

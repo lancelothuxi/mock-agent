@@ -1,6 +1,5 @@
 package io.github.lancelothuxi.mock.agent;
 
-import feign.Client;
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
 public class Global {
@@ -8,7 +7,6 @@ public class Global {
     public static volatile String mockServerURL;
     public static volatile String zkAddress;
     public static volatile String applicationName;
-    public static volatile Client feignClient;
     public static boolean agentMandatory=true;
 
 

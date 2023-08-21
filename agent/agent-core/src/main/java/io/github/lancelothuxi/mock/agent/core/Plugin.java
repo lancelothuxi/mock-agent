@@ -1,5 +1,7 @@
 package io.github.lancelothuxi.mock.agent.core;
 
+import net.bytebuddy.matcher.ElementMatcher;
+
 /**
  * @author lancelot
  * @version 1.0
@@ -7,21 +9,21 @@ package io.github.lancelothuxi.mock.agent.core;
  */
 public interface Plugin {
     /**
-     *  name
+     * classMatcher
      * @return
      */
-    String name();
+    ElementMatcher classMatcher();
 
     /**
-     * 提供者
+     * methodMatcher
      * @return
      */
-    TargetElementProvider[] elementMatchers();
+    ElementMatcher methodMatcher();
 
     /**
      * 织入类
      * @return
      */
-    Class<?> advice();
+    Class<? extends Interceptor> interceptor();
 
 }

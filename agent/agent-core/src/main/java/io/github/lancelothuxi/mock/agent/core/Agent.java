@@ -1,6 +1,5 @@
 package io.github.lancelothuxi.mock.agent.core;
 
-import io.github.lancelothuxi.mock.agent.CommonInterceptor;
 import io.github.lancelothuxi.mock.agent.Global;
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.dubbo.DubboStartInterceptor;
@@ -96,21 +95,6 @@ public class Agent {
 
 
         /**dubbo26相关**/
-
-        // 匹配被拦截方法
-        agentBuilder.type(named("com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker"))
-                .transform(
-                        new AgentBuilder.Transformer() {
-                            @Override
-                            public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription type, ClassLoader classLoader, JavaModule module) {
-                                return builder.method(named("invoke")).intercept(
-                                        MethodDelegation.withDefaultConfiguration().to(
-                                                new CommonInterceptor(classLoader, "com.lancelot.mock.agent.dubbo26.Dubbo26InvokeInterceptor")));
-                            }
-                        }
-                ).installOn(instrumentation);
-
-
         //注解方式l配置依赖的dubbo interface方式拦截
         agentBuilder.type(named("com.alibaba.dubbo.config.spring.ReferenceBean"))
                 .transform(

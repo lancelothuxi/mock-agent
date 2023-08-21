@@ -14,5 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dubbo-alibaba=InvokerPlugin
-dubbo-alibaba=RegisterPlugin
+dubbo-apache=org.apache.skywalking.apm.plugin.asf.dubbo.DubboInstrumentation
+dubbo-apache=org.apache.skywalking.apm.plugin.asf.dubbo.DubboInstrumentation

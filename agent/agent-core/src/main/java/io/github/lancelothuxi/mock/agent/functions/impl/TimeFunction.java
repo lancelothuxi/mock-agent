@@ -28,8 +28,8 @@ public class TimeFunction extends AbstractFunction {
         if (format.isEmpty()) {
             datetime = Long.toString(System.currentTimeMillis());
         }
-        if (DIVISOR_PATTERN.matcher(format).matches()) { // divisor is a positive number
-            long div = Long.parseLong(format.substring(1)); // should never case NFE
+        if (DIVISOR_PATTERN.matcher(format).matches()) {
+            long div = Long.parseLong(format.substring(1));
             datetime = Long.toString(System.currentTimeMillis() / div);
         } else {
             DateTimeFormatter df = DateTimeFormatter

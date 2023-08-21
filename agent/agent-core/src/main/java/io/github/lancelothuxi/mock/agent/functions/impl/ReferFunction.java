@@ -3,7 +3,6 @@ package io.github.lancelothuxi.mock.agent.functions.impl;
 import com.alibaba.fastjson.JSONPath;
 import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Collection;
 
@@ -18,12 +17,6 @@ public class ReferFunction extends AbstractFunction {
         super();
     }
 
-    public static void main(String[] args) {
-        final String s = RandomStringUtils.randomAlphabetic(10);
-
-        System.out.println("s = " + s);
-
-    }
 
     @Override
     public String execute(Object... args) {
@@ -49,7 +42,6 @@ public class ReferFunction extends AbstractFunction {
 
     @Override
     public void setParameters(Collection<CompoundVariable> parameters) {
-        // TODO 参数个数校验
         values = parameters.toArray(new CompoundVariable[parameters.size()]);
     }
 

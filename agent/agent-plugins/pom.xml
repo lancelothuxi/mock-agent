@@ -22,7 +22,8 @@
 
     <modules>
         <module>dubbo-alibaba</module>
-        <module>dubbo-alibaba</module>
+        <module>dubbo-apache</module>
+        <module>openfeign</module>
     </modules>
 
 

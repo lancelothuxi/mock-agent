@@ -1,5 +1,6 @@
 package io.github.lancelothuxi.mock.agent;
 
+import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import java.lang.reflect.Method;

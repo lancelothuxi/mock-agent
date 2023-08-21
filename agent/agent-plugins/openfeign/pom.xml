@@ -20,5 +20,28 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>io.github.lancelothuxi</groupId>
+            <artifactId>mock-agent-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- OpenFeign -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>12.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>12.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 
 </project>

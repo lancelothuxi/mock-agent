@@ -42,6 +42,7 @@ public class FeignInvokeInterceptor implements Interceptor {
         OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
+    @Override
     public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) throws Exception {
 
         try {

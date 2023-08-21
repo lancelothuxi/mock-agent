@@ -41,6 +41,7 @@ public class Dubbo26InvokeInterceptor implements Interceptor {
 
     private volatile CommonDubboMockService commonDubboMockService;
 
+    @Override
     public Object intercept(@Origin Method method, @AllArguments Object[] allArguments,
                             @This Object self, @SuperCall Callable supercall) throws Exception {
 

@@ -14,7 +14,7 @@ public class InvokerPlugin implements Plugin {
 
     @Override
     public ElementMatcher classMatcher() {
-        return named("com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker");
+        return named("org.apache.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker");
     }
 
     @Override
@@ -24,6 +24,6 @@ public class InvokerPlugin implements Plugin {
 
     @Override
     public Class interceptor() {
-        return null;
+        return DubboInvokeInterceptor.class;
     }
 }

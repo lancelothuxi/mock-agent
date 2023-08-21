@@ -3,6 +3,9 @@ package io.github.lancelothuxi.mock.agent.core;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+/**
+ * @author lancelot
+ */
 public interface Interceptor {
 
     /**

@@ -14,4 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-spring=org.apache.skywalking.apm.plugin.asf.dubbo.DubboInstrumentation
+spring=io.github.lancelothuxi.mock.agent.spring.SpringApplicationNamePlugin

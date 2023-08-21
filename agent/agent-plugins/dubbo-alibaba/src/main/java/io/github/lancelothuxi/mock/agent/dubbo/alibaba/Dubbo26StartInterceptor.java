@@ -16,6 +16,7 @@ import java.util.concurrent.Callable;
 
 public class Dubbo26StartInterceptor implements Interceptor {
 
+    @Override
     public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) throws Exception {
         try {
 

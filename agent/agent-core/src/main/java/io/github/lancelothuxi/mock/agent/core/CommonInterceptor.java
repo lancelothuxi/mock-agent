@@ -9,6 +9,9 @@ import net.bytebuddy.implementation.bind.annotation.This;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+/**
+ *
+ */
 public class CommonInterceptor {
 
     private InterceptorClassLoader loader;

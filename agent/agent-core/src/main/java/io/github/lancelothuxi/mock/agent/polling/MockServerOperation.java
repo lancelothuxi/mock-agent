@@ -143,9 +143,7 @@ public class MockServerOperation {
             //注册
             HttpUtil.doPost(request, register, 3000);
         } catch (Exception ex) {
-            if (GlobalConfig.agentMandatory) {
-                throw new RuntimeException("注册请求失败，mock.agent.mandatory 设置为true, 程序将退出");
-            }
+
         }
         return request;
     }

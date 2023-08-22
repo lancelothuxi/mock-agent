@@ -2,8 +2,8 @@ package io.github.lancelothuxi.mock.agent.polling;
 
 import com.alibaba.fastjson.JSON;
 import io.github.lancelothuxi.mock.agent.CharStreams;
-import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.util.ConfigUtil;
 
 import java.io.BufferedReader;

@@ -16,16 +16,13 @@ public class GlobalConfig {
      */
     public static boolean degrade = false;
 
-
-    public static void init(){
-        degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
-    }
-
-
     static {
         getServerUrl();
     }
 
+    public static void init() {
+        degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
+    }
 
     private static void getServerUrl() {
 

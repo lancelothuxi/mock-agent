@@ -67,7 +67,8 @@
                         <configuration>
                             <finalName>mock-agent</finalName>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
                                         <Premain-Class>io.github.lancelothuxi.mock.agent.core.Agent</Premain-Class>
                                         <Can-Redefine-Classes>true</Can-Redefine-Classes>
@@ -75,7 +76,8 @@
                                         <Can-Set-Native-Method-Prefix>true</Can-Set-Native-Method-Prefix>
                                     </manifestEntries>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                             </transformers>
 
                             <filters>

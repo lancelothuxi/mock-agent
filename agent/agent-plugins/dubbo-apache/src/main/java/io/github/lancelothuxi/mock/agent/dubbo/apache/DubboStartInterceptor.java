@@ -1,8 +1,8 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
 import com.alibaba.dubbo.common.Constants;
-import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.polling.MockServerOperation;

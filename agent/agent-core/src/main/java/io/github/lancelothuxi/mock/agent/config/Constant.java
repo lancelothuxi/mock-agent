@@ -12,4 +12,16 @@ public class Constant {
      */
     public static final String AGENT_DEGRADE = "mock.agent.degrade";
 
+    public static final String NULL_STR = "null";
+
+    public static final String TRUE_STR = "true";
+
+    public static final String FALSE_STR = "false";
+
+    public static final String LEFT_BRACKET = "{";
+
+    public static final String RIGHT_BRACKET = "}";
+
+    public static final String LEFT_SQUARE_BRACKET = "[";
+
 }

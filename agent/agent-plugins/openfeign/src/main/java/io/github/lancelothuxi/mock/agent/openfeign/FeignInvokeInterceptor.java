@@ -9,8 +9,8 @@ import feign.Contract;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
-import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
 import io.github.lancelothuxi.mock.agent.config.registry.FeignMockConfigRegistry;
@@ -146,11 +146,10 @@ public class FeignInvokeInterceptor implements Interceptor {
             final Object result = ParseUtil.parseMockValue(data, javaType);
             return result;
         } catch (Exception e) {
-            LogUtil.log("mock-agent call dubbo rest mock has error Global.agentMandatory={}", GlobalConfig.agentMandatory, e);
-            if (GlobalConfig.agentMandatory) {
-                throw e;
-            } else {
+            if (GlobalConfig.degrade) {
                 return supercall.call();
+            } else {
+                throw e;
             }
         }
     }

@@ -1,26 +1,37 @@
 package io.github.lancelothuxi.mock.agent.util;
 
-import com.fasterxml.jackson.databind.JavaType;
+import com.alibaba.fastjson.JSON;
 
+import java.lang.reflect.Type;
+
+import static io.github.lancelothuxi.mock.agent.config.Constant.FALSE_STR;
+import static io.github.lancelothuxi.mock.agent.config.Constant.LEFT_BRACKET;
+import static io.github.lancelothuxi.mock.agent.config.Constant.LEFT_SQUARE_BRACKET;
+import static io.github.lancelothuxi.mock.agent.config.Constant.NULL_STR;
+import static io.github.lancelothuxi.mock.agent.config.Constant.TRUE_STR;
+
+/**
+ * @author lancelot
+ */
 public class ParseUtil {
 
-    public static Object parseMockValue(String mock, JavaType type) {
+    public static Object parseMockValue(String mock, Type type) {
         Object value;
-        if ("null".equals(mock)) {
+        if (NULL_STR.equals(mock)) {
             value = null;
-        } else if ("true".equals(mock)) {
+        } else if (TRUE_STR.equals(mock)) {
             value = true;
-        } else if ("false".equals(mock)) {
+        } else if (FALSE_STR.equals(mock)) {
             value = false;
         } else if (mock.length() < 2 || (!mock.startsWith("\"") || !mock.endsWith("\"")) && (!mock.startsWith("'") || !mock.endsWith("'"))) {
-            if (type != null && type.getRawClass() == String.class) {
+            if (type != null && type.getTypeName().equals("java.lang.String")) {
                 value = mock;
             } else if (StringUtils.isNumeric(mock)) {
-                value = JsonUtils.parseObject(mock);
-            } else if (mock.startsWith("{")) {
-                value = JsonUtils.parseObject(mock, type);
-            } else if (mock.startsWith("[")) {
-                value = JsonUtils.parseObject(mock, type);
+                value = JSON.parseObject(mock);
+            } else if (mock.startsWith(LEFT_BRACKET)) {
+                value = JSON.parseObject(mock, type);
+            } else if (mock.startsWith(LEFT_SQUARE_BRACKET)) {
+                value = JSON.parseObject(mock, type);
             } else {
                 value = mock;
             }

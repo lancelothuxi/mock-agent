@@ -49,10 +49,12 @@ public abstract class CommonMockService {
             return supercall.call();
         }
 
+        //服务端mock
         if (mockConfig.mockFromServer()) {
             return mockFromServer(interfaceName, methodName, group, version, supercall, argsString, genericReturnType);
         }
 
+        //本地mock
         final List<MockData> mockDataList = mockConfig.getMockDataList();
         if (CollectionUtils.isEmpty(mockDataList)) {
             throw new RuntimeException("mock agent 获取数据为空或者异常");

@@ -22,7 +22,7 @@ public class CompoundVariable implements Function {
                         .asSubclass(Function.class)
                         .getDeclaredConstructor().newInstance();
                 String referenceKey = tempFunc.getReferenceKey();
-                if (referenceKey.length() > 0) { // ignore self
+                if (referenceKey.length() > 0) {
                     functions.put(referenceKey, tempFunc.getClass());
                 }
             }

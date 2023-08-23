@@ -27,8 +27,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.concurrent.Callable;
 
-import static com.alibaba.dubbo.rpc.support.MockInvoker.parseMockValue;
-
 /**
  *
  */
@@ -44,6 +42,7 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
         MockClusterInvoker mockClusterInvoker = (MockClusterInvoker) self;
         Invocation invocation = ((Invocation) allArguments[0]);
 
+        //skip CommonDubboMockService
         final String interfaceName = mockClusterInvoker.getInterface().getCanonicalName();
         if (interfaceName.equals(CommonDubboMockService.class.getName())) {
             return supercall.call();
@@ -58,6 +57,18 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
         return super.doMock(interfaceName, methodName, groupName, version, supercall, argsString, dubboMethod.getGenericReturnType());
     }
 
+    /**
+     * dubbo服务端mock 通过代码方式生成CommonDubboMockService接口的dubbo代理类
+     * 通过dubbo协议请求 mock server端的 CommonDubboMockService
+     * @param interfaceName
+     * @param methodName
+     * @param group
+     * @param version
+     * @param supercall
+     * @param argsString
+     * @param genericReturnType
+     * @return
+     */
     @Override
     public Object mockFromServer(String interfaceName, String methodName,
                                  String group, String version, Callable supercall,
@@ -98,15 +109,12 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
             throw new RuntimeException("mock agent 获取数据为空或者异常");
         }
 
-
         LogUtil.log("mock-agent call mock response is valid interfaceName={} methodName={} response={}", interfaceName, methodName, mockResponse.getData());
-
 
         String data = mockResponse.getData();
         if (data == null || data.length() == 0) {
             throw new RuntimeException("mock agent 获取数据为空或者异常");
         }
-
 
         Object mockValue = ParseUtil.parseMockValue(data,genericReturnType);
         return mockValue;

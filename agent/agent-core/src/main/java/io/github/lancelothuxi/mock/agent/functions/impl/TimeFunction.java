@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
+/**
+ * @author lancelot
+ */
 public class TimeFunction extends AbstractFunction {
 
     private static final String KEY = "__time";
@@ -17,10 +20,6 @@ public class TimeFunction extends AbstractFunction {
     private static final Pattern DIVISOR_PATTERN = Pattern.compile("/\\d+");
 
     private String format = "";
-
-    public TimeFunction() {
-        super();
-    }
 
     @Override
     public String execute(Object... args) {

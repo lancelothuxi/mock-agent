@@ -111,7 +111,7 @@ public class DubboInvokeInterceptor implements Interceptor {
                 mockRequest.setGroupName(groupName);
                 mockRequest.setVersion(version);
                 mockRequest.setArgs(argsString);
-                mockRequest.setAppName(mockConfig.getAppliactionName());
+                mockRequest.setAppName(mockConfig.getApplicationName());
 
                 LogUtil.log("mock-agent call mock request interfaceName={} methodName={} args={}", interfaceName, methodName, argsString);
                 MockResponse mockResponse = commonDubboMockService.doMockRequest(mockRequest);

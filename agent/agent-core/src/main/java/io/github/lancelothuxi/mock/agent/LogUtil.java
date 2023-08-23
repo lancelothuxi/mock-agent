@@ -1,8 +1,8 @@
 package io.github.lancelothuxi.mock.agent;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 /**
@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class LogUtil {
 
-    private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    private static Logger logger= LoggerFactory.getLogger(LogUtil.class);
 
     private static boolean logEnabled = Objects.equals("true", System.getProperty("mock.agent.log.enabled"));
 
@@ -20,19 +20,6 @@ public class LogUtil {
         if (!logEnabled) {
             return;
         }
-
-        if (args != null && args.length > 0 && args[args.length - 1] instanceof Throwable) {
-            Throwable throwable = (Throwable) args[args.length - 1];
-            throwable.printStackTrace();
-        }
-
-        String formatedMessage = MessageFormatter.format(message, args);
-        try {
-            bw.write(formatedMessage);
-            bw.newLine();
-            bw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        logger.info(message,args);
     }
 }

@@ -7,17 +7,14 @@ import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
 import java.util.Collection;
 
+/**
+ * @author lancelot
+ */
 public class RandomString extends AbstractFunction {
 
     private static final String KEY = "__RandomString";
     private static final int CHARS = 2;
-    private static final int PARAM_NAME = 3;
     private CompoundVariable[] values;
-
-    public RandomString() {
-        super();
-    }
-
 
     @Override
     public String execute(Object... args) {

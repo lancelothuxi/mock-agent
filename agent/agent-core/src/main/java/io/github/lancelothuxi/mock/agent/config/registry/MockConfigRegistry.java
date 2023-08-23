@@ -30,19 +30,15 @@ public class MockConfigRegistry {
     }
 
 
-    public static void clear() {
-        registry.clear();
-    }
-
-    public static Collection<MockConfig> values() {
-        return registry.values();
-    }
-
     public static Set<Key> keys() {
         return registry.keySet();
     }
 
 
+    /**
+     * 同步到到本地存储
+     * @param configs
+     */
     public static void sync(List<MockConfig> configs) {
 
         if (configs == null || configs.size() == 0) {

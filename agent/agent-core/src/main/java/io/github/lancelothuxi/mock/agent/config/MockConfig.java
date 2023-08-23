@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author lancelot
+ */
 public class MockConfig implements Serializable {
 
     private static final long serialVersionUID = 3146855948097315719L;
@@ -44,9 +47,19 @@ public class MockConfig implements Serializable {
      */
     private String type;
 
-    private String appliactionName;
+    /**
+     * 应用名称
+     */
+    private String applicationName;
 
+    /**
+     * 是否是服务端mock
+     */
     private Integer serverSideMock = 1;
+
+    /**
+     * mock数据列表
+     */
     private List<MockData> mockDataList = new ArrayList<>();
 
 
@@ -80,12 +93,12 @@ public class MockConfig implements Serializable {
         this.mockDataList = mockDataList;
     }
 
-    public String getAppliactionName() {
-        return appliactionName;
+    public String getApplicationName() {
+        return applicationName;
     }
 
-    public void setAppliactionName(String appliactionName) {
-        this.appliactionName = appliactionName;
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
     }
 
     public String getType() {

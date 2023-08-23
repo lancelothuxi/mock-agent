@@ -72,7 +72,7 @@ public class FeignInvokeInterceptor implements Interceptor {
             query.setVersion("");
             query.setType("feign");
             query.setData(argsString);
-            query.setAppliactionName(GlobalConfig.applicationName);
+            query.setApplicationName(GlobalConfig.applicationName);
 
             final MockConfig mockConfig = FeignMockConfigRegistry.getMockConfig(query);
             if (mockConfig == null) {

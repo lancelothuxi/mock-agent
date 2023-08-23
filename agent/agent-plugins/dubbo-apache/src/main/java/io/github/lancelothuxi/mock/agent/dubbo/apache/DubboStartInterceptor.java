@@ -49,7 +49,7 @@ public class DubboStartInterceptor {
                     mockConfig.setMethodName(methodName);
                     mockConfig.setGroupName(groupName);
                     mockConfig.setVersion(version);
-                    mockConfig.setAppliactionName(appName);
+                    mockConfig.setApplicationName(appName);
 
                     LogUtil.log("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}", interfaceName, methodName, groupName, version);
                     MockConfigRegistry.add4Register(mockConfig);

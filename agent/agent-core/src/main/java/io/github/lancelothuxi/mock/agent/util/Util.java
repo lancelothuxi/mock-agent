@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class Util {
 
-
     public static <K, V> V mapGetOrDefault(Map<K, V> map, K key, V defautlVal) {
         final V v = map.get(key);
         if (v == null) {
@@ -30,7 +29,6 @@ public class Util {
         }
     }
 
-
     public static boolean isJavaVersionThanJdk7() {
         String javaVersion = System.getProperty("java.version");
         int majorVersion = Integer.parseInt(javaVersion.split("\\.")[0]);
@@ -52,12 +50,10 @@ public class Util {
                 stringBuffer.append("null");
                 continue;
             }
-            stringBuffer.append(o.toString())
-                    .append(",");
+            stringBuffer.append(o.toString()).append(",");
         }
 
         stringBuffer.append("]");
         return stringBuffer.toString();
     }
-
 }

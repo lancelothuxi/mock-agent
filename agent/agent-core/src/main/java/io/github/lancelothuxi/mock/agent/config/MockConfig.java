@@ -5,63 +5,38 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author lancelot
- */
+/** @author lancelot */
 public class MockConfig implements Serializable {
 
     private static final long serialVersionUID = 3146855948097315719L;
-    /**
-     *
-     */
+    /** */
     private Long id;
-    /**
-     * 接口
-     */
+    /** 接口 */
     private String interfaceName;
-    /**
-     * 方法
-     */
+    /** 方法 */
     private String methodName;
-    /**
-     * 分组
-     */
+    /** 分组 */
     private String groupName;
-    /**
-     * 版本
-     */
+    /** 版本 */
     private String version;
-    /**
-     * mock数据
-     */
+    /** mock数据 */
     private String data;
-    /**
-     * 是否启用
-     */
+    /** 是否启用 */
     private Integer enabled;
 
     private Date updateTime;
 
-    /**
-     * 类型 duboo/dubborest/feign
-     */
+    /** 类型 duboo/dubborest/feign */
     private String type;
 
-    /**
-     * 应用名称
-     */
+    /** 应用名称 */
     private String applicationName;
 
-    /**
-     * 是否是服务端mock
-     */
+    /** 是否是服务端mock */
     private Integer serverSideMock = 1;
 
-    /**
-     * mock数据列表
-     */
+    /** mock数据列表 */
     private List<MockData> mockDataList = new ArrayList<>();
-
 
     public MockConfig(String interfaceName, String methodName, String groupName, String version) {
         this.interfaceName = interfaceName;
@@ -70,8 +45,7 @@ public class MockConfig implements Serializable {
         this.version = version;
     }
 
-    public MockConfig() {
-    }
+    public MockConfig() {}
 
     public Integer getServerSideMock() {
         return serverSideMock;
@@ -172,5 +146,4 @@ public class MockConfig implements Serializable {
     public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
-
 }

@@ -1,6 +1,5 @@
 package io.github.lancelothuxi.mock.agent.functions;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CompoundVariable implements Function {
-
 
     private static final FunctionParser functionParser = new FunctionParser();
     private static final Map<String, Class<? extends Function>> functions = new HashMap<>();
@@ -18,9 +16,8 @@ public class CompoundVariable implements Function {
             String str = CompoundVariable.class.getPackage().getName() + ".impl";
             List<String> classes = ClassFinder.getClasssFromPackage(str);
             for (String clazzName : classes) {
-                Function tempFunc = Class.forName(clazzName)
-                        .asSubclass(Function.class)
-                        .getDeclaredConstructor().newInstance();
+                Function tempFunc =
+                    Class.forName(clazzName).asSubclass(Function.class).getDeclaredConstructor().newInstance();
                 String referenceKey = tempFunc.getReferenceKey();
                 if (referenceKey.length() > 0) {
                     functions.put(referenceKey, tempFunc.getClass());
@@ -32,7 +29,6 @@ public class CompoundVariable implements Function {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private String rawParameters;
@@ -70,10 +66,7 @@ public class CompoundVariable implements Function {
     }
 
     @Override
-    public void setParameters(Collection<CompoundVariable> parameters) throws Exception {
-
-    }
-
+    public void setParameters(Collection<CompoundVariable> parameters) throws Exception {}
 
     @Override
     public String execute(Object... args) {
@@ -85,7 +78,7 @@ public class CompoundVariable implements Function {
         for (Object item : compiledComponents) {
             if (item instanceof Function) {
                 try {
-                    results.append(((Function) item).execute(args));
+                    results.append(((Function)item).execute(args));
                 } catch (Exception e) {
                 }
             } else {
@@ -94,5 +87,4 @@ public class CompoundVariable implements Function {
         }
         return results.toString();
     }
-
 }

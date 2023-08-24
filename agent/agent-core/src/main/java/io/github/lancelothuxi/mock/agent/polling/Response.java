@@ -1,9 +1,9 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
 
 public class Response {
 

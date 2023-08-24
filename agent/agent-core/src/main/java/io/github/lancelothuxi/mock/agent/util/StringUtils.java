@@ -17,7 +17,6 @@ public class StringUtils {
         return !isEmpty(cs);
     }
 
-
     public static boolean isNumeric(final CharSequence cs) {
         if (isEmpty(cs)) {
             return false;

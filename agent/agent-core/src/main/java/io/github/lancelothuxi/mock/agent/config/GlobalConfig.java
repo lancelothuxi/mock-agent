@@ -2,18 +2,14 @@ package io.github.lancelothuxi.mock.agent.config;
 
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
-/**
- * @author lancelot
- */
+/** @author lancelot */
 public class GlobalConfig {
 
     public static volatile String mockServerURL;
     public static volatile String zkAddress;
     public static volatile String applicationName;
 
-    /**
-     * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
-     */
+    /** 当agent出现错误时候，是否降级执行真实调用，否则抛出异常 */
     public static boolean degrade = false;
 
     static {
@@ -40,7 +36,6 @@ public class GlobalConfig {
             throw new RuntimeException("get ZK_ADDRESS from env failed");
         }
     }
-
 
     private static String getPropertyFromEnvOrSystemProperty(String key) {
 

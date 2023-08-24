@@ -1,18 +1,15 @@
 package io.github.lancelothuxi.mock.agent.functions.impl;
 
-
-import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
-import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
-
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-/**
- * @author lancelot
- */
+import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
+import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
+
+/** @author lancelot */
 public class TimeFunction extends AbstractFunction {
 
     private static final String KEY = "__time";
@@ -31,9 +28,7 @@ public class TimeFunction extends AbstractFunction {
             long div = Long.parseLong(format.substring(1));
             datetime = Long.toString(System.currentTimeMillis() / div);
         } else {
-            DateTimeFormatter df = DateTimeFormatter
-                    .ofPattern(format)
-                    .withZone(ZoneId.systemDefault());
+            DateTimeFormatter df = DateTimeFormatter.ofPattern(format).withZone(ZoneId.systemDefault());
             datetime = df.format(Instant.now());
         }
         return datetime;
@@ -47,10 +42,9 @@ public class TimeFunction extends AbstractFunction {
         int count = values.length;
 
         if (count > 0) {
-            format = ((CompoundVariable) values[0]).execute();
+            format = ((CompoundVariable)values[0]).execute();
         }
     }
-
 
     @Override
     public String getReferenceKey() {

@@ -10,19 +10,16 @@ public abstract class AbstractFunction implements Function {
      * @throws Exception
      */
     @Override
-    abstract public String execute(Object... args) throws Exception;
+    public abstract String execute(Object... args) throws Exception;
 
     /**
      * @param parameters
      * @throws Exception
      */
     @Override
-    abstract public void setParameters(Collection<CompoundVariable> parameters) throws Exception;
+    public abstract void setParameters(Collection<CompoundVariable> parameters) throws Exception;
 
-    /**
-     * @return
-     */
+    /** @return */
     @Override
-    abstract public String getReferenceKey();
-
+    public abstract String getReferenceKey();
 }

@@ -1,16 +1,14 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-
 import java.io.Serializable;
+
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
 
 public class DubboConfigResponse implements Serializable {
 
     MockConfig dubboMockConfig;
 
-
-    public DubboConfigResponse() {
-    }
+    public DubboConfigResponse() {}
 
     public DubboConfigResponse(MockConfig dubboMockConfig) {
         this.dubboMockConfig = dubboMockConfig;
@@ -23,6 +21,4 @@ public class DubboConfigResponse implements Serializable {
     public void setDubboMockConfig(MockConfig dubboMockConfig) {
         this.dubboMockConfig = dubboMockConfig;
     }
-
-
 }

@@ -28,5 +28,4 @@ public interface Plugin {
      * @return
      */
     Class<? extends Interceptor> interceptor();
-
 }

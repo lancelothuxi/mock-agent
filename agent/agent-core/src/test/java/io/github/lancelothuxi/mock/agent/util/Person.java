@@ -14,8 +14,7 @@ public class Person {
         this.age = age;
     }
 
-    public Person() {
-    }
+    public Person() {}
 
     public String getName() {
         return name;
@@ -33,7 +32,7 @@ public class Person {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Person person = (Person) obj;
+        Person person = (Person)obj;
         return age == person.age && name.equals(person.name);
     }
 
@@ -44,9 +43,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+        return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
     }
 }

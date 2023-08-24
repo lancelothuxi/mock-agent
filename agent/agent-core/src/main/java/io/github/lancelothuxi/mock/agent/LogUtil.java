@@ -1,9 +1,9 @@
 package io.github.lancelothuxi.mock.agent;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Objects;
 
 /**
  * @author lancelot
@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class LogUtil {
 
-    private static Logger logger= LoggerFactory.getLogger(LogUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(LogUtil.class);
 
     private static boolean logEnabled = Objects.equals("true", System.getProperty("mock.agent.log.enabled"));
 
@@ -20,6 +20,6 @@ public class LogUtil {
         if (!logEnabled) {
             return;
         }
-        logger.info(message,args);
+        logger.info(message, args);
     }
 }

@@ -7,9 +7,7 @@ package io.github.lancelothuxi.mock.agent.config;
  */
 public class Constant {
 
-    /**
-     * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
-     */
+    /** 当agent出现错误时候，是否降级执行真实调用，否则抛出异常 */
     public static final String AGENT_DEGRADE = "mock.agent.degrade";
 
     public static final String NULL_STR = "null";
@@ -23,5 +21,4 @@ public class Constant {
     public static final String RIGHT_BRACKET = "}";
 
     public static final String LEFT_SQUARE_BRACKET = "[";
-
 }

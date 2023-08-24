@@ -1,9 +1,9 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
+import static net.bytebuddy.matcher.ElementMatchers.named;
+
 import io.github.lancelothuxi.mock.agent.core.Plugin;
 import net.bytebuddy.matcher.ElementMatcher;
-
-import static net.bytebuddy.matcher.ElementMatchers.named;
 
 /**
  * @author lancelot

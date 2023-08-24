@@ -14,22 +14,33 @@
 
 package io.github.lancelothuxi.mock.agent.core;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
-public class InterceptorInstanceLoader {
+import io.github.lancelothuxi.mock.agent.LogUtil;
 
-    private static ConcurrentHashMap<String, Object> INSTANCE_CACHE = new ConcurrentHashMap<String, Object>();
-    private static ReentrantLock INSTANCE_LOAD_LOCK = new ReentrantLock();
+/** @author lancelot */
+public class PluginResourcesResolver {
 
-    public static <T> T load(String className, InterceptorClassLoader classLoader) {
-
+    public List<URL> getResources() {
+        List<URL> cfgUrlPaths = new ArrayList<URL>();
+        Enumeration<URL> urls;
         try {
-            final Class<?> loaderClass = classLoader.findClass(className);
-            return (T)loaderClass.newInstance();
+            urls = PluginResourcesResolver.class.getClassLoader().getResources("mock-plugin.def");
 
-        } catch (Exception e) {
-            return null;
+            while (urls.hasMoreElements()) {
+                URL pluginUrl = urls.nextElement();
+                cfgUrlPaths.add(pluginUrl);
+                LogUtil.log("find plugin define in {}", pluginUrl);
+            }
+
+            return cfgUrlPaths;
+        } catch (IOException e) {
+            LogUtil.log("read resources failure.", e);
         }
+        return null;
     }
 }

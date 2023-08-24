@@ -3,9 +3,7 @@ package io.github.lancelothuxi.mock.agent.core;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-/**
- * @author lancelot
- */
+/** @author lancelot */
 public interface Interceptor {
 
     /**
@@ -16,6 +14,5 @@ public interface Interceptor {
      * @return
      * @throws Exception
      */
-    public Object intercept(Method method, Object[] allArguments,
-                            Object self, Callable supercall) throws Exception;
+    public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) throws Exception;
 }

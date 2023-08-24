@@ -1,8 +1,6 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-/**
- * @author Jason Song(song_s@ctrip.com)
- */
+/** @author Jason Song(song_s@ctrip.com) */
 public class LongPollingStatusCodeException extends RuntimeException {
     private final int m_statusCode;
 

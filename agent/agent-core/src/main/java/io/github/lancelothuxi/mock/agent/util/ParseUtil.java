@@ -1,18 +1,16 @@
 package io.github.lancelothuxi.mock.agent.util;
 
-import com.alibaba.fastjson.JSON;
-
-import java.lang.reflect.Type;
-
 import static io.github.lancelothuxi.mock.agent.config.Constant.FALSE_STR;
 import static io.github.lancelothuxi.mock.agent.config.Constant.LEFT_BRACKET;
 import static io.github.lancelothuxi.mock.agent.config.Constant.LEFT_SQUARE_BRACKET;
 import static io.github.lancelothuxi.mock.agent.config.Constant.NULL_STR;
 import static io.github.lancelothuxi.mock.agent.config.Constant.TRUE_STR;
 
-/**
- * @author lancelot
- */
+import java.lang.reflect.Type;
+
+import com.alibaba.fastjson.JSON;
+
+/** @author lancelot */
 public class ParseUtil {
 
     public static Object parseMockValue(String mock, Type type) {
@@ -23,7 +21,8 @@ public class ParseUtil {
             value = true;
         } else if (FALSE_STR.equals(mock)) {
             value = false;
-        } else if (mock.length() < 2 || (!mock.startsWith("\"") || !mock.endsWith("\"")) && (!mock.startsWith("'") || !mock.endsWith("'"))) {
+        } else if (mock.length() < 2
+            || (!mock.startsWith("\"") || !mock.endsWith("\"")) && (!mock.startsWith("'") || !mock.endsWith("'"))) {
             if (type != null && type.getTypeName().equals("java.lang.String")) {
                 value = mock;
             } else if (StringUtils.isNumeric(mock)) {

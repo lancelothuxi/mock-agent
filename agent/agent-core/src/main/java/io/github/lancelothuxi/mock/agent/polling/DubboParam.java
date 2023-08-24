@@ -48,13 +48,13 @@ public class DubboParam {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DubboParam that = (DubboParam) o;
-        return Objects.equals(interfaceName, that.interfaceName) &&
-                Objects.equals(methodName, that.methodName) &&
-                Objects.equals(groupName, that.groupName) &&
-                Objects.equals(version, that.version);
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        DubboParam that = (DubboParam)o;
+        return Objects.equals(interfaceName, that.interfaceName) && Objects.equals(methodName, that.methodName)
+            && Objects.equals(groupName, that.groupName) && Objects.equals(version, that.version);
     }
 
     public String getInterfaceName() {

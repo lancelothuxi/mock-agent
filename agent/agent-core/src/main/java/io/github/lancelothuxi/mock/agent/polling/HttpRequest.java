@@ -19,7 +19,6 @@ public class HttpRequest {
         m_readTimeout = -1;
     }
 
-
     public Object getBody() {
         return body;
     }

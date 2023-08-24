@@ -1,17 +1,15 @@
 package io.github.lancelothuxi.mock.agent.core;
 
+import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
+
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import net.bytebuddy.implementation.bind.annotation.This;
 
-import java.lang.reflect.Method;
-import java.util.concurrent.Callable;
-
-/**
- *
- */
+/** */
 public class CommonInterceptor {
 
     private InterceptorClassLoader loader;
@@ -23,7 +21,6 @@ public class CommonInterceptor {
         delegate = InterceptorInstanceLoader.load(delegaterClassname, loader);
     }
 
-
     public Class loadClass(String clazzName) {
         try {
             return loader.findClass(clazzName);
@@ -33,14 +30,14 @@ public class CommonInterceptor {
     }
 
     @RuntimeType
-    public Object intercept(@Origin Method method, @AllArguments Object[] allArguments,
-                            @This Object self, @SuperCall Callable supercall) throws Exception {
+    public Object intercept(@Origin Method method, @AllArguments Object[] allArguments, @This Object self,
+        @SuperCall Callable supercall) throws Exception {
 
         if (delegate == null) {
             try {
                 return supercall.call();
             } catch (Exception e) {
-                //ignore
+                // ignore
             }
         }
 

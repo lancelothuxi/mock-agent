@@ -1,15 +1,13 @@
 package io.github.lancelothuxi.mock.agent.functions.impl;
 
+import java.util.Collection;
+
 import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
 import io.github.lancelothuxi.mock.agent.util.RandomStringUtils;
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
-import java.util.Collection;
-
-/**
- * @author lancelot
- */
+/** @author lancelot */
 public class RandomString extends AbstractFunction {
 
     private static final String KEY = "__RandomString";
@@ -47,5 +45,4 @@ public class RandomString extends AbstractFunction {
     public String getReferenceKey() {
         return KEY;
     }
-
 }

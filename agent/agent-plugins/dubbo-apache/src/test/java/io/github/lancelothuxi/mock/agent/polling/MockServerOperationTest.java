@@ -1,11 +1,12 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
-import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.testng.Assert;
+
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
+import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 
 /**
  * @author lancelot
@@ -34,17 +35,14 @@ public class MockServerOperationTest {
 
         Assert.assertNull(queryResultnotExist);
 
-
         List<MockConfig> list = new ArrayList<>();
         list.add(new MockConfig("a", "b", "", ""));
         list.add(new MockConfig("a3", "b3", "", ""));
     }
 
     @org.testng.annotations.Test
-    public void testRegisterAndGet4DubboRest() {
-    }
+    public void testRegisterAndGet4DubboRest() {}
 
     @org.testng.annotations.Test
-    public void testRegisterAndGet4Feign() {
-    }
+    public void testRegisterAndGet4Feign() {}
 }

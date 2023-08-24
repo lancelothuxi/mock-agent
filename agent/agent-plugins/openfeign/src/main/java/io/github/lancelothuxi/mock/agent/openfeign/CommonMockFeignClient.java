@@ -9,7 +9,6 @@ import io.github.lancelothuxi.mock.agent.config.MockConfig;
  * @version 1.0
  * @date 2023/6/14 下午8:13
  */
-
 public interface CommonMockFeignClient {
 
     @RequestLine("POST /mock/feign/config/queryMockConfigData")

@@ -7,13 +7,9 @@ package io.github.lancelothuxi.mock.agent.transformer;
  */
 public interface Enhance {
 
-    /**
-     * @return
-     */
+    /** @return */
     String enhanceMethodName();
 
-    /**
-     * @return
-     */
+    /** @return */
     String enhanceClassName();
 }

@@ -1,6 +1,5 @@
 package io.github.lancelothuxi.mock.agent.functions;
 
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -21,15 +20,16 @@ public class FunctionParser {
                         break;
                     }
                     // Keep '\' unless it is one of the escapable chars '$' ',' or '\'
-                    // N.B. This method is used to parse function parameters, so must treat ',' as special
+                    // N.B. This method is used to parse function parameters, so must treat ',' as
+                    // special
                     if (current[0] != '$' && current[0] != ',' && current[0] != '\\') {
                         buffer.append(previous); // i.e. '\\'
                     }
                     previous = ' ';
                     buffer.append(current[0]);
-                } else if (current[0] == '{' && previous == '$') {// found "${"
+                } else if (current[0] == '{' && previous == '$') { // found "${"
                     buffer.deleteCharAt(buffer.length() - 1);
-                    if (buffer.length() > 0) {// save leading text
+                    if (buffer.length() > 0) { // save leading text
                         result.add(buffer.toString());
                         buffer.setLength(0);
                     }
@@ -71,23 +71,23 @@ public class FunctionParser {
                     String funcName = buffer.toString();
                     function = CompoundVariable.getNamedFunction(funcName.trim());
                     if (function instanceof Function) {
-                        ((Function) function).setParameters(parseParams(reader));
+                        ((Function)function).setParameters(parseParams(reader));
                         if (firstNonSpace(reader, '#') != '}') {
-                            reader.reset();// set to start of string
+                            reader.reset(); // set to start of string
                             char[] cb = new char[100];
                             int nbRead = reader.read(cb);
-                            throw new Exception("Expected } after "
-                                    + funcName + " function call in " + new String(cb, 0, nbRead));
+                            throw new Exception(
+                                "Expected } after " + funcName + " function call in " + new String(cb, 0, nbRead));
                         }
 
                         return function;
                     } else { // Function does not exist, so treat as per missing variable
                         buffer.append(current[0]);
                     }
-                } else if (current[0] == '}') {// variable, or function with no parameter list
+                } else if (current[0] == '}') { // variable, or function with no parameter list
                     function = CompoundVariable.getNamedFunction(buffer.toString());
-                    if (function instanceof Function) {// ensure that setParameters() is called.
-                        ((Function) function).setParameters(new ArrayList<CompoundVariable>());
+                    if (function instanceof Function) { // ensure that setParameters() is called.
+                        ((Function)function).setParameters(new ArrayList<CompoundVariable>());
                     }
                     buffer.setLength(0);
                     return function;
@@ -165,7 +165,7 @@ public class FunctionParser {
                     previous = current[0];
                 }
             }
-        } catch (IOException e) {// Should not happen with StringReader
+        } catch (IOException e) { // Should not happen with StringReader
         }
         // Dropped out, i.e. did not find closing ')'
         CompoundVariable var = new CompoundVariable();

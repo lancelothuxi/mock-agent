@@ -1,17 +1,16 @@
 package io.github.lancelothuxi.mock.agent.config.registry;
 
-import io.github.lancelothuxi.mock.agent.LogUtil;
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.util.MapCompare;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.MockConfig;
+import io.github.lancelothuxi.mock.agent.util.MapCompare;
 
 public class MockConfigRegistry {
 
@@ -20,23 +19,24 @@ public class MockConfigRegistry {
     private static Map<Key, MockConfig> registerRegistry = new ConcurrentHashMap<>();
 
     public static void add(MockConfig mockConfig) {
-        Key key = new Key(mockConfig.getInterfaceName(), mockConfig.getMethodName(), mockConfig.getGroupName(), mockConfig.getVersion());
+        Key key = new Key(mockConfig.getInterfaceName(), mockConfig.getMethodName(), mockConfig.getGroupName(),
+            mockConfig.getVersion());
         registry.put(key, mockConfig);
     }
 
     public static void add4Register(MockConfig mockConfig) {
-        Key key = new Key(mockConfig.getInterfaceName(), mockConfig.getMethodName(), mockConfig.getGroupName(), mockConfig.getVersion());
+        Key key = new Key(mockConfig.getInterfaceName(), mockConfig.getMethodName(), mockConfig.getGroupName(),
+            mockConfig.getVersion());
         registerRegistry.put(key, mockConfig);
     }
-
 
     public static Set<Key> keys() {
         return registry.keySet();
     }
 
-
     /**
      * 同步到到本地存储
+     *
      * @param configs
      */
     public static void sync(List<MockConfig> configs) {
@@ -47,13 +47,13 @@ public class MockConfigRegistry {
 
         Map<Key, MockConfig> tmp = new HashMap<>();
         for (MockConfig config : configs) {
-            Key key = new Key(config.getInterfaceName(), config.getMethodName(), config.getGroupName(), config.getVersion());
+            Key key =
+                new Key(config.getInterfaceName(), config.getMethodName(), config.getGroupName(), config.getVersion());
             tmp.put(key, config);
         }
 
         MapCompare.compareMaps(registry, tmp);
     }
-
 
     public static List<MockConfig> registryValues() {
         return new ArrayList<>(registerRegistry.values());
@@ -66,14 +66,15 @@ public class MockConfigRegistry {
         final MockConfig mockConfig = registry.get(key);
 
         if (mockConfig == null) {
-            LogUtil.log("mock agent query mock config from registry interfaceName={} methodName={} " +
-                            "group={} version={}  current keys size ={}",
-                    query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(), keys().size());
+            LogUtil.log(
+                "mock agent query mock config from registry interfaceName={} methodName={} "
+                    + "group={} version={}  current keys size ={}",
+                query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(),
+                keys().size());
         }
 
         return mockConfig;
     }
-
 
     public static MockConfig getMockConfig(Key key) {
 
@@ -86,23 +87,14 @@ public class MockConfigRegistry {
         return mockConfig;
     }
 
-
     public static class Key {
-        /**
-         * 接口
-         */
+        /** 接口 */
         private String interfaceName;
-        /**
-         * 方法
-         */
+        /** 方法 */
         private String methodName;
-        /**
-         * 分组
-         */
+        /** 分组 */
         private String groupName;
-        /**
-         * 版本
-         */
+        /** 版本 */
         private String version;
 
         public Key(String interfaceName, String methodName, String groupName, String version) {
@@ -136,22 +128,15 @@ public class MockConfigRegistry {
             if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            Key key = (Key) o;
-            return Objects.equals(interfaceName, key.interfaceName) &&
-                    Objects.equals(methodName, key.methodName) &&
-                    Objects.equals(groupName, key.groupName) &&
-                    Objects.equals(version, key.version);
+            Key key = (Key)o;
+            return Objects.equals(interfaceName, key.interfaceName) && Objects.equals(methodName, key.methodName)
+                && Objects.equals(groupName, key.groupName) && Objects.equals(version, key.version);
         }
-
 
         @Override
         public String toString() {
-            return "Key{" +
-                    "interfaceName='" + interfaceName + '\'' +
-                    ", methodName='" + methodName + '\'' +
-                    ", groupName='" + groupName + '\'' +
-                    ", version='" + version + '\'' +
-                    '}';
+            return "Key{" + "interfaceName='" + interfaceName + '\'' + ", methodName='" + methodName + '\''
+                + ", groupName='" + groupName + '\'' + ", version='" + version + '\'' + '}';
         }
 
         @Override
@@ -159,5 +144,4 @@ public class MockConfigRegistry {
             return Objects.hash(interfaceName, methodName, groupName, version);
         }
     }
-
 }

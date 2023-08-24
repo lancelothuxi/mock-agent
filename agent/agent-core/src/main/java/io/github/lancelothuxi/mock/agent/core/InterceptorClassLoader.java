@@ -16,12 +16,11 @@ public class InterceptorClassLoader extends ClassLoader {
         return defineClass(name, bt, 0, bt.length);
     }
 
-
     private byte[] loadClassData(String className) {
-        //read class
+        // read class
         InputStream is = getClass().getClassLoader().getResourceAsStream(className.replace(".", "/") + ".class");
         ByteArrayOutputStream byteSt = new ByteArrayOutputStream();
-        //write into byte
+        // write into byte
         int len = 0;
         try {
             while ((len = is.read()) != -1) {
@@ -30,8 +29,7 @@ public class InterceptorClassLoader extends ClassLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //convert into byte array
+        // convert into byte array
         return byteSt.toByteArray();
     }
-
 }

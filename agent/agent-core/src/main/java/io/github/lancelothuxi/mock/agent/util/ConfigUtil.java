@@ -1,9 +1,6 @@
 package io.github.lancelothuxi.mock.agent.util;
 
-
-/**
- * @author Jason Song(song_s@ctrip.com)
- */
+/** @author Jason Song(song_s@ctrip.com) */
 public class ConfigUtil {
 
     private int connectTimeout = 1000;
@@ -16,6 +13,4 @@ public class ConfigUtil {
     public int getReadTimeout() {
         return readTimeout;
     }
-
-
 }

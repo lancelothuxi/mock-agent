@@ -1,9 +1,9 @@
 package io.github.lancelothuxi.mock.agent.util;
 
+import org.testng.annotations.Test;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.testng.annotations.Test;
 
 /**
  * @author lancelot

@@ -14,15 +14,17 @@
 
 package io.github.lancelothuxi.mock.agent.core;
 
+import io.github.lancelothuxi.mock.agent.LogUtil;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import io.github.lancelothuxi.mock.agent.LogUtil;
-
-/** @author lancelot */
+/**
+ * @author lancelot
+ */
 public class PluginResourcesResolver {
 
     public List<URL> getResources() {

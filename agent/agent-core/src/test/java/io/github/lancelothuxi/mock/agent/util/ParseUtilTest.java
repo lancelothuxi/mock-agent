@@ -1,11 +1,10 @@
 package io.github.lancelothuxi.mock.agent.util;
 
-import java.lang.reflect.Type;
-
+import com.alibaba.fastjson.JSON;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.alibaba.fastjson.JSON;
+import java.lang.reflect.Type;
 
 /**
  * @author lancelot
@@ -41,7 +40,7 @@ public class ParseUtilTest {
 
         Assert.assertTrue(result instanceof GenericDemo);
 
-        GenericDemo<Person> genericDemo1 = (GenericDemo)result;
+        GenericDemo<Person> genericDemo1 = (GenericDemo) result;
 
         Assert.assertEquals(genericDemo1.getData().getName(), "tom");
     }

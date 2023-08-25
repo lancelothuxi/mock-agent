@@ -1,13 +1,14 @@
 package io.github.lancelothuxi.mock.agent.functions.impl;
 
-import java.util.Collection;
-
 import com.alibaba.fastjson.JSONPath;
-
 import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
 
-/** @author lancelot */
+import java.util.Collection;
+
+/**
+ * @author lancelot
+ */
 public class ReferFunction extends AbstractFunction {
 
     private static final String KEY = "__refer";
@@ -19,7 +20,7 @@ public class ReferFunction extends AbstractFunction {
             return "";
         }
 
-        String requestData = (String)args[0];
+        String requestData = (String) args[0];
         final String referJsonPathExpression = values[0].execute();
 
         try {

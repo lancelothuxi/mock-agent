@@ -1,12 +1,11 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.testng.Assert;
-
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
+import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author lancelot
@@ -41,8 +40,10 @@ public class MockServerOperationTest {
     }
 
     @org.testng.annotations.Test
-    public void testRegisterAndGet4DubboRest() {}
+    public void testRegisterAndGet4DubboRest() {
+    }
 
     @org.testng.annotations.Test
-    public void testRegisterAndGet4Feign() {}
+    public void testRegisterAndGet4Feign() {
+    }
 }

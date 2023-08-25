@@ -1,23 +1,10 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import org.apache.dubbo.common.constants.CommonConstants;
-import org.apache.dubbo.config.ReferenceConfig;
-import org.apache.dubbo.config.RegistryConfig;
-import org.apache.dubbo.rpc.AsyncRpcResult;
-import org.apache.dubbo.rpc.Invocation;
-import org.apache.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker;
-import org.springframework.util.CollectionUtils;
-
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
@@ -35,6 +22,17 @@ import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import net.bytebuddy.implementation.bind.annotation.This;
+import org.apache.dubbo.common.constants.CommonConstants;
+import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.rpc.AsyncRpcResult;
+import org.apache.dubbo.rpc.Invocation;
+import org.apache.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker;
+import org.springframework.util.CollectionUtils;
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 public class DubboInvokeInterceptor implements Interceptor {
 
@@ -51,11 +49,11 @@ public class DubboInvokeInterceptor implements Interceptor {
 
     @Override
     public Object intercept(@Origin Method method, @AllArguments Object[] allArguments, @This Object self,
-        @SuperCall Callable supercall) throws Exception {
+                            @SuperCall Callable supercall) throws Exception {
 
         // check if need mock
-        MockClusterInvoker mockClusterInvoker = (MockClusterInvoker)self;
-        Invocation invocation = ((Invocation)allArguments[0]);
+        MockClusterInvoker mockClusterInvoker = (MockClusterInvoker) self;
+        Invocation invocation = ((Invocation) allArguments[0]);
         final String interfaceName = mockClusterInvoker.getInterface().getCanonicalName();
 
         try {
@@ -69,7 +67,7 @@ public class DubboInvokeInterceptor implements Interceptor {
             final String version = mockClusterInvoker.getUrl().getParameter(CommonConstants.VERSION_KEY, "");
 
             LogUtil.log("entering DubboInterceptor by java agent interfaceName={} methodName={}", interfaceName,
-                methodName);
+                    methodName);
 
             MockConfig query = new MockConfig();
             query.setInterfaceName(interfaceName);
@@ -85,10 +83,10 @@ public class DubboInvokeInterceptor implements Interceptor {
             }
 
             final Method dubboMethod =
-                mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
+                    mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
             if (dubboMethod == null) {
                 LogUtil.log("dubboMethod is null by java agent for interfaceName={} methodName={}", interfaceName,
-                    methodName);
+                        methodName);
                 throw new RuntimeException("mock agent 获取数据为空或者异常");
             }
 
@@ -99,7 +97,7 @@ public class DubboInvokeInterceptor implements Interceptor {
                     synchronized (DubboInvokeInterceptor.class) {
                         RegistryConfig registryConfig = new RegistryConfig(GlobalConfig.zkAddress);
                         ReferenceConfig<CommonDubboMockService> referenceConfig =
-                            new ReferenceConfig<CommonDubboMockService>();
+                                new ReferenceConfig<CommonDubboMockService>();
                         referenceConfig.setInterface(CommonDubboMockService.class);
                         referenceConfig.setRegistry(registryConfig);
                         referenceConfig.setProtocol("dubbo");
@@ -117,24 +115,24 @@ public class DubboInvokeInterceptor implements Interceptor {
                 mockRequest.setAppName(mockConfig.getApplicationName());
 
                 LogUtil.log("mock-agent call mock request interfaceName={} methodName={} args={}", interfaceName,
-                    methodName, argsString);
+                        methodName, argsString);
                 MockResponse mockResponse = commonDubboMockService.doMockRequest(mockRequest);
 
                 if (mockResponse == null) {
                     LogUtil.log("mock-agent call mock response is null interfaceName={} methodName={} response={}",
-                        interfaceName, methodName, mockResponse.getData());
+                            interfaceName, methodName, mockResponse.getData());
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
 
                 if (!mockResponse.success()) {
                     LogUtil.log(
-                        "mock-agent call mock response is not success interfaceName={} methodName={} response={}",
-                        interfaceName, methodName, mockResponse.getData());
+                            "mock-agent call mock response is not success interfaceName={} methodName={} response={}",
+                            interfaceName, methodName, mockResponse.getData());
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
 
                 LogUtil.log("mock-agent call mock response is valid interfaceName={} methodName={} response={}",
-                    interfaceName, methodName, mockResponse.getData());
+                        interfaceName, methodName, mockResponse.getData());
 
                 String data = mockResponse.getData();
                 if (data == null || data.length() == 0) {

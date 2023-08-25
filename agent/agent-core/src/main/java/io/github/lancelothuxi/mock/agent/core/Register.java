@@ -9,6 +9,8 @@ import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
  */
 public interface Register {
 
-    /** @param registry */
+    /**
+     * @param registry
+     */
     void register(MockConfigRegistry registry);
 }

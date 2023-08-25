@@ -1,8 +1,8 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-import java.util.List;
-
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
+
+import java.util.List;
 
 public class PollingParam {
 

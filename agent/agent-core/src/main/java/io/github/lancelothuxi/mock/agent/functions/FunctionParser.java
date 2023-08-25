@@ -71,13 +71,13 @@ public class FunctionParser {
                     String funcName = buffer.toString();
                     function = CompoundVariable.getNamedFunction(funcName.trim());
                     if (function instanceof Function) {
-                        ((Function)function).setParameters(parseParams(reader));
+                        ((Function) function).setParameters(parseParams(reader));
                         if (firstNonSpace(reader, '#') != '}') {
                             reader.reset(); // set to start of string
                             char[] cb = new char[100];
                             int nbRead = reader.read(cb);
                             throw new Exception(
-                                "Expected } after " + funcName + " function call in " + new String(cb, 0, nbRead));
+                                    "Expected } after " + funcName + " function call in " + new String(cb, 0, nbRead));
                         }
 
                         return function;
@@ -87,7 +87,7 @@ public class FunctionParser {
                 } else if (current[0] == '}') { // variable, or function with no parameter list
                     function = CompoundVariable.getNamedFunction(buffer.toString());
                     if (function instanceof Function) { // ensure that setParameters() is called.
-                        ((Function)function).setParameters(new ArrayList<CompoundVariable>());
+                        ((Function) function).setParameters(new ArrayList<CompoundVariable>());
                     }
                     buffer.setLength(0);
                     return function;

@@ -40,7 +40,7 @@ public final class ClassFinder {
                     findClassInPackageByFile(packageName, filePath, recursive, classes);
                 } else if ("jar".equals(protocol)) {
                     JarFile jarFile = null;
-                    jarFile = ((JarURLConnection)url.openConnection()).getJarFile();
+                    jarFile = ((JarURLConnection) url.openConnection()).getJarFile();
                     getAllClassNameByJar(jarFile, packageName, recursive, classes);
                 }
             }
@@ -53,7 +53,7 @@ public final class ClassFinder {
     }
 
     public static void findClassInPackageByFile(String packageName, String filePath, final boolean recursive,
-        List<String> classes) {
+                                                List<String> classes) {
         File dir = new File(filePath);
         if (!dir.exists() || !dir.isDirectory()) {
             return;
@@ -72,7 +72,7 @@ public final class ClassFinder {
         for (File file : dirFiles) {
             if (file.isDirectory()) {
                 findClassInPackageByFile(packageName + "." + file.getName(), file.getAbsolutePath(), recursive,
-                    classes);
+                        classes);
             } else {
                 String className = file.getName().substring(0, file.getName().length() - 6);
                 try {

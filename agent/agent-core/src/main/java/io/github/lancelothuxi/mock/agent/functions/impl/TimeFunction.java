@@ -1,15 +1,17 @@
 package io.github.lancelothuxi.mock.agent.functions.impl;
 
+import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
+import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-import io.github.lancelothuxi.mock.agent.functions.AbstractFunction;
-import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
-
-/** @author lancelot */
+/**
+ * @author lancelot
+ */
 public class TimeFunction extends AbstractFunction {
 
     private static final String KEY = "__time";
@@ -42,7 +44,7 @@ public class TimeFunction extends AbstractFunction {
         int count = values.length;
 
         if (count > 0) {
-            format = ((CompoundVariable)values[0]).execute();
+            format = ((CompoundVariable) values[0]).execute();
         }
     }
 

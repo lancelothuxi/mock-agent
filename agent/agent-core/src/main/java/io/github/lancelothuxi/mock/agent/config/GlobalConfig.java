@@ -1,23 +1,39 @@
 package io.github.lancelothuxi.mock.agent.config;
 
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/** @author lancelot */
+import static io.github.lancelothuxi.mock.agent.util.ConfigUtil.getPropertyFromEnvOrSystemProperty;
+
+/**
+ * @author lancelot
+ */
 public class GlobalConfig {
 
     public static volatile String mockServerURL;
-    public static volatile String zkAddress;
     public static volatile String applicationName;
-
-    /** 当agent出现错误时候，是否降级执行真实调用，否则抛出异常 */
+    /**
+     * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
+     */
     public static boolean degrade = false;
-
-    static {
-        getServerUrl();
-    }
+    private static Logger logger = LoggerFactory.getLogger(GlobalConfig.class);
 
     public static void init() {
         degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
+        getServerUrl();
+        getApplicationName();
+
+        logger.info("mock agent env mockServerURL={} applicationName={}", mockServerURL, applicationName);
+    }
+
+    private static void getApplicationName() {
+        String mockAgentApplicationName = getPropertyFromEnvOrSystemProperty("MOCK_AGENT_APPLICATION_NAME");
+        if (StringUtils.isNotEmpty(mockAgentApplicationName)) {
+            applicationName = mockAgentApplicationName;
+        } else {
+            throw new RuntimeException("please config MOCK_APPLICATION_NAME as OS or System variable");
+        }
     }
 
     private static void getServerUrl() {
@@ -26,29 +42,7 @@ public class GlobalConfig {
         if (StringUtils.isNotEmpty(mockServerUrlFromEnv)) {
             mockServerURL = mockServerUrlFromEnv;
         } else {
-            throw new RuntimeException("get MOCK_SERVER_URL from env failed");
+            throw new RuntimeException("please config MOCK_SERVER_URL as OS or System variable");
         }
-
-        String zkAddressFromEnv = getPropertyFromEnvOrSystemProperty("ZK_ADDRESS");
-        if (StringUtils.isNotEmpty(zkAddressFromEnv)) {
-            zkAddress = zkAddressFromEnv;
-        } else {
-            throw new RuntimeException("get ZK_ADDRESS from env failed");
-        }
-    }
-
-    private static String getPropertyFromEnvOrSystemProperty(String key) {
-
-        String value = System.getenv(key);
-        if (StringUtils.isNotEmpty(value)) {
-            return value;
-        }
-
-        String propertyValue = System.getProperty(key);
-        if (StringUtils.isNotEmpty(propertyValue)) {
-            return propertyValue;
-        }
-
-        return null;
     }
 }

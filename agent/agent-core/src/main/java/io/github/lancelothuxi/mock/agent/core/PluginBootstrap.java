@@ -1,5 +1,8 @@
 package io.github.lancelothuxi.mock.agent.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +16,8 @@ import java.util.List;
  * @date 2023/8/24 下午4:33
  */
 public class PluginBootstrap {
+
+    private static Logger logger = LoggerFactory.getLogger(PluginBootstrap.class);
 
     public List<Plugin> loadPlugins() {
 
@@ -39,14 +44,15 @@ public class PluginBootstrap {
                             continue;
                         }
                         PluginDefine pluginDefine = PluginDefine.build(line);
-                        Plugin plugin = (Plugin)Class.forName(pluginDefine.getName()).newInstance();
+                        Plugin plugin = (Plugin) Class.forName(pluginDefine.getDefineClass()).newInstance();
                         plugins.add(plugin);
                     } catch (Exception e) {
+                        logger.error("mock-agent 加载插件出错", e);
                     }
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("mock-agent 加载插件出错", e);
             }
         }
 

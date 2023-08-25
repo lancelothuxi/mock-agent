@@ -17,7 +17,7 @@ public class CompoundVariable implements Function {
             List<String> classes = ClassFinder.getClasssFromPackage(str);
             for (String clazzName : classes) {
                 Function tempFunc =
-                    Class.forName(clazzName).asSubclass(Function.class).getDeclaredConstructor().newInstance();
+                        Class.forName(clazzName).asSubclass(Function.class).getDeclaredConstructor().newInstance();
                 String referenceKey = tempFunc.getReferenceKey();
                 if (referenceKey.length() > 0) {
                     functions.put(referenceKey, tempFunc.getClass());
@@ -66,7 +66,8 @@ public class CompoundVariable implements Function {
     }
 
     @Override
-    public void setParameters(Collection<CompoundVariable> parameters) throws Exception {}
+    public void setParameters(Collection<CompoundVariable> parameters) throws Exception {
+    }
 
     @Override
     public String execute(Object... args) {
@@ -78,7 +79,7 @@ public class CompoundVariable implements Function {
         for (Object item : compiledComponents) {
             if (item instanceof Function) {
                 try {
-                    results.append(((Function)item).execute(args));
+                    results.append(((Function) item).execute(args));
                 } catch (Exception e) {
                 }
             } else {

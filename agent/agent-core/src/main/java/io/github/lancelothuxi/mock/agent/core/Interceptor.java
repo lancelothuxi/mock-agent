@@ -3,8 +3,11 @@ package io.github.lancelothuxi.mock.agent.core;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-/** @author lancelot */
+/**
+ * @author lancelot
+ */
 public interface Interceptor {
+
 
     /**
      * @param method

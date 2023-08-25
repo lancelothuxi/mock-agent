@@ -19,7 +19,9 @@ public abstract class AbstractFunction implements Function {
     @Override
     public abstract void setParameters(Collection<CompoundVariable> parameters) throws Exception;
 
-    /** @return */
+    /**
+     * @return
+     */
     @Override
     public abstract String getReferenceKey();
 }

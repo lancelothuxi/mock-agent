@@ -26,7 +26,7 @@ public class InterceptorInstanceLoader {
 
         try {
             final Class<?> loaderClass = classLoader.findClass(className);
-            return (T)loaderClass.newInstance();
+            return (T) loaderClass.newInstance();
 
         } catch (Exception e) {
             return null;

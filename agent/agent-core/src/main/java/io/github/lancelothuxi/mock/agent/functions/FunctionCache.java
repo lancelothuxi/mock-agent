@@ -69,7 +69,7 @@ public class FunctionCache {
     }
 
     public static void
-        replaceAll(BiFunction<? super String, ? super CompoundVariable, ? extends CompoundVariable> function) {
+    replaceAll(BiFunction<? super String, ? super CompoundVariable, ? extends CompoundVariable> function) {
         cache.replaceAll(function);
     }
 
@@ -90,22 +90,22 @@ public class FunctionCache {
     }
 
     public static CompoundVariable computeIfAbsent(String key,
-        Function<? super String, ? extends CompoundVariable> mappingFunction) {
+                                                   Function<? super String, ? extends CompoundVariable> mappingFunction) {
         return cache.computeIfAbsent(key, mappingFunction);
     }
 
     public static CompoundVariable computeIfPresent(String key,
-        BiFunction<? super String, ? super CompoundVariable, ? extends CompoundVariable> remappingFunction) {
+                                                    BiFunction<? super String, ? super CompoundVariable, ? extends CompoundVariable> remappingFunction) {
         return cache.computeIfPresent(key, remappingFunction);
     }
 
     public static CompoundVariable compute(String key,
-        BiFunction<? super String, ? super CompoundVariable, ? extends CompoundVariable> remappingFunction) {
+                                           BiFunction<? super String, ? super CompoundVariable, ? extends CompoundVariable> remappingFunction) {
         return cache.compute(key, remappingFunction);
     }
 
     public static CompoundVariable merge(String key, CompoundVariable value,
-        BiFunction<? super CompoundVariable, ? super CompoundVariable, ? extends CompoundVariable> remappingFunction) {
+                                         BiFunction<? super CompoundVariable, ? super CompoundVariable, ? extends CompoundVariable> remappingFunction) {
         return cache.merge(key, value, remappingFunction);
     }
 }

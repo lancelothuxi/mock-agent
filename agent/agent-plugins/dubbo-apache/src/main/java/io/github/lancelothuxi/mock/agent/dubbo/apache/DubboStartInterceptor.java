@@ -1,13 +1,6 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.concurrent.Callable;
-
-import org.apache.dubbo.common.constants.CommonConstants;
-
 import com.alibaba.dubbo.common.Constants;
-
 import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
@@ -20,12 +13,17 @@ import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import net.bytebuddy.implementation.bind.annotation.This;
+import org.apache.dubbo.common.constants.CommonConstants;
+
+import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.Callable;
 
 public class DubboStartInterceptor {
 
     @RuntimeType
     public static Object intercept(@Origin Method method, @Argument(0) Map<String, String> map, @This Object self,
-        @SuperCall Callable supercall) throws Exception {
+                                   @SuperCall Callable supercall) throws Exception {
         try {
             final String s = map.get(Constants.SIDE_KEY);
 
@@ -52,7 +50,7 @@ public class DubboStartInterceptor {
                     mockConfig.setApplicationName(appName);
 
                     LogUtil.log("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}",
-                        interfaceName, methodName, groupName, version);
+                            interfaceName, methodName, groupName, version);
                     MockConfigRegistry.add4Register(mockConfig);
                 }
 

@@ -2,10 +2,14 @@ package io.github.lancelothuxi.mock.agent.functions;
 
 import java.util.Collection;
 
-/** @author lancelot */
+/**
+ * @author lancelot
+ */
 public interface Function {
 
-    /** @return */
+    /**
+     * @return
+     */
     String getReferenceKey();
 
     /**

@@ -5,6 +5,7 @@ package io.github.lancelothuxi.mock.agent.util;
  * @version 1.0
  * @date 2023/7/25 下午1:40
  */
+
 import java.util.Random;
 
 public class RandomStringUtils {
@@ -45,7 +46,7 @@ public class RandomStringUtils {
      * <p>
      * Characters will be chosen from the set of alpha-numeric characters as indicated by the arguments.
      *
-     * @param count the length of random string to create
+     * @param count   the length of random string to create
      * @param letters if {@code true}, generated string may include alphabetic characters
      * @param numbers if {@code true}, generated string may include numeric characters
      * @return the random string
@@ -60,15 +61,15 @@ public class RandomStringUtils {
      * <p>
      * Characters will be chosen from the set of alpha-numeric characters as indicated by the arguments.
      *
-     * @param count the length of random string to create
-     * @param start the position in set of chars to start at
-     * @param end the position in set of chars to end before
+     * @param count   the length of random string to create
+     * @param start   the position in set of chars to start at
+     * @param end     the position in set of chars to end before
      * @param letters if {@code true}, generated string may include alphabetic characters
      * @param numbers if {@code true}, generated string may include numeric characters
      * @return the random string
      */
     public static String random(final int count, final int start, final int end, final boolean letters,
-        final boolean numbers) {
+                                final boolean numbers) {
         return random(count, start, end, letters, numbers, null, RANDOM);
     }
 
@@ -88,21 +89,21 @@ public class RandomStringUtils {
      * {@link Random} instance with a fixed seed and using it for each call, the same random sequence of strings can be
      * generated repeatedly and predictably.
      *
-     * @param count the length of random string to create
-     * @param start the position in set of chars to start at (inclusive)
-     * @param end the position in set of chars to end before (exclusive)
+     * @param count   the length of random string to create
+     * @param start   the position in set of chars to start at (inclusive)
+     * @param end     the position in set of chars to end before (exclusive)
      * @param letters only allow letters?
      * @param numbers only allow numbers?
-     * @param chars the set of chars to choose randoms from, must not be empty. If {@code null}, then it will use the
-     *            set of all chars.
-     * @param random a source of randomness.
+     * @param chars   the set of chars to choose randoms from, must not be empty. If {@code null}, then it will use the
+     *                set of all chars.
+     * @param random  a source of randomness.
      * @return the random string
      * @throws ArrayIndexOutOfBoundsException if there are not {@code (end - start) + 1} characters in the set array.
-     * @throws IllegalArgumentException if {@code count} &lt; 0 or the provided chars array is empty.
+     * @throws IllegalArgumentException       if {@code count} &lt; 0 or the provided chars array is empty.
      * @since 2.0
      */
     public static String random(int count, int start, int end, final boolean letters, final boolean numbers,
-        final char[] chars, final Random random) {
+                                final char[] chars, final Random random) {
         if (count == 0) {
             return StringUtils.EMPTY;
         } else if (count < 0) {
@@ -126,7 +127,7 @@ public class RandomStringUtils {
         } else {
             if (end <= start) {
                 throw new IllegalArgumentException(
-                    "Parameter end (" + end + ") must be greater than start (" + start + ")");
+                        "Parameter end (" + end + ") must be greater than start (" + start + ")");
             }
         }
 
@@ -135,7 +136,7 @@ public class RandomStringUtils {
 
         if (chars == null && (numbers && end <= zero_digit_ascii || letters && end <= first_letter_ascii)) {
             throw new IllegalArgumentException("Parameter end (" + end + ") must be greater then (" + zero_digit_ascii
-                + ") for generating digits " + "or greater then (" + first_letter_ascii + ") for generating letters.");
+                    + ") for generating digits " + "or greater then (" + first_letter_ascii + ") for generating letters.");
         }
 
         final StringBuilder builder = new StringBuilder(count);
@@ -165,7 +166,7 @@ public class RandomStringUtils {
             }
 
             if (letters && Character.isLetter(codePoint) || numbers && Character.isDigit(codePoint)
-                || !letters && !numbers) {
+                    || !letters && !numbers) {
                 builder.appendCodePoint(codePoint);
 
                 if (numberOfChars == 2) {

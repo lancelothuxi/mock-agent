@@ -9,31 +9,49 @@ package io.github.lancelothuxi.mock.agent.config;
 public class MockData {
     private static final long serialVersionUID = 1L;
 
-    /** 主键 */
+    /**
+     * 主键
+     */
     private Long id;
 
-    /** mock响应数据值 */
+    /**
+     * mock响应数据值
+     */
     private String data;
 
-    /** mock规则配置表的id */
+    /**
+     * mock规则配置表的id
+     */
     private String mockConfigId;
 
-    /** mock请求参数匹配规则 */
+    /**
+     * mock请求参数匹配规则
+     */
     private String mockReqParams;
 
-    /** 服务名 */
+    /**
+     * 服务名
+     */
     private String interfaceName;
 
-    /** 方法名 */
+    /**
+     * 方法名
+     */
     private String methodName;
 
-    /** 超时时间 */
+    /**
+     * 超时时间
+     */
     private Integer timeout = 0;
 
-    /** 根据jsonpath eval后的实际值 */
+    /**
+     * 根据jsonpath eval后的实际值
+     */
     private String expectedValue;
 
-    /** 是否启用 */
+    /**
+     * 是否启用
+     */
     private Long enabled;
 
     public Long getEnabled() {

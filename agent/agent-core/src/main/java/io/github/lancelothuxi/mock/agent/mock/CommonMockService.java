@@ -1,11 +1,5 @@
 package io.github.lancelothuxi.mock.agent.mock;
 
-import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
-
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.concurrent.Callable;
-
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
@@ -13,6 +7,12 @@ import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
 import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
 import io.github.lancelothuxi.mock.agent.util.CollectionUtils;
 import io.github.lancelothuxi.mock.agent.util.ParseUtil;
+
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.concurrent.Callable;
+
+import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
 
 /**
  * @author lancelot
@@ -33,7 +33,7 @@ public abstract class CommonMockService {
      * @throws Exception
      */
     public Object doMock(String interfaceName, String methodName, String group, String version, Callable supercall,
-        String argsString, Type genericReturnType) throws Exception {
+                         String argsString, Type genericReturnType) throws Exception {
 
         MockConfig query = new MockConfig();
         query.setInterfaceName(interfaceName);
@@ -92,7 +92,7 @@ public abstract class CommonMockService {
      * @return
      */
     public abstract Object mockFromServer(String interfaceName, String methodName, String group, String version,
-        Callable supercall, String argsString, Type genericReturnType);
+                                          Callable supercall, String argsString, Type genericReturnType);
 
     /**
      * @param returnValue

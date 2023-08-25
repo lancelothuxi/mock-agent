@@ -1,15 +1,10 @@
 package io.github.lancelothuxi.mock.agent.openfeign;
 
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.concurrent.Callable;
-
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import feign.Contract;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
@@ -18,13 +13,17 @@ import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
-import io.github.lancelothuxi.mock.agent.config.registry.FeignMockConfigRegistry;
+import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
 import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
 import io.github.lancelothuxi.mock.agent.polling.Util;
 import io.github.lancelothuxi.mock.agent.util.CollectionUtils;
 import io.github.lancelothuxi.mock.agent.util.ParseUtil;
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * @author liulei1971
@@ -46,7 +45,7 @@ public class FeignInvokeInterceptor implements Interceptor {
     public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) throws Exception {
 
         try {
-            Method realMethod = (Method)allArguments[1];
+            Method realMethod = (Method) allArguments[1];
 
             String methodName = realMethod.getName();
             if ("equals".equals(methodName) || "hashCode".equals(methodName) || "toString".equals(methodName)) {
@@ -59,7 +58,7 @@ public class FeignInvokeInterceptor implements Interceptor {
                 return supercall.call();
             }
 
-            Object[] args = (Object[])allArguments[2];
+            Object[] args = (Object[]) allArguments[2];
             final String argsString = JSON.toJSONString(args);
 
             MockConfig query = new MockConfig();
@@ -72,7 +71,7 @@ public class FeignInvokeInterceptor implements Interceptor {
             query.setData(argsString);
             query.setApplicationName(GlobalConfig.applicationName);
 
-            final MockConfig mockConfig = FeignMockConfigRegistry.getMockConfig(query);
+            final MockConfig mockConfig = MockConfigRegistry.getMockConfig(query);
             if (mockConfig == null) {
                 return supercall.call();
             }
@@ -81,33 +80,33 @@ public class FeignInvokeInterceptor implements Interceptor {
                 if (commonMockFeignClient == null) {
                     synchronized (FeignInvokeInterceptor.class) {
                         commonMockFeignClient =
-                            Feign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder())
-                                //
-                                // .client(Global.feignClient)
-                                .contract(new Contract.Default())
-                                .target(CommonMockFeignClient.class, GlobalConfig.mockServerURL);
+                                Feign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder())
+                                        //
+                                        // .client(Global.feignClient)
+                                        .contract(new Contract.Default())
+                                        .target(CommonMockFeignClient.class, GlobalConfig.mockServerURL);
                     }
                 }
 
                 MockFeignResponse mockFeignResponse = commonMockFeignClient.doMock(mockConfig);
                 LogUtil.log("mock-agent feign mock request interfaceName={} methodName={} args={}", interfacename,
-                    methodName, argsString);
+                        methodName, argsString);
 
                 if (mockFeignResponse == null) {
                     LogUtil.log("mock-agent feign mock response is null interfaceName={} methodName={}", interfacename,
-                        methodName);
+                            methodName);
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
 
                 if (!mockFeignResponse.success()) {
                     LogUtil.log(
-                        "mock-agent feign mock response is not success interfaceName={} methodName={} response={}",
-                        interfacename, methodName, mockFeignResponse.getData());
+                            "mock-agent feign mock response is not success interfaceName={} methodName={} response={}",
+                            interfacename, methodName, mockFeignResponse.getData());
                     throw new RuntimeException("mock agent 获取数据为空或者异常");
                 }
 
                 LogUtil.log("mock-agent feign mock response is valid interfaceName={} methodName={} response={}",
-                    interfacename, methodName, mockFeignResponse.getData());
+                        interfacename, methodName, mockFeignResponse.getData());
 
                 String data = mockFeignResponse.getData();
                 if (data == null || data.length() == 0) {

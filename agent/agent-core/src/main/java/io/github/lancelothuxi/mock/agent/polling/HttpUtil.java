@@ -1,5 +1,11 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
+import com.alibaba.fastjson.JSON;
+import io.github.lancelothuxi.mock.agent.CharStreams;
+import io.github.lancelothuxi.mock.agent.LogUtil;
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
+import io.github.lancelothuxi.mock.agent.util.ConfigUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,18 +16,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import com.alibaba.fastjson.JSON;
-
-import io.github.lancelothuxi.mock.agent.CharStreams;
-import io.github.lancelothuxi.mock.agent.LogUtil;
-import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
-import io.github.lancelothuxi.mock.agent.util.ConfigUtil;
-
 public class HttpUtil {
 
     private ConfigUtil m_configUtil;
 
-    /** Constructor. */
+    /**
+     * Constructor.
+     */
     public HttpUtil() {
         m_configUtil = new ConfigUtil();
     }
@@ -37,7 +38,7 @@ public class HttpUtil {
             URL url = new URL(GlobalConfig.mockServerURL + method);
             // 通过远程url连接对象打开连接、
             try {
-                connection = (HttpURLConnection)url.openConnection();
+                connection = (HttpURLConnection) url.openConnection();
             } catch (Exception ex) {
                 System.out.println("mock agent http open connection failed = " + ex.getMessage());
             }
@@ -118,7 +119,7 @@ public class HttpUtil {
         InputStreamReader esr = null;
         int statusCode;
         try {
-            HttpURLConnection conn = (HttpURLConnection)new URL(httpRequest.getUrl()).openConnection();
+            HttpURLConnection conn = (HttpURLConnection) new URL(httpRequest.getUrl()).openConnection();
 
             conn.setRequestMethod("GET");
 
@@ -213,7 +214,7 @@ public class HttpUtil {
         try {
             URL url = new URL(httpRequest.getUrl());
             // 通过远程url连接对象打开连接
-            connection = (HttpURLConnection)url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             // 设置连接请求方式
             connection.setRequestMethod("POST");
 

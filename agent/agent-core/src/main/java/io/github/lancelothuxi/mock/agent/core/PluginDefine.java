@@ -9,10 +9,14 @@ import io.github.lancelothuxi.mock.agent.util.StringUtils;
  */
 public class PluginDefine {
 
-    /** Plugin name. */
+    /**
+     * Plugin name.
+     */
     private String name;
 
-    /** The class name of plugin defined. */
+    /**
+     * The class name of plugin defined.
+     */
     private String defineClass;
 
     private PluginDefine(String name, String defineClass) {

@@ -1,16 +1,15 @@
 package io.github.lancelothuxi.mock.agent.polling;
 
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import com.alibaba.fastjson.JSON;
-
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.util.DigestUtils;
+
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MockServerOperation {
 
@@ -21,7 +20,9 @@ public class MockServerOperation {
 
     private static volatile boolean dubboTaskStarted = false;
 
-    /** dubbo */
+    /**
+     * dubbo
+     */
     public static void registerAndGet4Dubbo() {
 
         final Request request = register("dubbo", MockConfigRegistry.registryValues());

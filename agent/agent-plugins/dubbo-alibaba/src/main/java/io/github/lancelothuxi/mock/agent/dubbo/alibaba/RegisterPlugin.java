@@ -1,9 +1,9 @@
 package io.github.lancelothuxi.mock.agent.dubbo.alibaba;
 
-import static net.bytebuddy.matcher.ElementMatchers.named;
-
 import io.github.lancelothuxi.mock.agent.core.Plugin;
 import net.bytebuddy.matcher.ElementMatcher;
+
+import static net.bytebuddy.matcher.ElementMatchers.named;
 
 /**
  * @author lancelot
@@ -14,12 +14,12 @@ public class RegisterPlugin implements Plugin {
 
     @Override
     public ElementMatcher classMatcher() {
-        return named("com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker");
+        return named("com.alibaba.dubbo.config.spring.ReferenceBean");
     }
 
     @Override
     public ElementMatcher methodMatcher() {
-        return named("invoke");
+        return named("afterPropertiesSet");
     }
 
     @Override

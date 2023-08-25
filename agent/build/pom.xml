@@ -78,6 +78,10 @@
                                 </transformer>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>mock-plugin.def</resource>
+                                </transformer>
                             </transformers>
 
                             <filters>

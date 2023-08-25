@@ -14,18 +14,22 @@
 
 package io.github.lancelothuxi.mock.agent.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 
-/** @author lancelot */
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author lancelot
+ */
 public class PluginFinder {
 
     private List<Plugin> plugins = new ArrayList<>();
 
-    /** @param plugins */
+    /**
+     * @param plugins
+     */
     public PluginFinder(List<Plugin> plugins) {
 
         for (Plugin plugin : plugins) {

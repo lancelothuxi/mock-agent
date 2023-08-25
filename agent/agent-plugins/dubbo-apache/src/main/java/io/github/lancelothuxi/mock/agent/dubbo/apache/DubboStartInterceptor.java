@@ -19,6 +19,9 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+/**
+ * @author lancelot
+ */
 public class DubboStartInterceptor {
 
     @RuntimeType

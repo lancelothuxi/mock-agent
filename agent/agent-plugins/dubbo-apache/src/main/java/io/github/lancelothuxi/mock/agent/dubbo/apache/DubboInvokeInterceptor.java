@@ -34,6 +34,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import static io.github.lancelothuxi.mock.agent.util.ConfigUtil.getPropertyFromEnvOrSystemProperty;
+
 public class DubboInvokeInterceptor implements Interceptor {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -95,7 +97,9 @@ public class DubboInvokeInterceptor implements Interceptor {
             if (mockConfig.mockFromServer()) {
                 if (commonDubboMockService == null) {
                     synchronized (DubboInvokeInterceptor.class) {
-                        RegistryConfig registryConfig = new RegistryConfig(GlobalConfig.zkAddress);
+
+                        String zkAddress = getPropertyFromEnvOrSystemProperty("MOCK_AGENT_ZK_ADDRESS");
+                        RegistryConfig registryConfig = new RegistryConfig(zkAddress);
                         ReferenceConfig<CommonDubboMockService> referenceConfig =
                                 new ReferenceConfig<CommonDubboMockService>();
                         referenceConfig.setInterface(CommonDubboMockService.class);

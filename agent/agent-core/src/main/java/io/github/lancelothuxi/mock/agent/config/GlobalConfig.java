@@ -28,7 +28,7 @@ public class GlobalConfig {
     }
 
     private static void getApplicationName() {
-        String mockAgentApplicationName = getPropertyFromEnvOrSystemProperty("MOCK_AGENT_APPLICATION_NAME");
+        String mockAgentApplicationName = getPropertyFromEnvOrSystemProperty("MOCK_APPLICATION_NAME");
         if (StringUtils.isNotEmpty(mockAgentApplicationName)) {
             applicationName = mockAgentApplicationName;
         } else {

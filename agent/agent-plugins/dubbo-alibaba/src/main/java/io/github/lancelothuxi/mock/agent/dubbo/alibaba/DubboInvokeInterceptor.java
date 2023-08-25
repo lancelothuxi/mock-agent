@@ -8,7 +8,6 @@ import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker;
 import com.alibaba.fastjson.JSON;
-import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import io.github.lancelothuxi.mock.agent.mock.CommonMockService;

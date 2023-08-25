@@ -14,6 +14,7 @@
 
 package io.github.lancelothuxi.mock.agent.core;
 
+import net.bytebuddy.description.type.TypeDefinition;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 
@@ -31,18 +32,16 @@ public class PluginFinder {
      * @param plugins
      */
     public PluginFinder(List<Plugin> plugins) {
-
-        for (Plugin plugin : plugins) {
-
-            ElementMatcher match = plugin.classMatcher();
-
-            if (match == null) {
-                continue;
-            }
-        }
+        this.plugins=plugins;
     }
 
     public Plugin find(TypeDescription typeDescription) {
+
+        for (Plugin plugin : plugins) {
+            if(plugin.classMatcher().matches(typeDescription)){
+                return plugin;
+            }
+        }
 
         return null;
     }

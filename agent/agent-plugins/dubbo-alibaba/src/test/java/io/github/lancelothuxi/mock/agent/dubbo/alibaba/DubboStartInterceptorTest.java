@@ -7,7 +7,7 @@ import com.ea.agentloader.AgentLoader;
 import io.github.lancelothuxi.mock.agent.core.Agent;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
-
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
 /**
@@ -21,6 +21,11 @@ public class DubboStartInterceptorTest {
     public void testIntercept() {
 
         Invocation invocation = Mockito.mock(Invocation.class);
+        MockClusterInvoker spiedMockClusterInvoker = Mockito.spy(new MockClusterInvoker());
+
+        when(spiedMockClusterInvoker.getInterface()).thenReturn(
+                DubboStartInterceptorTest.class
+        );
 
         Result result = new MockClusterInvoker().invoke(invocation);
 

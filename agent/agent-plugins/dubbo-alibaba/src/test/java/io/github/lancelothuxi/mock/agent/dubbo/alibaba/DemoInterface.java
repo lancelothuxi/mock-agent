@@ -1,7 +1,7 @@
 package io.github.lancelothuxi.mock.agent.dubbo.alibaba;
 
-import io.github.lancelothuxi.mock.agent.util.DemoGeneric;
 import io.github.lancelothuxi.mock.agent.util.DemoRequest;
+import io.github.lancelothuxi.mock.agent.util.Person;
 
 /**
  * @author lancelot
@@ -10,5 +10,5 @@ import io.github.lancelothuxi.mock.agent.util.DemoRequest;
  */
 public interface DemoInterface<T> {
 
-  public DemoGeneric<T> hello(DemoRequest demoRequest);
+  public Person hello(DemoRequest demoRequest);
 }

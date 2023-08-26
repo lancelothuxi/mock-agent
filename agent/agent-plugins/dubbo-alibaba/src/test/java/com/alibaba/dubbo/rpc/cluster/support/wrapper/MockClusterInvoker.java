@@ -7,6 +7,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcResult;
 import io.github.lancelothuxi.mock.agent.dubbo.alibaba.DemoInterface;
 
+
 /**
  * 创建一个同包名 同类名的MockClusterInvoker的 方便测试
  * @author lancelot

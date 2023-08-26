@@ -77,7 +77,7 @@ public abstract class CommonMockService {
             FunctionCache.putIfAbsent(data, compoundVariable);
         }
 
-        data = compoundVariable.execute(argsString);
+        data = compoundVariable.execute(data);
 
         Object mockValue = ParseUtil.parseMockValue(data, genericReturnType);
 

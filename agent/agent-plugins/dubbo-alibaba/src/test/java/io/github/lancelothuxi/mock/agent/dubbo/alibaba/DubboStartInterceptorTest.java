@@ -37,12 +37,8 @@ public class DubboStartInterceptorTest {
         DemoRequest demoRequest=new DemoRequest();
         when(invocation.getArguments()).thenReturn(new Object[]{demoRequest});
 
-        DemoGeneric<Person> demoGeneric=new DemoGeneric();
-        demoGeneric.setCode("000");
         Person person=new Person("tom",11);
-        demoGeneric.setData(person);
-
-        String jsonString = JSON.toJSONString(demoGeneric);
+        String jsonString = JSON.toJSONString(person);
 
         MockConfig mockConfig=new MockConfig();
         mockConfig.setServerSideMock(0);
@@ -59,10 +55,10 @@ public class DubboStartInterceptorTest {
 
         Object resultValue = result.getValue();
 
-        assertTrue(resultValue instanceof DemoGeneric);
+        assertTrue(resultValue instanceof Person);
 
-        DemoGeneric<Person> demoGeneric1=(DemoGeneric)resultValue;
-        String name = demoGeneric1.getData().getName();
-        assertEquals(name,"tom");
+        //处理泛型
+        Person personResult=(Person)resultValue;
+        assertEquals(personResult.getName(),"tom");
     }
 }

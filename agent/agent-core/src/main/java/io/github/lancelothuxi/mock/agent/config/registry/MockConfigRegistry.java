@@ -12,6 +12,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author lancelot
+ */
 public class MockConfigRegistry {
 
     public static String lastMd5;

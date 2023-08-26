@@ -2,6 +2,7 @@ package io.github.lancelothuxi.mock.agent.polling;
 
 import com.alibaba.fastjson.JSONPath;
 import io.github.lancelothuxi.mock.agent.config.MockData;
+import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
 import java.util.List;
 
@@ -16,6 +17,11 @@ public class Util {
 
         for (MockData mockData : mockDataList) {
             try {
+
+                if(StringUtils.isEmpty(mockData.getMockReqParams())){
+                    return mockData;
+                }
+
                 final Object jsonPathValue = JSONPath.read(argsString, mockData.getMockReqParams());
                 if (jsonPathValue == null) {
                     continue;

@@ -5,6 +5,7 @@ import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcResult;
+import io.github.lancelothuxi.mock.agent.dubbo.alibaba.DemoInterface;
 
 /**
  * 创建一个同包名 同类名的MockClusterInvoker的 方便测试
@@ -15,12 +16,11 @@ import com.alibaba.dubbo.rpc.RpcResult;
 public class MockClusterInvoker {
 
     public Result invoke(Invocation invocation) throws RpcException{
-
         return new RpcResult("real data");
     }
 
     public Class getInterface(){
-        return MockClusterInvoker.class;
+        return DemoInterface.class;
     }
 
     public URL getUrl() {

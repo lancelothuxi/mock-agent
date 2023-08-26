@@ -3,12 +3,10 @@ package io.github.lancelothuxi.mock.agent.dubbo.alibaba;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker;
-import com.ea.agentloader.AgentLoader;
-import io.github.lancelothuxi.mock.agent.core.Agent;
+import io.github.lancelothuxi.mock.agent.util.DemoRequest;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
 import static org.mockito.Mockito.*;
-import static org.testng.Assert.*;
 
 /**
  * @author lancelot
@@ -23,11 +21,10 @@ public class DubboStartInterceptorTest {
         Invocation invocation = Mockito.mock(Invocation.class);
         MockClusterInvoker spiedMockClusterInvoker = Mockito.spy(new MockClusterInvoker());
 
-        when(spiedMockClusterInvoker.getInterface()).thenReturn(
-                DubboStartInterceptorTest.class
-        );
+        when(invocation.getMethodName()).thenReturn("hello");
+        when(invocation.getParameterTypes()).thenReturn(new Class[]{DemoRequest.class});
 
-        Result result = new MockClusterInvoker().invoke(invocation);
+        Result result = spiedMockClusterInvoker.invoke(invocation);
 
         Object resultValue = result.getValue();
 

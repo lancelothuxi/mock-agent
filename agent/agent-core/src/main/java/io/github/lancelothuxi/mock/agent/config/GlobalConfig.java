@@ -23,7 +23,6 @@ public class GlobalConfig {
         degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
         getServerUrl();
         getApplicationName();
-
         logger.info("mock agent env mockServerURL={} applicationName={}", mockServerURL, applicationName);
     }
 

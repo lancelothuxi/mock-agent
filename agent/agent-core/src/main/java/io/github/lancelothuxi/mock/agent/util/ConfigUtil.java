@@ -5,9 +5,6 @@ package io.github.lancelothuxi.mock.agent.util;
  */
 public class ConfigUtil {
 
-    private int connectTimeout = 1000;
-    private int readTimeout = 5000;
-
     public static String getPropertyFromEnvOrSystemProperty(String key) {
 
         String value = System.getenv(key);
@@ -21,13 +18,5 @@ public class ConfigUtil {
         }
 
         return null;
-    }
-
-    public int getConnectTimeout() {
-        return connectTimeout;
-    }
-
-    public int getReadTimeout() {
-        return readTimeout;
     }
 }

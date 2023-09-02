@@ -98,5 +98,7 @@ public abstract class CommonMockService {
      * @param returnValue
      * @return
      */
-    public abstract Object wrapReturnValue(Object returnValue);
+    protected Object wrapReturnValue(Object returnValue){
+        return returnValue;
+    }
 }

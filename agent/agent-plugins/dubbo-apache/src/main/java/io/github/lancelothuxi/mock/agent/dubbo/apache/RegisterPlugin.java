@@ -14,7 +14,7 @@ public class RegisterPlugin implements Plugin {
 
     @Override
     public ElementMatcher classMatcher() {
-        return named("com.alibaba.dubbo.config.spring.ReferenceBean");
+        return named("com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker");
     }
 
     @Override
@@ -24,6 +24,6 @@ public class RegisterPlugin implements Plugin {
 
     @Override
     public Class interceptor() {
-        return null;
+        return DubboInvokeInterceptor.class;
     }
 }

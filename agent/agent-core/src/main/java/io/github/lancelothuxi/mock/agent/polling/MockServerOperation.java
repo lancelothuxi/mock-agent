@@ -29,15 +29,15 @@ public class MockServerOperation {
      */
     public static void register() {
 
-        final Request request = register( MockConfigRegistry.registryValues());
-        syncDubboConfigsFromServer(request);
         if (dubboTaskStarted) {
             return;
         }
 
         scheduledExecutorService.schedule(new Runnable() {
+
             @Override
             public void run() {
+                final Request request = register( MockConfigRegistry.registryValues());
                 syncDubboConfigsFromServer(request);
             }
         }, 5, TimeUnit.SECONDS);

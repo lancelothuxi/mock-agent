@@ -9,7 +9,6 @@ import java.net.URL;
 
 import com.alibaba.fastjson.JSON;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
-import io.github.lancelothuxi.mock.agent.util.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

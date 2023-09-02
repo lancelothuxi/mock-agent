@@ -1,68 +1,60 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
-import com.alibaba.dubbo.common.Constants;
-import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
-import io.github.lancelothuxi.mock.agent.polling.MockServerOperation;
-import io.github.lancelothuxi.mock.agent.util.Util;
+import io.github.lancelothuxi.mock.agent.core.Interceptor;
+import io.github.lancelothuxi.mock.agent.util.StringUtils;
 import io.github.lancelothuxi.mock.api.CommonDubboMockService;
-import net.bytebuddy.implementation.bind.annotation.Argument;
-import net.bytebuddy.implementation.bind.annotation.Origin;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
-import net.bytebuddy.implementation.bind.annotation.This;
-import org.apache.dubbo.common.constants.CommonConstants;
+import org.apache.dubbo.config.spring.ReferenceBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
  * @author lancelot
  */
-public class DubboStartInterceptor {
+public class DubboStartInterceptor implements Interceptor {
+    private static Logger logger = LoggerFactory.getLogger(DubboStartInterceptor.class);
 
-    @RuntimeType
-    public static Object intercept(@Origin Method method, @Argument(0) Map<String, String> map, @This Object self,
-                                   @SuperCall Callable supercall) throws Exception {
+    @Override
+    public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) {
         try {
-            final String s = map.get(Constants.SIDE_KEY);
 
-            if (CommonConstants.CONSUMER_SIDE.equals(s)) {
+            ReferenceBean referenceBean = (ReferenceBean) self;
+            final String interfaceName = referenceBean.getInterface();
+            final String groupName = referenceBean.getGroup();
+            final String version = referenceBean.getVersion();
 
-                final String interfaceName = Util.mapGetOrDefault(map, Constants.INTERFACE_KEY, "");
-                if (interfaceName.equals(CommonDubboMockService.class.getName())) {
-                    return supercall.call();
-                }
-
-                final String appName = GlobalConfig.applicationName;
-
-                final String[] methodNames = Util.mapGetOrDefault(map, Constants.METHODS_KEY, "").split(",");
-                final String groupName = Util.mapGetOrDefault(map, Constants.GROUP_KEY, "");
-                final String version = Util.mapGetOrDefault(map, Constants.VERSION_KEY, "");
-
-                for (String methodName : methodNames) {
-
-                    MockConfig mockConfig = new MockConfig();
-                    mockConfig.setInterfaceName(interfaceName);
-                    mockConfig.setMethodName(methodName);
-                    mockConfig.setGroupName(groupName);
-                    mockConfig.setVersion(version);
-                    mockConfig.setApplicationName(appName);
-
-                    LogUtil.log("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}",
-                            interfaceName, methodName, groupName, version);
-                    MockConfigRegistry.add4Register(mockConfig);
-                }
-
-                MockServerOperation.register();
+            // skip CommonDubboMockService
+            if (interfaceName.equals(CommonDubboMockService.class.getName())) {
+                return supercall.call();
             }
+
+            for (Method dubboMethod : referenceBean.getInterfaceClass().getMethods()) {
+                MockConfig mockConfig = new MockConfig();
+                mockConfig.setInterfaceName(interfaceName);
+                mockConfig.setMethodName(dubboMethod.getName());
+                mockConfig.setGroupName(StringUtils.isEmpty(groupName) ? "" : groupName);
+                mockConfig.setVersion(StringUtils.isEmpty(version) ? "" : version);
+                mockConfig.setApplicationName(GlobalConfig.applicationName);
+                mockConfig.setType("dubbo");
+
+                logger.info("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}",
+                        interfaceName, dubboMethod.getName(), groupName, version);
+                MockConfigRegistry.add4Register(mockConfig);
+            }
+
         } catch (Throwable throwable) {
-            LogUtil.log("intercept dubbo 启动类失败", throwable);
+            logger.error("intercept dubbo 启动类失败", throwable);
         }
 
-        return supercall.call();
+        try {
+            return supercall.call();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

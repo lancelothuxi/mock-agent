@@ -1,9 +1,9 @@
 package io.github.lancelothuxi.mock.agent.config.registry;
 
-import io.github.lancelothuxi.mock.agent.LogUtil;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.util.MapCompare;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author lancelot
  */
 public class MockConfigRegistry {
+    private static Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
 
     public static String lastMd5;
     private static Map<Key, MockConfig> registry = new ConcurrentHashMap<>();
@@ -43,14 +44,14 @@ public class MockConfigRegistry {
      */
     public static void sync(List<MockConfig> configs) {
 
-        if (configs == null || configs.size() == 0) {
+        if (configs == null || configs.isEmpty()) {
             registry.clear();
         }
 
         Map<Key, MockConfig> tmp = new HashMap<>();
+        assert configs != null;
         for (MockConfig config : configs) {
-            Key key =
-                    new Key(config);
+            Key key = new Key(config);
             tmp.put(key, config);
         }
 
@@ -68,23 +69,11 @@ public class MockConfigRegistry {
         final MockConfig mockConfig = registry.get(key);
 
         if (mockConfig == null) {
-            LogUtil.log(
-                    "mock agent query mock config from registry interfaceName={} methodName={} "
+            logger.info("mock agent query mock config from registry interfaceName={} methodName={} "
                             + "group={} version={}  current keys size ={}",
                     query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(),
                     keys().size());
         }
-
-        return mockConfig;
-    }
-
-    public static MockConfig getMockConfig(Key key) {
-
-        if (!registry.containsKey(key)) {
-            return null;
-        }
-
-        final MockConfig mockConfig = registry.get(key);
 
         return mockConfig;
     }
@@ -94,23 +83,23 @@ public class MockConfigRegistry {
         /**
          * 类型
          */
-        private String type;
+        private final String type;
         /**
          * 接口
          */
-        private String interfaceName;
+        private final String interfaceName;
         /**
          * 方法
          */
-        private String methodName;
+        private final String methodName;
         /**
          * 分组
          */
-        private String groupName;
+        private final String groupName;
         /**
          * 版本
          */
-        private String version;
+        private final String version;
 
         public Key(MockConfig mockConfig) {
             this.interfaceName = mockConfig.getInterfaceName();

@@ -57,7 +57,7 @@ public class DubboStartInterceptor {
                     MockConfigRegistry.add4Register(mockConfig);
                 }
 
-                MockServerOperation.registerAndGet4Dubbo();
+                MockServerOperation.register();
             }
         } catch (Throwable throwable) {
             LogUtil.log("intercept dubbo 启动类失败", throwable);

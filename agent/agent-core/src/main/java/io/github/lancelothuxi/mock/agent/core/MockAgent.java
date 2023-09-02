@@ -17,9 +17,9 @@ import java.lang.instrument.Instrumentation;
  *
  * @author lancelot
  */
-public class Agent {
+public class MockAgent {
 
-    private static Logger logger = LoggerFactory.getLogger(Agent.class);
+    private static Logger logger = LoggerFactory.getLogger(MockAgent.class);
 
     public static void premain(String arguments, Instrumentation instrumentation) {
 

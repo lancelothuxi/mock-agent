@@ -41,6 +41,7 @@ public class MockAgent {
             @Override
             public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription,
                                                     ClassLoader classLoader, JavaModule module) {
+                //todo match any class any method
                 Plugin plugin = pluginFinder.find(typeDescription);
                 return builder.method(plugin.methodMatcher()).intercept(MethodDelegation.withDefaultConfiguration()
                         .to(new CommonInterceptor(classLoader, plugin.interceptor().getName())));

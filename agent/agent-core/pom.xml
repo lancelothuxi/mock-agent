@@ -2,37 +2,19 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
         <artifactId>mock-agent</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
-
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.lancelothuxi</groupId>
     <artifactId>mock-agent-core</artifactId>
-    <version>1.0.0</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
+    <version>${rversion}</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <dependencies>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -46,7 +28,6 @@
             <version>1.7.32</version>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>com.alibaba</groupId>

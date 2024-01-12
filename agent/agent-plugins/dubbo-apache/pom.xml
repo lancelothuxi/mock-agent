@@ -8,12 +8,10 @@
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
         <artifactId>mock-agent-plugins</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>io.github.lancelothuxi</groupId>
     <artifactId>mock-agent-plugin-dubbo-apache</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -21,16 +19,10 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.github.lancelothuxi</groupId>
-            <artifactId>mock-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
         <dependency>
             <groupId>io.github.lancelothuxi</groupId>
             <artifactId>mock-agent-core</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>

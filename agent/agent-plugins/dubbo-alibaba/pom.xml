@@ -8,12 +8,10 @@
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
         <artifactId>mock-agent-plugins</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>io.github.lancelothuxi</groupId>
     <artifactId>mock-agent-plugin-dubbo-alibaba</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -23,16 +21,8 @@
     <dependencies>
         <dependency>
             <groupId>io.github.lancelothuxi</groupId>
-            <artifactId>mock-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.lancelothuxi</groupId>
             <artifactId>mock-agent-core</artifactId>
-            <version>1.0.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -45,13 +35,6 @@
                 </exclusion>
             </exclusions>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ea.agentloader</groupId>
-            <artifactId>ea-agent-loader</artifactId>
-            <version>1.0.3</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>

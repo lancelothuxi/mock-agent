@@ -5,7 +5,6 @@ import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
-import io.github.lancelothuxi.mock.api.CommonDubboMockService;
 import org.apache.dubbo.config.spring.ReferenceBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +27,6 @@ public class DubboStartInterceptor implements Interceptor {
             final String groupName = referenceBean.getGroup();
             final String version = referenceBean.getVersion();
 
-            // skip CommonDubboMockService
-            if (interfaceName.equals(CommonDubboMockService.class.getName())) {
-                return supercall.call();
-            }
 
             for (Method dubboMethod : referenceBean.getInterfaceClass().getMethods()) {
                 MockConfig mockConfig = new MockConfig();

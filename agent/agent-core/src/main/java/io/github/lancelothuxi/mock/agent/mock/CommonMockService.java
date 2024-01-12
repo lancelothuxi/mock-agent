@@ -48,11 +48,6 @@ public abstract class CommonMockService {
             return supercall.call();
         }
 
-        // 服务端mock
-        if (mockConfig.mockFromServer()) {
-            return mockFromServer(interfaceName, methodName, group, version, supercall, argsString, genericReturnType);
-        }
-
         // 本地mock
         final List<MockData> mockDataList = mockConfig.getMockDataList();
         if (CollectionUtils.isEmpty(mockDataList)) {
@@ -80,19 +75,8 @@ public abstract class CommonMockService {
         data = compoundVariable.execute(data);
 
         Object mockValue = ParseUtil.parseMockValue(data, genericReturnType);
-
         return wrapReturnValue(mockValue);
     }
-
-    /**
-     * @param interfaceName
-     * @param methodName
-     * @param group
-     * @param version
-     * @return
-     */
-    public abstract Object mockFromServer(String interfaceName, String methodName, String group, String version,
-                                          Callable supercall, String argsString, Type genericReturnType);
 
     /**
      * @param returnValue

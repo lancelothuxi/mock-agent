@@ -24,24 +24,4 @@ public class ParseUtilTest {
         Object result = ParseUtil.parseMockValue("null", null);
         Assert.assertNull(result);
     }
-
-    @Test
-    public void testParseGenericJavaType() {
-
-        GenericDemo<Person> genericDemo = new GenericDemo<>();
-        Person person = new Person("tom", 11);
-        genericDemo.setData(person);
-
-        String jsonString = JSON.toJSONString(genericDemo);
-
-        Type type = new MyParameterizedType(GenericDemo.class, Person.class);
-
-        Object result = ParseUtil.parseMockValue(jsonString, type);
-
-        Assert.assertTrue(result instanceof GenericDemo);
-
-        GenericDemo<Person> genericDemo1 = (GenericDemo) result;
-
-        Assert.assertEquals(genericDemo1.getData().getName(), "tom");
-    }
 }

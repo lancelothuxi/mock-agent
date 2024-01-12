@@ -1,6 +1,9 @@
 package io.github.lancelothuxi.mock.agent.dubbo.alibaba;
 
+import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import io.github.lancelothuxi.mock.agent.core.Plugin;
+import net.bytebuddy.description.method.MethodDescription;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 
 import static net.bytebuddy.matcher.ElementMatchers.named;
@@ -13,17 +16,17 @@ import static net.bytebuddy.matcher.ElementMatchers.named;
 public class InvokerPlugin implements Plugin {
 
     @Override
-    public ElementMatcher classMatcher() {
+    public ElementMatcher<TypeDescription> classMatcher() {
         return named("com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker");
     }
 
     @Override
-    public ElementMatcher methodMatcher() {
+    public ElementMatcher<? super MethodDescription> methodMatcher() {
         return named("invoke");
     }
 
     @Override
-    public Class interceptor() {
+    public Class<? extends Interceptor> interceptor() {
         return DubboInvokeInterceptor.class;
     }
 }

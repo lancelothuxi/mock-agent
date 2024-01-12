@@ -8,10 +8,9 @@
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
         <artifactId>mock-agent</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>io.github.lancelothuxi</groupId>
     <artifactId>mock-agent-build</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -25,7 +24,6 @@
         <dependency>
             <groupId>io.github.lancelothuxi</groupId>
             <artifactId>mock-agent-core</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>

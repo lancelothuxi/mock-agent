@@ -8,12 +8,10 @@
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
         <artifactId>mock-agent</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
-    <groupId>io.github.lancelothuxi</groupId>
     <artifactId>mock-agent-plugins</artifactId>
-    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <properties>

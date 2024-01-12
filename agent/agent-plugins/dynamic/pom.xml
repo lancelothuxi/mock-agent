@@ -7,10 +7,10 @@
 
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
-        <artifactId>mock-agent-plugins</artifactId>
+        <artifactId>mock-agent-transformers</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>mock-agent-plugin-dynamic</artifactId>
+    <artifactId>mock-agent-transformer-dynamic</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

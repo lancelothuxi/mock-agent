@@ -20,7 +20,7 @@ public class MockServerOperation {
     private static String registerUrl = "/mock/dubbo/config/register";
     private static String queryAllURL = "/mock/dubbo/config/getAllByType";
 
-    private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+    private static final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
 
     private static volatile boolean dubboTaskStarted = false;
 

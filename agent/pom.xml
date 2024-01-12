@@ -12,14 +12,14 @@
     <properties>
         <revision>1.0.0</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
+        <flatten-maven-transformer.version>1.3.0</flatten-maven-transformer.version>
         <testng.version>6.9.10</testng.version>
         <mockito.version>4.0.0</mockito.version>
     </properties>
 
     <modules>
         <module>agent-core</module>
-        <module>agent-plugins</module>
+        <module>agent-transformers</module>
         <module>build</module>
     </modules>
 
@@ -57,22 +57,22 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+        <transformers>
+            <transformer>
+                <groupId>org.apache.maven.transformers</groupId>
+                <artifactId>maven-compiler-transformer</artifactId>
                 <version>3.2</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
-            </plugin>
+            </transformer>
 
-            <plugin>
+            <transformer>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>${flatten-maven-plugin.version}</version>
+                <artifactId>flatten-maven-transformer</artifactId>
+                <version>${flatten-maven-transformer.version}</version>
                 <configuration>
                     <flattenedPomFilename>pom-xml-flattened</flattenedPomFilename>
                     <updatePomFile>true</updatePomFile>
@@ -94,8 +94,8 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-        </plugins>
+            </transformer>
+        </transformers>
     </build>
 
 </project>

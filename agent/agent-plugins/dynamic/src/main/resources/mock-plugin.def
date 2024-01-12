@@ -14,4 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dynamic=io.github.lancelothuxi.mock.agent.dubbo.apache.InvokerPlugin
+dynamic=io.github.lancelothuxi.mock.agent.dynamic.DynamicPlugin

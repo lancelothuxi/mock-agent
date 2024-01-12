@@ -1,11 +1,10 @@
-package io.github.lancelothuxi.mock.agent.dubbo.apache;
+package io.github.lancelothuxi.mock.agent.dubbo.alibaba;
 
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
-import io.github.lancelothuxi.mock.agent.core.Plugin;
+import io.github.lancelothuxi.mock.agent.core.Transformer;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
-import net.bytebuddy.matcher.ElementMatchers;
 
 import static net.bytebuddy.matcher.ElementMatchers.named;
 
@@ -14,20 +13,20 @@ import static net.bytebuddy.matcher.ElementMatchers.named;
  * @version 1.0
  * @date 2023/8/21 上午11:44
  */
-public class InvokerPlugin implements Plugin {
+public class RegisterTransformer implements Transformer {
 
     @Override
     public ElementMatcher<TypeDescription> classMatcher() {
-        return ElementMatchers.<TypeDescription>named("org.apache.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker");
+        return named("com.alibaba.dubbo.config.spring.ReferenceBean");
     }
 
     @Override
     public ElementMatcher<? super MethodDescription> methodMatcher() {
-        return named("invoke");
+        return named("afterPropertiesSet");
     }
 
     @Override
     public Class<? extends Interceptor> interceptor() {
-        return DubboInvokeInterceptor.class;
+        return DubboStartInterceptor.class;
     }
 }

@@ -19,7 +19,7 @@ public class PluginBootstrap {
 
     private static final Logger logger = LoggerFactory.getLogger(PluginBootstrap.class);
 
-    public List<Plugin> loadPlugins() {
+    public List<Transformer> loadPlugins() {
 
         // load plugins
         PluginResourcesResolver pluginResourcesResolver = new PluginResourcesResolver();
@@ -32,8 +32,8 @@ public class PluginBootstrap {
         return loadPlugins(resources);
     }
 
-    private List<Plugin> loadPlugins(List<URL> resources) {
-        List<Plugin> plugins = new ArrayList<>();
+    private List<Transformer> loadPlugins(List<URL> resources) {
+        List<Transformer> transformers = new ArrayList<>();
         for (URL url : resources) {
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -44,8 +44,8 @@ public class PluginBootstrap {
                             continue;
                         }
                         PluginDefine pluginDefine = PluginDefine.build(line);
-                        Plugin plugin = (Plugin) Class.forName(pluginDefine.getDefineClass()).newInstance();
-                        plugins.add(plugin);
+                        Transformer transformer = (Transformer) Class.forName(pluginDefine.getDefineClass()).newInstance();
+                        transformers.add(transformer);
                     } catch (Exception e) {
                         logger.error("mock-agent 加载插件出错", e);
                     }
@@ -56,6 +56,6 @@ public class PluginBootstrap {
             }
         }
 
-        return plugins;
+        return transformers;
     }
 }

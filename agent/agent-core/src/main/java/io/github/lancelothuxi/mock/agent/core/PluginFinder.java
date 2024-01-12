@@ -25,19 +25,19 @@ import java.util.List;
  */
 public class PluginFinder {
 
-    private List<Plugin> plugins = new ArrayList<>();
+    private List<Transformer> transformers = new ArrayList<>();
 
     /**
-     * @param plugins
+     * @param transformers
      */
-    public PluginFinder(List<Plugin> plugins) {
-        this.plugins=plugins;
+    public PluginFinder(List<Transformer> transformers) {
+        this.transformers = transformers;
     }
 
-    public Plugin find(TypeDescription typeDescription) {
-        for (Plugin plugin : plugins) {
-            if(plugin.classMatcher().matches(typeDescription)){
-                return plugin;
+    public Transformer find(TypeDescription typeDescription) {
+        for (Transformer transformer : transformers) {
+            if(transformer.classMatcher().matches(typeDescription)){
+                return transformer;
             }
         }
         return null;
@@ -45,8 +45,8 @@ public class PluginFinder {
 
     public ElementMatcher<? super TypeDescription> buildMatch() {
         List<ElementMatcher<? super TypeDescription>> elementMatchers = new ArrayList<>();
-        for (Plugin plugin : plugins) {
-            ElementMatcher<? super TypeDescription> elementMatcher = plugin.classMatcher();
+        for (Transformer transformer : transformers) {
+            ElementMatcher<? super TypeDescription> elementMatcher = transformer.classMatcher();
             elementMatchers.add(elementMatcher);
         }
         return new AnyMatcher<>(elementMatchers);

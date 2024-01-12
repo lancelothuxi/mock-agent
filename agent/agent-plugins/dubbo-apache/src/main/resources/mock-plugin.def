@@ -14,5 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dubbo-apache=io.github.lancelothuxi.mock.agent.dubbo.apache.InvokerPlugin
-dubbo-apache=io.github.lancelothuxi.mock.agent.dubbo.apache.RegisterPlugin
+dubbo-apache=io.github.lancelothuxi.mock.agent.dubbo.apache.DubboApachePlugin

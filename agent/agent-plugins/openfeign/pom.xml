@@ -7,12 +7,12 @@
 
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
-        <artifactId>mock-agent-plugins</artifactId>
+        <artifactId>mock-agent-transformers</artifactId>
         <version>${revision}</version>
     </parent>
 
     <groupId>io.github.lancelothuxi</groupId>
-    <artifactId>mock-agent-plugin-openfeign</artifactId>
+    <artifactId>mock-agent-transformer-openfeign</artifactId>
     <packaging>jar</packaging>
 
     <properties>

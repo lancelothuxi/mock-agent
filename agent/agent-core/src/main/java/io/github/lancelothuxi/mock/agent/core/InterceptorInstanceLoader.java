@@ -18,10 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class InterceptorInstanceLoader {
-
-    private static ConcurrentHashMap<String, Object> INSTANCE_CACHE = new ConcurrentHashMap<String, Object>();
-    private static ReentrantLock INSTANCE_LOAD_LOCK = new ReentrantLock();
-
     public static <T> T load(String className, InterceptorClassLoader classLoader) {
 
         try {

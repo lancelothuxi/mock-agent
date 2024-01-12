@@ -23,8 +23,6 @@ import java.util.concurrent.Callable;
  */
 public class DubboInvokeInterceptor extends CommonMockService implements Interceptor {
     
-    private static Logger logger = LoggerFactory.getLogger(DubboInvokeInterceptor.class);
-
     @Override
     public Object intercept(@Origin Method method, @AllArguments Object[] allArguments, @This Object self,
                             @SuperCall Callable supercall) throws Exception {

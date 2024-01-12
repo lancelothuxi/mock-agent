@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class PluginBootstrap {
 
-    private static Logger logger = LoggerFactory.getLogger(PluginBootstrap.class);
+    private static final Logger logger = LoggerFactory.getLogger(PluginBootstrap.class);
 
     public List<Plugin> loadPlugins() {
 

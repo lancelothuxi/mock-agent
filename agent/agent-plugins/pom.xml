@@ -23,6 +23,7 @@
         <module>dubbo-apache</module>
         <module>openfeign</module>
         <module>spring</module>
+        <module>dynamic</module>
     </modules>
 
 

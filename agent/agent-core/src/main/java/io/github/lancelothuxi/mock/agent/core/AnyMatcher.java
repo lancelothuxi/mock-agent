@@ -1,6 +1,7 @@
 package io.github.lancelothuxi.mock.agent.core;
 
 import net.bytebuddy.description.NamedElement;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 
 import java.util.List;
@@ -12,9 +13,9 @@ import java.util.List;
  */
 public class AnyMatcher<T extends NamedElement> extends ElementMatcher.Junction.AbstractBase<T> {
 
-    private List<ElementMatcher> elementMatchers;
+    private List<ElementMatcher<? super TypeDescription>> elementMatchers;
 
-    public AnyMatcher(List<ElementMatcher> elementMatchers) {
+    public AnyMatcher(List<ElementMatcher<? super TypeDescription>> elementMatchers) {
         this.elementMatchers = elementMatchers;
     }
 

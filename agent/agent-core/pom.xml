@@ -9,7 +9,6 @@
         <version>${revision}</version>
     </parent>
     <artifactId>mock-agent-core</artifactId>
-    <version>${rversion}</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

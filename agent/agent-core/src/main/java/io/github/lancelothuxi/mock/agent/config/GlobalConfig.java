@@ -17,7 +17,7 @@ public class GlobalConfig {
      * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
      */
     public static boolean degrade = false;
-    private static Logger logger = LoggerFactory.getLogger(GlobalConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(GlobalConfig.class);
 
     public static void init() {
         degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));

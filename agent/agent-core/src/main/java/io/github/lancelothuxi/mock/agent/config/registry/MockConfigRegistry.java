@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MockConfigRegistry {
     private static Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
-
     public static String lastMd5;
     private static Map<Key, MockConfig> registry = new ConcurrentHashMap<>();
     private static Map<Key, MockConfig> registerRegistry = new ConcurrentHashMap<>();

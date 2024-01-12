@@ -14,8 +14,12 @@ import org.slf4j.LoggerFactory;
 
 
 public class HttpUtil {
-    private static Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
+    private static final Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
 
+
+    public static String sendPostRequest(String url, Object jsonData) {
+       return sendPostRequest(url,jsonData,10000);
+    }
     public static String sendPostRequest(String url, Object jsonData,int readTimeout) {
         HttpURLConnection con = null;
         BufferedReader in = null;

@@ -14,12 +14,11 @@ import java.lang.instrument.Instrumentation;
 
 /**
  * agent to intercept dubbo interfaces
- *
  * @author lancelot
  */
 public class MockAgent {
 
-    private static Logger logger = LoggerFactory.getLogger(MockAgent.class);
+    private static final Logger logger = LoggerFactory.getLogger(MockAgent.class);
 
     public static void premain(String arguments, Instrumentation instrumentation) {
 
@@ -36,7 +35,6 @@ public class MockAgent {
                 .or(ElementMatchers.<TypeDescription>nameStartsWith("com.taobao.")).or(ElementMatchers.isSynthetic()));
 
         PluginFinder pluginFinder = new PluginFinder(new PluginBootstrap().loadPlugins());
-
         agentBuilder.type(pluginFinder.buildMatch()).transform(new AgentBuilder.Transformer() {
             @Override
             public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription,

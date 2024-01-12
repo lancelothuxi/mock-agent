@@ -10,9 +10,8 @@
         <artifactId>mock-agent-plugins</artifactId>
         <version>${revision}</version>
     </parent>
-
-    <groupId>io.github.lancelothuxi</groupId>
-    <artifactId>mock-agent-plugin-openfeign</artifactId>
+    <artifactId>mock-agent-plugin-dynamic</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -20,30 +19,12 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>io.github.lancelothuxi</groupId>
             <artifactId>mock-agent-core</artifactId>
         </dependency>
-        <!-- OpenFeign -->
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
-            <version>12.1</version>
-            <scope>provided</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>12.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>6.0.11</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
 

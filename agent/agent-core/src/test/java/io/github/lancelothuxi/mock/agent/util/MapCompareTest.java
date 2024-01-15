@@ -1,7 +1,6 @@
 package io.github.lancelothuxi.mock.agent.util;
 
 
-import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +12,7 @@ import java.util.Map;
  */
 public class MapCompareTest {
 
-    @Test
+    @org.testng.annotations.Test
     public void testMinus() {
 
         Map<String, Integer> map1 = new HashMap<>();

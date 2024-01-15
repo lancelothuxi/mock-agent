@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.lancelothuxi</groupId>
+    <artifactId>mock-agent-plugins</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <groupId>io.github.lancelothuxi</groupId>
+  <artifactId>mock-agent-transformer-spring</artifactId>
+  <version>1.0.0</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.lancelothuxi</groupId>
+      <artifactId>mock-agent-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.3.22</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>

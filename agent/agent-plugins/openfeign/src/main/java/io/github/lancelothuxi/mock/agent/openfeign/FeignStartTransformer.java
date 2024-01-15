@@ -10,7 +10,7 @@ import net.bytebuddy.matcher.ElementMatchers;
 public class FeignStartTransformer implements Transformer {
     @Override
     public ElementMatcher<TypeDescription> classMatcher() {
-        return ElementMatchers.<TypeDescription>named("com.ysepay.common.http.openfeign.FeignClientsRegistrar");
+        return ElementMatchers.<TypeDescription>named("openfeign.FeignClientsRegistrar");
     }
 
     @Override

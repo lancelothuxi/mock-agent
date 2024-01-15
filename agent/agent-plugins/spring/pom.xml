@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>io.github.lancelothuxi</groupId>
-        <artifactId>mock-agent-transformers</artifactId>
+        <artifactId>mock-agent-plugins</artifactId>
         <version>${revision}</version>
     </parent>
 
@@ -25,7 +25,6 @@
         <dependency>
             <groupId>io.github.lancelothuxi</groupId>
             <artifactId>mock-agent-core</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>

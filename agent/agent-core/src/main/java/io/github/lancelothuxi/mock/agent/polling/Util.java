@@ -22,7 +22,7 @@ public class Util {
                     return mockData;
                 }
 
-                final Object jsonPathValue = JSONPath.read(argsString, mockData.getMockReqParams());
+                final Object jsonPathValue = JSONPath.eval(argsString, mockData.getMockReqParams());
                 if (jsonPathValue == null) {
                     continue;
                 }

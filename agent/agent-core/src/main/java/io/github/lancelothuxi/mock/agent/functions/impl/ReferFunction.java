@@ -24,7 +24,7 @@ public class ReferFunction extends AbstractFunction {
         final String referJsonPathExpression = values[0].execute();
 
         try {
-            final Object jsonPathValue = JSONPath.read(requestData, referJsonPathExpression);
+            final Object jsonPathValue = JSONPath.eval(requestData, referJsonPathExpression);
             if (jsonPathValue == null) {
                 return "";
             }

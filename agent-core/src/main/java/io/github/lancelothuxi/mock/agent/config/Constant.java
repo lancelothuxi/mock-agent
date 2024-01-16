@@ -7,6 +7,11 @@ package io.github.lancelothuxi.mock.agent.config;
  */
 public class Constant {
 
+    public static String QUERY_MOCK_CONFIG_LIST_URL = GlobalConfig.mockServerURL+"/mock/config/getMockConfigs";
+
+    public static final String MOCK_CONFIG_REGISTER_URL= GlobalConfig.mockServerURL + "/mock/config/register";
+
+
     /**
      * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
      */

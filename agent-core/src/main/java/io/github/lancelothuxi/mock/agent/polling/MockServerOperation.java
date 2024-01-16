@@ -10,64 +10,63 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import static io.github.lancelothuxi.mock.agent.config.Constant.MOCK_CONFIG_REGISTER_URL;
+import static io.github.lancelothuxi.mock.agent.config.Constant.QUERY_MOCK_CONFIG_LIST_URL;
+
 public class MockServerOperation {
-    private static Logger logger = LoggerFactory.getLogger(MockAgent.class);
 
-    private static String registerUrl = "/mock/dubbo/config/register";
-    private static String queryAllURL = "/mock/dubbo/config/getAllByType";
-
-    private static final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-
-    private static volatile boolean dubboTaskStarted = false;
-
+    private static final Timer timer = new Timer();
     /**
      * dubbo
      */
-    public static void register() {
+    public static void sync() {
+        final QueryMockConfigsRequest queryMockConfigsRequest = register(
+                MockConfigRegistry.registryValues());
 
-        if (dubboTaskStarted) {
-            return;
-        }
+        syncMockConfigsFromServer(queryMockConfigsRequest);
 
-        scheduledExecutorService.schedule(new Runnable() {
-
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                final Request request = register( MockConfigRegistry.registryValues());
-                syncDubboConfigsFromServer(request);
+                syncMockConfigsFromServer(queryMockConfigsRequest);
             }
-        }, 5, TimeUnit.SECONDS);
-
-        dubboTaskStarted = true;
+        }, 0, 5000L);
     }
 
-    private static void syncDubboConfigsFromServer(Request request) {
-        final String result = HttpUtil.sendPostRequest(queryAllURL,request, 3000);
-        String md5Hex = DigestUtils.getMD5(result).toUpperCase();
 
-        // 数据有变化
+
+    private static void syncMockConfigsFromServer(QueryMockConfigsRequest queryMockConfigsRequest) {
+        final String result = HttpUtil.sendPostRequest(QUERY_MOCK_CONFIG_LIST_URL,queryMockConfigsRequest, 3000);
+        String md5Hex = DigestUtils
+                .getMD5(result).toUpperCase();
+        //数据有变化
         if (!md5Hex.equals(MockConfigRegistry.lastMd5)) {
             MockConfigRegistry.lastMd5 = md5Hex;
-            final Response response = JSON.parseObject(result, Response.class);
-            MockConfigRegistry.sync(response.getMockConfigs());
+            final MockConfigListResponse mockConfigListResponse = JSON.parseObject(result, MockConfigListResponse.class);
+            MockConfigRegistry.sync(mockConfigListResponse.getMockConfigs());
         }
     }
 
-    private static Request register(List<MockConfig> mockConfigs) {
-        Request request = new Request();
-        request.setAppName(GlobalConfig.applicationName);
-        request.setMockConfigList(mockConfigs);
+
+    private static QueryMockConfigsRequest register(List<MockConfig> mockConfigs) {
+        QueryMockConfigsRequest queryMockConfigsRequest = new QueryMockConfigsRequest();
+        queryMockConfigsRequest.setAppName(GlobalConfig.applicationName);
+        queryMockConfigsRequest.setMockConfigList(mockConfigs);
 
         try {
-            // 注册
-            HttpUtil.sendPostRequest(registerUrl,request, 3000);
-        } catch (Exception ex) {
-            logger.error("注册失败",ex);
+            //注册
+            HttpUtil.sendPostRequest(MOCK_CONFIG_REGISTER_URL, queryMockConfigsRequest,3000);
+        }catch (Exception ex){
+            if(GlobalConfig.degrade){
+                throw new RuntimeException("注册请求失败，mock.agent.mandatory 设置为true, 程序将退出");
+            }
         }
-        return request;
+        return queryMockConfigsRequest;
     }
 }

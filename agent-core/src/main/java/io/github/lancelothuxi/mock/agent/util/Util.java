@@ -1,6 +1,6 @@
 package io.github.lancelothuxi.mock.agent.util;
 
-import java.util.Collection;
+import java.io.*;
 import java.util.Map;
 
 public class Util {
@@ -29,31 +29,22 @@ public class Util {
         }
     }
 
-    public static boolean isJavaVersionThanJdk7() {
-        String javaVersion = System.getProperty("java.version");
-        int majorVersion = Integer.parseInt(javaVersion.split("\\.")[0]);
-        if (majorVersion > 1 || (majorVersion == 1 && Integer.parseInt(javaVersion.split("\\.")[1]) > 7)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static String collectionToString(Collection collection) {
-        if (collection == null || collection.size() == 0) {
-            return "[]";
+    public static String readFileToString(File file) throws IOException {
+        // 创建文件对象
+        if (!file.exists()) {
+            throw new IOException("文件不存在");
         }
 
-        StringBuffer stringBuffer = new StringBuffer("[");
-        for (Object o : collection) {
-            if (o == null) {
-                stringBuffer.append("null");
-                continue;
-            }
-            stringBuffer.append(o.toString()).append(",");
+        // 读取文件内容
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        StringBuffer sb = new StringBuffer();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
         }
+        reader.close();
 
-        stringBuffer.append("]");
-        return stringBuffer.toString();
+        // 返回文件内容
+        return sb.toString();
     }
 }

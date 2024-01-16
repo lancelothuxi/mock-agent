@@ -13,6 +13,7 @@ public class GlobalConfig {
 
     public static volatile String mockServerURL;
     public static volatile String applicationName;
+    public static  String LOCAL_CONFIG_FILE_PATH;
     /**
      * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
      */

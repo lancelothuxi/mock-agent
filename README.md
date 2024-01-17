@@ -3,6 +3,7 @@
 ## 简介
 
 Mock Agent 是一个无侵入式的 mock 工具，它使用 JavaAgent 技术，在运行时修改被 mock 的类的行为。
+支持 dubbo feign 和任意类mock
 
 ## 功能
 

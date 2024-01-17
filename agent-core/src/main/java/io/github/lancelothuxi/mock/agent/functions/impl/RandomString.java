@@ -40,7 +40,7 @@ public class RandomString extends AbstractFunction {
     @Override
     public void setParameters(Collection<CompoundVariable> parameters) {
         // TODO 参数个数校验
-        values = parameters.toArray(new CompoundVariable[parameters.size()]);
+        values = parameters.toArray(new CompoundVariable[0]);
     }
 
     @Override

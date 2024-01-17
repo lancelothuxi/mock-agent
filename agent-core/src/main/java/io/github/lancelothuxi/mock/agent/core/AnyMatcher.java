@@ -21,7 +21,7 @@ public class AnyMatcher<T extends NamedElement> extends ElementMatcher.Junction.
 
     @Override
     public boolean matches(T target) {
-        if (elementMatchers == null || elementMatchers.size() == 0) {
+        if (elementMatchers == null || elementMatchers.isEmpty()) {
             return false;
         }
 

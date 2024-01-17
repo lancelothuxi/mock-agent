@@ -22,9 +22,8 @@ public final class ClassFinder {
         boolean recursive = true;
 
         // 包名字
-        String packageName = pack;
         // 包名对应的路径名称
-        String packageDirName = packageName.replace('.', '/');
+        String packageDirName = pack.replace('.', '/');
 
         Enumeration<URL> dirs;
 
@@ -37,11 +36,11 @@ public final class ClassFinder {
 
                 if ("file".equals(protocol)) {
                     String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
-                    findClassInPackageByFile(packageName, filePath, recursive, classes);
+                    findClassInPackageByFile(pack, filePath, recursive, classes);
                 } else if ("jar".equals(protocol)) {
                     JarFile jarFile = null;
                     jarFile = ((JarURLConnection) url.openConnection()).getJarFile();
-                    getAllClassNameByJar(jarFile, packageName, recursive, classes);
+                    getAllClassNameByJar(jarFile, pack, recursive, classes);
                 }
             }
 

@@ -37,7 +37,7 @@ public class ReferFunction extends AbstractFunction {
 
     @Override
     public void setParameters(Collection<CompoundVariable> parameters) {
-        values = parameters.toArray(new CompoundVariable[parameters.size()]);
+        values = parameters.toArray(new CompoundVariable[0]);
     }
 
     @Override

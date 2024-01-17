@@ -21,16 +21,10 @@ import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
  */
 public abstract class CommonMockService {
 
+
     /**
-     * @param interfaceName
-     * @param methodName
-     * @param group
-     * @param version
-     * @param supercall
-     * @param argsString
-     * @param genericReturnType
-     * @return
-     * @throws Exception
+     *
+     *
      */
     public Object doMock(String interfaceName, String methodName, String group, String version, Callable supercall,
                          String argsString, Type genericReturnType) throws Exception {

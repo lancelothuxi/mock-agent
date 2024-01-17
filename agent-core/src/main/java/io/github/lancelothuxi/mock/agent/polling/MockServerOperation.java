@@ -5,6 +5,7 @@ import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.util.DigestUtils;
+import io.github.lancelothuxi.mock.agent.util.HttpUtil;
 
 import java.util.List;
 import java.util.Timer;

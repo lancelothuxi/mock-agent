@@ -2,7 +2,7 @@ package io.github.lancelothuxi.mock.agent.polling.remote;
 
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.polling.HttpUtil;
+import io.github.lancelothuxi.mock.agent.util.HttpUtil;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.QueryMockConfigsRequest;
 

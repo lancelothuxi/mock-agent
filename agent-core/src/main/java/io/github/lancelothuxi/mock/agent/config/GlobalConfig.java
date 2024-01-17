@@ -1,5 +1,6 @@
 package io.github.lancelothuxi.mock.agent.config;
 
+import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.local.LocalFileConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.remote.HttpConfigFetcher;
@@ -27,7 +28,6 @@ public class GlobalConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalConfig.class);
 
-    private static MockConfigFetcher mockConfigFetcher;
 
     public static void init() {
         degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
@@ -35,14 +35,7 @@ public class GlobalConfig {
         getApplicationName();
         logger.info("mock agent env mockServerURL={} applicationName={}", mockServerURL, applicationName);
 
-        //init config fetcher
-        String configMode = getPropertyFromEnvOrSystemProperty(CONFIG_MODE);
-
-        if("file".equals(configMode)){
-            mockConfigFetcher = new LocalFileConfigFetcher();
-        }else {
-            mockConfigFetcher = new HttpConfigFetcher();
-        }
+        MockConfigRegistry.init();
     }
 
     private static void getApplicationName() {

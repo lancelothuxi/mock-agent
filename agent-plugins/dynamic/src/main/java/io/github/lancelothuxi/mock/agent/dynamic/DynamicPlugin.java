@@ -5,9 +5,8 @@ import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.core.Plugin;
-import io.github.lancelothuxi.mock.agent.core.PluginFinder;
 import io.github.lancelothuxi.mock.agent.core.Transformer;
-import io.github.lancelothuxi.mock.agent.polling.HttpUtil;
+import io.github.lancelothuxi.mock.agent.util.HttpUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

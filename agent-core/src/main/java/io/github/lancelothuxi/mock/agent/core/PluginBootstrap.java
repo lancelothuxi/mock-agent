@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author lancelot
  * @version 1.0
- * @date 2023/8/24 下午4:33
+ * @since 2023/8/24 下午4:33
  */
 public class PluginBootstrap {
 
@@ -25,7 +25,7 @@ public class PluginBootstrap {
         PluginResourcesResolver pluginResourcesResolver = new PluginResourcesResolver();
         List<URL> resources = pluginResourcesResolver.getResources();
 
-        if (resources == null || resources.size() == 0) {
+        if (resources == null || resources.isEmpty()) {
             return new ArrayList<>();
         }
 
@@ -37,10 +37,10 @@ public class PluginBootstrap {
         for (URL url : resources) {
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-                String line = null;
+                String line;
                 while ((line = reader.readLine()) != null) {
                     try {
-                        if (line.trim().length() == 0 || line.startsWith("#")) {
+                        if (line.trim().isEmpty() || line.startsWith("#")) {
                             continue;
                         }
                         PluginDefine pluginDefine = PluginDefine.build(line);

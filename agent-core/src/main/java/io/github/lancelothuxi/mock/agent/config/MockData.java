@@ -1,12 +1,14 @@
 package io.github.lancelothuxi.mock.agent.config;
 
+import java.io.Serializable;
+
 /**
  * mock配置关联响应数据对象 mock_data
  *
  * @author ruoyi
- * @date 2023-05-10
+ * @since  2023-05-10
  */
-public class MockData {
+public class MockData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

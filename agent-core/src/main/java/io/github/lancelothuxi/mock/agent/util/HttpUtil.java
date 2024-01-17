@@ -1,4 +1,4 @@
-package io.github.lancelothuxi.mock.agent.polling;
+package io.github.lancelothuxi.mock.agent.util;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

@@ -26,9 +26,7 @@ public class AnyMatcher<T extends NamedElement> extends ElementMatcher.Junction.
         }
 
         for (ElementMatcher elementMatcher : elementMatchers) {
-            if (elementMatcher.matches(target)) {
-                return true;
-            }
+            if (elementMatcher.matches(target)) return true;
         }
         return false;
     }

@@ -1,27 +1,50 @@
 package io.github.lancelothuxi.mock.agent.config.registry;
 
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
+import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
+import io.github.lancelothuxi.mock.agent.polling.local.LocalFileConfigFetcher;
+import io.github.lancelothuxi.mock.agent.polling.remote.HttpConfigFetcher;
 import io.github.lancelothuxi.mock.agent.util.MapCompare;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static io.github.lancelothuxi.mock.agent.config.GlobalConfig.CONFIG_MODE;
+import static io.github.lancelothuxi.mock.agent.util.ConfigUtil.getPropertyFromEnvOrSystemProperty;
 
 /**
  * @author lancelot
  */
 public class MockConfigRegistry {
-    private static Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
+    private static final Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
     public static String lastMd5;
-    private static Map<Key, MockConfig> registry = new ConcurrentHashMap<>();
-    private static Map<Key, MockConfig> registerRegistry = new ConcurrentHashMap<>();
+    private static final Map<Key, MockConfig> registry = new ConcurrentHashMap<>();
+    private static final Map<Key, MockConfig> registerRegistry = new ConcurrentHashMap<>();
+    private static MockConfigFetcher mockConfigFetcher;
 
+    private static final Timer timer = new Timer();
+
+    public static void init(){
+
+        //init config fetcher
+        String configMode = getPropertyFromEnvOrSystemProperty(CONFIG_MODE);
+
+        if("file".equals(configMode)){
+            mockConfigFetcher = new LocalFileConfigFetcher();
+        }else {
+            mockConfigFetcher = new HttpConfigFetcher();
+        }
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                List<MockConfig> mockConfigs = mockConfigFetcher.getMockConfigs();
+                sync(mockConfigs);
+            }
+        }, 0, 5000L);
+    }
     public static void add(MockConfig mockConfig) {
         Key key = new Key(mockConfig);
         registry.put(key, mockConfig);

@@ -5,7 +5,7 @@ import io.github.lancelothuxi.mock.agent.util.StringUtils;
 /**
  * @author lancelot
  * @version 1.0
- * @date 2023/8/24 下午4:02
+ * @since  2023/8/24 下午4:02
  */
 public class PluginDefine {
 

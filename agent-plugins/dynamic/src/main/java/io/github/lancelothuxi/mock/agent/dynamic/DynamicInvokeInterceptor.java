@@ -28,4 +28,9 @@ public class DynamicInvokeInterceptor extends CommonMockService implements Inter
 
         return result;
     }
+
+    @Override
+    protected String getType() {
+        return "dynamic";
+    }
 }

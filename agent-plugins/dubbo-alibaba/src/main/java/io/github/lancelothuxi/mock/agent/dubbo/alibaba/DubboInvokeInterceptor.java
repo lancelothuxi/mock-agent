@@ -49,4 +49,9 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
     public Object wrapReturnValue(Object returnValue) {
         return new RpcResult(returnValue);
     }
+
+    @Override
+    protected String getType() {
+        return null;
+    }
 }

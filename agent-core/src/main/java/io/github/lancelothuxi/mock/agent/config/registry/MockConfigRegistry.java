@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import static io.github.lancelothuxi.mock.agent.config.GlobalConfig.CONFIG_MODE;
 import static io.github.lancelothuxi.mock.agent.util.ConfigUtil.getPropertyFromEnvOrSystemProperty;
+import static io.github.lancelothuxi.mock.agent.util.Util.getOrDefault;
 
 /**
  * @author lancelot
@@ -37,13 +39,16 @@ public class MockConfigRegistry {
             mockConfigFetcher = new HttpConfigFetcher();
         }
 
+
+        List<MockConfig> mockConfigs = mockConfigFetcher.getMockConfigs();
+        sync(mockConfigs);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 List<MockConfig> mockConfigs = mockConfigFetcher.getMockConfigs();
                 sync(mockConfigs);
             }
-        }, 0, 5000L);
+        }, 5000L, 5000L);
     }
     public static void add(MockConfig mockConfig) {
         Key key = new Key(mockConfig);
@@ -79,6 +84,11 @@ public class MockConfigRegistry {
 
         MapCompare.compareMaps(registry, tmp);
     }
+
+    public static List<MockConfig> getMockConfigs(String type) {
+        return registry.values().stream().filter(t->type.equals(t.getType())).collect(Collectors.toList());
+    }
+
 
     public static List<MockConfig> registryValues() {
         return new ArrayList<>(registerRegistry.values());
@@ -126,9 +136,9 @@ public class MockConfigRegistry {
         public Key(MockConfig mockConfig) {
             this.interfaceName = mockConfig.getInterfaceName();
             this.methodName = mockConfig.getMethodName();
-            this.groupName = mockConfig.getGroupName();
-            this.version = mockConfig.getVersion();
-            this.type= mockConfig.getVersion();
+            this.groupName = getOrDefault(mockConfig.getGroupName(),"");
+            this.version = getOrDefault(mockConfig.getVersion(),"");
+            this.type= mockConfig.getType();
         }
 
         public String getInterfaceName() {

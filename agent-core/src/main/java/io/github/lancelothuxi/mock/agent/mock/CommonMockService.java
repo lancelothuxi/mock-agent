@@ -21,9 +21,7 @@ import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
  */
 public abstract class CommonMockService {
 
-
     /**
-     *
      *
      */
     public Object doMock(String interfaceName, String methodName, String group, String version, Callable supercall,
@@ -32,8 +30,9 @@ public abstract class CommonMockService {
         MockConfig query = new MockConfig();
         query.setInterfaceName(interfaceName);
         query.setMethodName(methodName);
-        query.setGroupName(group);
-        query.setVersion(version);
+        query.setGroupName(group==null?"":group);
+        query.setVersion(version==null?"":version);
+        query.setType(getType());
 
         // try find config from local cache
         final MockConfig mockConfig = MockConfigRegistry.getMockConfig(query);
@@ -76,7 +75,9 @@ public abstract class CommonMockService {
      * @param returnValue
      * @return
      */
-    protected Object wrapReturnValue(Object returnValue){
+    protected Object wrapReturnValue(Object returnValue) {
         return returnValue;
     }
+
+    protected abstract String getType();
 }

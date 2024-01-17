@@ -50,6 +50,12 @@
             <version>${revision}</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.lancelothuxi</groupId>
+            <artifactId>mock-agent-plugin-dynamic</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -27,14 +27,11 @@ public class DynamicPlugin implements Plugin {
         queryMockConfigsRequest.setType("dynamic");
         queryMockConfigsRequest.setAppName(GlobalConfig.applicationName);
 
+        List<MockConfig> dynamicConfigs = MockConfigRegistry.getMockConfigs("dynamic");
         //获取动态mock配置
-        String result = HttpUtil.sendPostRequest(QUERY_MOCK_CONFIG_LIST_URL, JSON.toJSONString(queryMockConfigsRequest));
-
-        MockConfigListResponse mockConfigs = JSON.parseObject(result, MockConfigListResponse.class);
-
         Map<String, List<String>> groupMethodsByInterface = new HashMap<>();
 
-        for (MockConfig mockConfig : mockConfigs.getMockConfigs()) {
+        for (MockConfig mockConfig : dynamicConfigs) {
             if (!groupMethodsByInterface.containsKey(mockConfig.getInterfaceName())) {
                 List<String> methodNames = new ArrayList<>();
                 methodNames.add(mockConfig.getMethodName());
@@ -53,7 +50,7 @@ public class DynamicPlugin implements Plugin {
             transformers.add(dynamicInvokeTransformer);
         }
 
-        for (MockConfig mockConfig : mockConfigs.getMockConfigs()) {
+        for (MockConfig mockConfig : dynamicConfigs) {
             mockConfig.setType("dynamic");
             MockConfigRegistry.add(mockConfig);
         }

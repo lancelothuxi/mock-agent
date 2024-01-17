@@ -28,7 +28,7 @@ public class ParseUtil {
             if (type != null && type.getTypeName().equals("java.lang.String")) {
                 value = mock;
             } else if (StringUtils.isNumeric(mock)) {
-                value = JSON.parseObject(mock);
+                value = JSON.parseObject(mock,type);
             } else if (mock.startsWith(LEFT_BRACKET)) {
                 value = JSON.parseObject(mock, type);
             } else if (mock.startsWith(LEFT_SQUARE_BRACKET)) {

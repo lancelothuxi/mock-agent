@@ -36,19 +36,27 @@ Mock Agent 支持以下功能：
 
 ```java
 public class Example {
+    public static void main(String[] args) throws Exception{
 
-    public static void main(String[] args) {
+        System.setProperty("MOCK_APPLICATION_NAME","Example");
+        System.setProperty("mock.agent.config.mode","file");
+
+        URL resource = Example.class.getClassLoader().getResource("mockconfig.json");
+        File file = new File(resource.toURI());
+
+        String path = file.getPath();
+        System.setProperty("mock.agent.config.file.path",path);
+
+        AgentLoader.loadAgentClass(MockAgent.class.getName(),"");
+
         // 添加 Mock Agent 参数
-        System.setProperty("javaagent", "/path/to/mock-agent.jar");
-
         // 创建被 mock 的类的实例
         ExampleService service = new ExampleService();
 
         // 调用被 mock 的方法
         int result = service.add(1, 2);
 
-        // 验证结果
-        assertEquals(3, result);
+        System.out.println("result = " + result);
     }
 }
 

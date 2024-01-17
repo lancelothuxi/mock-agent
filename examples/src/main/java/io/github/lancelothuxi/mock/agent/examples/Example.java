@@ -1,14 +1,10 @@
 package io.github.lancelothuxi.mock.agent.examples;
 
-import com.alibaba.fastjson.JSON;
 import com.ea.agentloader.AgentLoader;
-import io.github.lancelothuxi.mock.agent.config.MockConfig;
-import io.github.lancelothuxi.mock.agent.config.MockData;
 import io.github.lancelothuxi.mock.agent.core.MockAgent;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 
 public class Example {
     public static void main(String[] args) throws Exception{

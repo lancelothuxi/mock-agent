@@ -29,6 +29,14 @@ public class Util {
         }
     }
 
+
+    public static <V> V getOrDefault(V v, V defValue) {
+        if (v == null) {
+            return defValue;
+        }
+        return v;
+    }
+
     public static String readFileToString(File file) throws IOException {
         // 创建文件对象
         if (!file.exists()) {

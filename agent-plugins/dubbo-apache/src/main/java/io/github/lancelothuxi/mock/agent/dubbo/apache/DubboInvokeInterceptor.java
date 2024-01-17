@@ -43,4 +43,9 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
                 dubboMethod.getGenericReturnType());
         return AsyncRpcResult.newDefaultAsyncResult(o,invocation);
     }
+
+    @Override
+    protected String getType() {
+        return null;
+    }
 }

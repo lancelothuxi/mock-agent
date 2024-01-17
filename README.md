@@ -33,6 +33,24 @@ Mock Agent 支持以下功能：
 ## 示例
 
 以下是一个使用 Mock Agent 的示例：
+```json
+[
+  {
+    "applicationName": "Example",
+    "enabled": 1,
+    "interfaceName": "io.github.lancelothuxi.mock.agent.examples.ExampleService",
+    "methodName": "add",
+    "mockDataList": [
+      {
+        "data": "5",
+        "timeout": 0
+      }
+    ],
+    "serverSideMock": 1,
+    "type": "dynamic"
+  }
+]
+```
 
 ```java
 public class Example {
@@ -56,6 +74,7 @@ public class Example {
         // 调用被 mock 的方法
         int result = service.add(1, 2);
 
+        //改变方法返回值，输出：result = 5
         System.out.println("result = " + result);
     }
 }
@@ -68,27 +87,8 @@ class ExampleService {
 }
 ```
 
-在上述示例中，我们需要 mock `ExampleService` 类的 `add()` 方法。在 `mock.properties` 文件中，我们添加如下配置：
-
-
-mock.classes = ExampleService
-mock.methods = add
-mock.return = 3
-
-运行上述示例，我们将得到以下输出：
-
-```
-[INFO] Initializing Mock Agent...
-[INFO] Mocking class ExampleService
-[INFO] Mocking method add
-[INFO] Mock Agent started
-[INFO] ExampleService.add(1, 2) = 3
-```
 注意事项
-Mock Agent 只能 mock 已加载的类。
 Mock Agent 可能会影响被 mock 的类的性能。
-贡献
-欢迎您对 Mock Agent 进行贡献。您可以提交 issue 或 pull request。
 
 
 许可

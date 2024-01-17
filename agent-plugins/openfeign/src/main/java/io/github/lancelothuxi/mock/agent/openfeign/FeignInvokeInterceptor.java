@@ -81,8 +81,6 @@ public class FeignInvokeInterceptor implements Interceptor {
                     synchronized (FeignInvokeInterceptor.class) {
                         commonMockFeignClient =
                                 Feign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder())
-                                        //
-                                        // .client(Global.feignClient)
                                         .contract(new Contract.Default())
                                         .target(CommonMockFeignClient.class, GlobalConfig.mockServerURL);
                     }

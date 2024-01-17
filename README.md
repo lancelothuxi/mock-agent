@@ -3,7 +3,13 @@
 ## 简介
 
 Mock Agent 是一个无侵入式的 mock 工具，它使用 JavaAgent 技术，在运行时修改被 mock 的类的行为。
-支持 dubbo feign 和任意类mock
+## 组件支持
+- dubbo(alibaba)
+- dubbo(apache)
+- feign
+
+## 任意类mock
+可对任意类进行mock
 
 ## 功能
 
@@ -23,12 +29,6 @@ Mock Agent 支持以下功能：
 
 ## 配置
 
-Mock Agent 的配置文件位于 `conf/mock.properties`。该文件包含以下配置项：
-
-* `mock.classes`: 需要 mock 的类的列表。
-* `mock.methods`: 需要 mock 的类的方法的列表。
-* `mock.return`: 方法的返回值。
-* `mock.exception`: 方法抛出的异常。
 
 ## 示例
 

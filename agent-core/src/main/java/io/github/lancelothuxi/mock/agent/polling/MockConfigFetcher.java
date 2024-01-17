@@ -10,5 +10,5 @@ public interface MockConfigFetcher {
     /**
      * 获取mock配置
      */
-    public List<MockConfig> getMockConfigs(String appName);
+    public List<MockConfig> getMockConfigs();
 }

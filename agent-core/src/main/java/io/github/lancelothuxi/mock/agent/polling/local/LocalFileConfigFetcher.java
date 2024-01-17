@@ -1,5 +1,6 @@
 package io.github.lancelothuxi.mock.agent.polling.local;
 
+import com.alibaba.fastjson2.JSON;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
@@ -17,7 +18,7 @@ import static io.github.lancelothuxi.mock.agent.util.Util.readFileToString;
 public class LocalFileConfigFetcher implements MockConfigFetcher {
 
     @Override
-    public List<MockConfig> getMockConfigs(String appName) {
+    public List<MockConfig> getMockConfigs() {
 
         String localConfigFilePath = GlobalConfig.LOCAL_CONFIG_FILE_PATH;
         if(StringUtils.isEmpty(localConfigFilePath)){
@@ -26,10 +27,9 @@ public class LocalFileConfigFetcher implements MockConfigFetcher {
 
         try {
             String content = readFileToString(new File(localConfigFilePath));
+            return JSON.parseArray(content, MockConfig.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        return null;
     }
 }

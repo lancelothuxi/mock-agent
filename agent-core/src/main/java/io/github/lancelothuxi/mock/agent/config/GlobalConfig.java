@@ -1,5 +1,8 @@
 package io.github.lancelothuxi.mock.agent.config;
 
+import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
+import io.github.lancelothuxi.mock.agent.polling.local.LocalFileConfigFetcher;
+import io.github.lancelothuxi.mock.agent.polling.remote.HttpConfigFetcher;
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,17 +17,32 @@ public class GlobalConfig {
     public static volatile String mockServerURL;
     public static volatile String applicationName;
     public static  String LOCAL_CONFIG_FILE_PATH;
+
+    public static String CONFIG_MODE = "mock.agent.config.mode";
+
     /**
      * 当agent出现错误时候，是否降级执行真实调用，否则抛出异常
      */
     public static boolean degrade = false;
+
     private static final Logger logger = LoggerFactory.getLogger(GlobalConfig.class);
+
+    private static MockConfigFetcher mockConfigFetcher;
 
     public static void init() {
         degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
         getServerUrl();
         getApplicationName();
         logger.info("mock agent env mockServerURL={} applicationName={}", mockServerURL, applicationName);
+
+        //init config fetcher
+        String configMode = getPropertyFromEnvOrSystemProperty(CONFIG_MODE);
+
+        if("file".equals(configMode)){
+            mockConfigFetcher = new LocalFileConfigFetcher();
+        }else {
+            mockConfigFetcher = new HttpConfigFetcher();
+        }
     }
 
     private static void getApplicationName() {

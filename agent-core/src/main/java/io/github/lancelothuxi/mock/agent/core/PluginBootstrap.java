@@ -44,8 +44,9 @@ public class PluginBootstrap {
                             continue;
                         }
                         PluginDefine pluginDefine = PluginDefine.build(line);
-                        Transformer transformer = (Transformer) Class.forName(pluginDefine.getDefineClass()).newInstance();
-                        transformers.add(transformer);
+                        Plugin plugin = (Plugin) Class.forName(pluginDefine.getDefineClass()).newInstance();
+                        List<Transformer> transformerList = plugin.transformers();
+                        transformers.addAll(transformerList);
                     } catch (Exception e) {
                         logger.error("mock-agent 加载插件出错", e);
                     }

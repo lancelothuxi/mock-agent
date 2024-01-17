@@ -11,7 +11,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>mock-agent-transformer-dubbo-apache</artifactId>
+    <artifactId>mock-agent-plugin-dubbo-apache</artifactId>
     <packaging>jar</packaging>
 
     <properties>

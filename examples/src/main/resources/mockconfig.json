@@ -1,0 +1,16 @@
+[
+  {
+    "applicationName": "Example",
+    "enabled": 1,
+    "interfaceName": "io.github.lancelothuxi.mock.agent.examples.ExampleService",
+    "methodName": "add",
+    "mockDataList": [
+      {
+        "data": "5",
+        "timeout": 0
+      }
+    ],
+    "serverSideMock": 1,
+    "type": "dynamic"
+  }
+]

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>io.github.lancelothuxi</groupId>
-    <artifactId>mock-agent-transformer-spring</artifactId>
+    <artifactId>mock-agent-plugin-spring</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

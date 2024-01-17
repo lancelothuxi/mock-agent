@@ -10,7 +10,7 @@
         <artifactId>mock-agent-plugins</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>mock-agent-transformer-dynamic</artifactId>
+    <artifactId>mock-agent-plugin-dynamic</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

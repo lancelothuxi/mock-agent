@@ -17,7 +17,6 @@ public class GlobalConfig {
 
     public static volatile String mockServerURL;
     public static volatile String applicationName;
-    public static  String LOCAL_CONFIG_FILE_PATH;
 
     public static String CONFIG_MODE = "mock.agent.config.mode";
 

@@ -36,7 +36,7 @@ AgentLoader.loadAgentClass(MockAgent.class.getName(),"");
 
 ## 示例
 
-以下是一个使用 Mock Agent 的示例：
+以下是一个使用 Mock Agent 对任意类mock的示例：
 ```json
 [
   {
@@ -91,6 +91,54 @@ class ExampleService {
 }
 ```
 
+以下是一个使用 Mock Agent 对dubbo调用mock的示例：
+```json
+[
+  {
+    "applicationName": "Example",
+    "interfaceName": "io.github.lancelothuxi.mock.agent.examples.dubbo.GreetingsService",
+    "methodName": "sayHi",
+    "mockDataList": [
+      {
+        "data": " this is mock data ",
+        "timeout": 0
+      }
+    ],
+    "type": "dubbo"
+  }
+]
+```
+
+```java
+public class Application {
+
+    public static void main(String[] args) throws Exception {
+
+        System.setProperty("MOCK_APPLICATION_NAME","Example");
+        System.setProperty("mock.agent.config.mode","file");
+
+        URL resource = Example.class.getClassLoader().getResource("mockconfig.json");
+        File file = new File(resource.toURI());
+
+        String path = file.getPath();
+        System.setProperty("mock.agent.config.file.path",path);
+
+        AgentLoader.loadAgentClass(MockAgent.class.getName(),"");
+
+        DubboApacheExampleService dubboApacheExampleService =new DubboApacheExampleService();
+        String sayHelloByDubbo = dubboApacheExampleService.sayHelloByDubbo();
+
+        //输出： sayHelloByDubbo =  this is mock data
+        System.out.println("sayHelloByDubbo = " + sayHelloByDubbo);
+    }
+}
+
+public interface GreetingsService {
+    String sayHi(String name);
+}
+```
+
+更多示例请参考  [examples](./examples)
 注意事项
 Mock Agent 可能会影响被 mock 的类的性能。
 

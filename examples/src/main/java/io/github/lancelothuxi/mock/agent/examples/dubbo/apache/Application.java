@@ -1,5 +1,7 @@
 package io.github.lancelothuxi.mock.agent.examples.dubbo.apache;
 
+import com.ea.agentloader.AgentLoader;
+import io.github.lancelothuxi.mock.agent.core.MockAgent;
 import io.github.lancelothuxi.mock.agent.examples.Example;
 
 import java.io.File;
@@ -19,8 +21,12 @@ public class Application {
         String path = file.getPath();
         System.setProperty("mock.agent.config.file.path",path);
 
+        AgentLoader.loadAgentClass(MockAgent.class.getName(),"");
 
         DubboApacheExampleService dubboApacheExampleService =new DubboApacheExampleService();
-        dubboApacheExampleService.sayHelloByDubbo();
+        String sayHelloByDubbo = dubboApacheExampleService.sayHelloByDubbo();
+
+        //输出： sayHelloByDubbo =  this is mock data
+        System.out.println("sayHelloByDubbo = " + sayHelloByDubbo);
     }
 }

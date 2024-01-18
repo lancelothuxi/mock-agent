@@ -46,6 +46,6 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
 
     @Override
     protected String getType() {
-        return null;
+        return "dubbo";
     }
 }

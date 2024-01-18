@@ -1,7 +1,6 @@
 [
   {
     "applicationName": "Example",
-    "enabled": 1,
     "interfaceName": "io.github.lancelothuxi.mock.agent.examples.ExampleService",
     "methodName": "add",
     "mockDataList": [
@@ -10,7 +9,18 @@
         "timeout": 0
       }
     ],
-    "serverSideMock": 1,
     "type": "dynamic"
+  },
+  {
+    "applicationName": "Example",
+    "interfaceName": "io.github.lancelothuxi.mock.agent.examples.dubbo.GreetingsService",
+    "methodName": "sayHi",
+    "mockDataList": [
+      {
+        "data": " this is mock data ",
+        "timeout": 0
+      }
+    ],
+    "type": "dubbo"
   }
 ]

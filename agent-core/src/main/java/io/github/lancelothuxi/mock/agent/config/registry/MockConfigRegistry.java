@@ -101,12 +101,11 @@ public class MockConfigRegistry {
         final MockConfig mockConfig = registry.get(key);
 
         if (mockConfig == null) {
-            logger.info("mock agent query mock config from registry interfaceName={} methodName={} "
-                            + "group={} version={}  current keys size ={}",
-                    query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion(),
-                    keys().size());
+            if(logger.isDebugEnabled()){
+                logger.info("mock agent query mock config from registry interfaceName={} methodName={} "
+                                + "group={} version={}", query.getInterfaceName(), query.getMethodName(), query.getGroupName(), query.getVersion());
+            }
         }
-
         return mockConfig;
     }
 

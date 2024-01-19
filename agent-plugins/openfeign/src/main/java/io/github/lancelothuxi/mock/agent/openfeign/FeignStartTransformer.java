@@ -10,17 +10,17 @@ import net.bytebuddy.matcher.ElementMatchers;
 public class FeignStartTransformer implements Transformer {
     @Override
     public ElementMatcher<TypeDescription> classMatcher() {
-        return ElementMatchers.<TypeDescription>named("openfeign.FeignClientsRegistrar");
+        return ElementMatchers.<TypeDescription>named("feign.ReflectiveFeign");
     }
 
     @Override
     public ElementMatcher<? super MethodDescription> methodMatcher() {
-        return ElementMatchers.<MethodDescription>named("registerFeignClient");
+        return ElementMatchers.<MethodDescription>named("newInstance");
     }
 
     @Override
     public Class<? extends Interceptor> interceptor() {
-        return null;
+        return FeignStartInterceptor.class;
     }
 
 }

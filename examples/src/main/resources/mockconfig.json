@@ -22,5 +22,17 @@
       }
     ],
     "type": "dubbo"
+  },
+  {
+    "applicationName": "Example",
+    "interfaceName": "io.github.lancelothuxi.mock.agent.examples.feign.HelloFeignService",
+    "methodName": "hello",
+    "mockDataList": [
+      {
+        "data": " this is mock data for feign ",
+        "timeout": 0
+      }
+    ],
+    "type": "feign"
   }
 ]

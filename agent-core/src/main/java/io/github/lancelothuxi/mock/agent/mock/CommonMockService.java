@@ -1,16 +1,21 @@
 package io.github.lancelothuxi.mock.agent.mock;
 
+import com.alibaba.fastjson.JSONPath;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
+import io.github.lancelothuxi.mock.agent.express.Express;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
 import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
 import io.github.lancelothuxi.mock.agent.util.CollectionUtils;
 import io.github.lancelothuxi.mock.agent.util.ParseUtil;
+import io.github.lancelothuxi.mock.agent.util.StringUtils;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.spi.CurrencyNameProvider;
 
 import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
 
@@ -21,6 +26,7 @@ import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
  */
 public abstract class CommonMockService {
 
+    private ConcurrentHashMap<String, Express> expressCache =new ConcurrentHashMap();
     /**
      *
      */
@@ -69,6 +75,37 @@ public abstract class CommonMockService {
 
         Object mockValue = ParseUtil.parseMockValue(data, genericReturnType);
         return wrapReturnValue(mockValue);
+    }
+
+
+    protected MockData getMockData(List<MockData> mockDataList, String expression) {
+
+        for (MockData mockData : mockDataList) {
+            try {
+
+                if(StringUtils.isEmpty(mockData.getMockReqParams())){
+                    return mockData;
+                }
+
+                Express express = expressCache.get(expression);
+                if(express== null){
+
+                    Object expressValue = express.getValue(mockData, expression);
+                }
+
+                final Object jsonPathValue = JSONPath.eval(argsString, mockData.getMockReqParams());
+                if (jsonPathValue == null) {
+                    continue;
+                }
+
+                if (jsonPathValue.toString().equals(mockData.getExpectedValue())) {
+                    return mockData;
+                }
+
+            } catch (Exception ex) {
+            }
+        }
+        return null;
     }
 
     /**

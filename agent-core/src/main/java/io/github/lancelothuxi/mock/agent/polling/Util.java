@@ -32,7 +32,6 @@ public class Util {
                 }
 
             } catch (Exception ex) {
-                continue;
             }
         }
         return null;

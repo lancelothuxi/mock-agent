@@ -14,6 +14,12 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>ognl</groupId>
+            <artifactId>ognl</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

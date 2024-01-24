@@ -5,6 +5,9 @@
     "methodName": "add",
     "mockDataList": [
       {
+        "conditions": [
+          "$[0].id == ''"
+        ],
         "data": "5",
         "timeout": 0
       }

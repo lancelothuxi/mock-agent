@@ -18,7 +18,7 @@ public class Example {
         String path = file.getPath();
         System.setProperty("mock.agent.config.file.path",path);
 
-        AgentLoader.loadAgentClass(MockAgent.class.getName(),"");
+        AgentLoader.loadAgentClass(MockAgent.class.getName(),"a=b");
 
         // 添加 Mock Agent 参数
         // 创建被 mock 的类的实例

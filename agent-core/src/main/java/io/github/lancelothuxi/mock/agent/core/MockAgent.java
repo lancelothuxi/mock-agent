@@ -1,5 +1,6 @@
 package io.github.lancelothuxi.mock.agent.core;
 
+import io.github.lancelothuxi.mock.agent.config.AgentArgs;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
@@ -27,7 +28,9 @@ public class MockAgent {
 
         logger.info("mock agent starting...");
 
-        GlobalConfig.init();
+        AgentArgs agentArgs =new AgentArgs(arguments);
+
+        GlobalConfig.init(agentArgs);
 
         final AgentBuilder.Default agentBuilder = new AgentBuilder.Default();
         agentBuilder.ignore(ElementMatchers.<TypeDescription>nameStartsWith("java.")

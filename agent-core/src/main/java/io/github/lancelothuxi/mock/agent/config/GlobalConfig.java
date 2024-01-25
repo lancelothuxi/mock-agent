@@ -28,9 +28,9 @@ public class GlobalConfig {
     private static final Logger logger = LoggerFactory.getLogger(GlobalConfig.class);
 
 
-    public static void init() {
+    public static void init(AgentArgs agentArgs) {
+
         degrade = "true".equals(System.getProperty(Constant.AGENT_DEGRADE));
-//        getServerUrl();
         getApplicationName();
         logger.info("mock agent env mockServerURL={} applicationName={}", mockServerURL, applicationName);
 

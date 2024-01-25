@@ -1,5 +1,7 @@
 package io.github.lancelothuxi.mock.agent.config;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author ruoyi
  * @since  2023-05-10
  */
+@Data
 public class MockData implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -29,7 +32,7 @@ public class MockData implements Serializable {
     /**
      * mock请求参数匹配规则
      */
-    private String mockReqParams;
+    private String expression;
 
     /**
      * 服务名
@@ -56,75 +59,4 @@ public class MockData implements Serializable {
      */
     private Long enabled;
 
-    public Long getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Long enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getInterfaceName() {
-        return interfaceName;
-    }
-
-    public void setInterfaceName(String interfaceName) {
-        this.interfaceName = interfaceName;
-    }
-
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public String getExpectedValue() {
-        return expectedValue;
-    }
-
-    public void setExpectedValue(String expectedValue) {
-        this.expectedValue = expectedValue;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getMockConfigId() {
-        return mockConfigId;
-    }
-
-    public void setMockConfigId(String mockConfigId) {
-        this.mockConfigId = mockConfigId;
-    }
-
-    public String getMockReqParams() {
-        return mockReqParams;
-    }
-
-    public void setMockReqParams(String mockReqParams) {
-        this.mockReqParams = mockReqParams;
-    }
-
-    public Integer getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(Integer timeout) {
-        this.timeout = timeout;
-    }
 }

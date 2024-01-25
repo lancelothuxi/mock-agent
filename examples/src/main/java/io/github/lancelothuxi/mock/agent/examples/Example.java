@@ -24,10 +24,17 @@ public class Example {
         // 创建被 mock 的类的实例
         ExampleService service = new ExampleService();
 
-        // 调用被 mock 的方法
-        int result = service.add(1, 2);
+        // 调用被 mock 的方法 包含 ognl 条件表达式
+        int result1 = service.add(1, 2);
 
-        System.out.println("result = " + result);
+        //输出 result1 = 4
+        System.out.println("result1 = " + result1);
+
+        // 调用被 mock 的方法 不含包含 ognl 条件表达式
+        int result2 = service.add(4, 5);
+
+        //输出 result1 = 5
+        System.out.println("result2 = " + result2);
 
 
     }

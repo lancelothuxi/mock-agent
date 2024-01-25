@@ -1,10 +1,10 @@
 package io.github.lancelothuxi.mock.agent.mock;
 
-import com.alibaba.fastjson.JSONPath;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.MockData;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
-import io.github.lancelothuxi.mock.agent.express.Express;
+import io.github.lancelothuxi.mock.agent.express.Expression;
+import io.github.lancelothuxi.mock.agent.express.ExpressionFactory;
 import io.github.lancelothuxi.mock.agent.functions.CompoundVariable;
 import io.github.lancelothuxi.mock.agent.functions.FunctionCache;
 import io.github.lancelothuxi.mock.agent.util.CollectionUtils;
@@ -14,10 +14,6 @@ import io.github.lancelothuxi.mock.agent.util.StringUtils;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.spi.CurrencyNameProvider;
-
-import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
 
 /**
  * @author lancelot
@@ -26,12 +22,11 @@ import static io.github.lancelothuxi.mock.agent.polling.Util.getMockData;
  */
 public abstract class CommonMockService {
 
-    private ConcurrentHashMap<String, Express> expressCache =new ConcurrentHashMap();
     /**
      *
      */
     public Object doMock(String interfaceName, String methodName, String group, String version, Callable supercall,
-                         String argsString, Type genericReturnType) throws Exception {
+                         Object[] args, Type genericReturnType) throws Exception {
 
         MockConfig query = new MockConfig();
         query.setInterfaceName(interfaceName);
@@ -53,7 +48,7 @@ public abstract class CommonMockService {
             throw new RuntimeException("mock agent 获取数据为空或者异常");
         }
 
-        MockData mockData = getMockData(mockDataList, argsString);
+        MockData mockData = getMockData(mockConfig,mockDataList, args);
         if (mockData == null) {
             throw new RuntimeException("mock agent 获取数据为空或者异常");
         }
@@ -78,22 +73,18 @@ public abstract class CommonMockService {
     }
 
 
-    protected MockData getMockData(List<MockData> mockDataList, String expression) {
+    protected MockData getMockData(MockConfig mockConfig, List<MockData> mockDataList, Object[] args) {
+
+        Expression expression = ExpressionFactory.getExpression(mockConfig.getExpressionType(),args);
 
         for (MockData mockData : mockDataList) {
             try {
 
-                if(StringUtils.isEmpty(mockData.getMockReqParams())){
+                if(StringUtils.isEmpty(mockData.getExpression())){
                     return mockData;
                 }
 
-                Express express = expressCache.get(expression);
-                if(express== null){
-
-                    Object expressValue = express.getValue(mockData, expression);
-                }
-
-                final Object jsonPathValue = JSONPath.eval(argsString, mockData.getMockReqParams());
+                Object jsonPathValue = expression.getValue(args, mockData.getExpression());
                 if (jsonPathValue == null) {
                     continue;
                 }

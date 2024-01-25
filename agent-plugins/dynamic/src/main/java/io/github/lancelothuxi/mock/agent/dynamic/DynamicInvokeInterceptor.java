@@ -21,9 +21,8 @@ public class DynamicInvokeInterceptor extends CommonMockService implements Inter
 
         String methodName = realMethod.getName();
         String interfaceName = realMethod.getDeclaringClass().getName();
-        final String argsString = JSON.toJSONString(args);
 
-        Object result = super.doMock(interfaceName, methodName, "", "", supercall, argsString,
+        Object result = super.doMock(interfaceName, methodName, "", "", supercall, args,
                 realMethod.getGenericReturnType());
 
         return result;

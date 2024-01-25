@@ -35,11 +35,10 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
         String methodName = invocation.getMethodName();
         final String groupName = mockClusterInvoker.getUrl().getParameter(Constants.GROUP_KEY, "");
         final String version = mockClusterInvoker.getUrl().getParameter(Constants.VERSION_KEY, "");
-        final String argsString = JSON.toJSONString(invocation.getArguments());
         final Method dubboMethod =
                 mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
 
-        Object o = super.doMock(interfaceName, methodName, groupName, version, supercall, argsString,
+        Object o = super.doMock(interfaceName, methodName, groupName, version, supercall, allArguments,
                 dubboMethod.getGenericReturnType());
         return AsyncRpcResult.newDefaultAsyncResult(o,invocation);
     }

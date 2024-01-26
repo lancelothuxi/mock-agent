@@ -64,7 +64,7 @@ public class MockConfig implements Serializable {
     private Integer serverSideMock = 0;
 
     //jsonpath ognl
-    private Integer expressionType;
+    private Integer expressionType = 1;
 
     /**
      * mock数据列表

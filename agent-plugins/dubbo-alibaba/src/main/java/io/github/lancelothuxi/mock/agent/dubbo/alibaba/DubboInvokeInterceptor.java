@@ -31,14 +31,12 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
         MockClusterInvoker mockClusterInvoker = (MockClusterInvoker) self;
         Invocation invocation = ((Invocation) allArguments[0]);
 
-        // skip CommonDubboMockService
         final String interfaceName = mockClusterInvoker.getInterface().getCanonicalName();
 
         String methodName = invocation.getMethodName();
         final String groupName = mockClusterInvoker.getUrl().getParameter(Constants.GROUP_KEY, "");
         final String version = mockClusterInvoker.getUrl().getParameter(Constants.VERSION_KEY, "");
-        final Method dubboMethod =
-                mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
+        final Method dubboMethod = mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
 
         return super.doMock(interfaceName, methodName, groupName, version, supercall, allArguments,
                 dubboMethod.getGenericReturnType());
@@ -51,6 +49,6 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
 
     @Override
     protected String getType() {
-        return null;
+        return "dubbo";
     }
 }

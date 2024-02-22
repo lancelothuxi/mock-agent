@@ -52,7 +52,7 @@ public class HttpUtil {
             }
         }catch (Exception ex){
             logger.error("http请求出错",ex);
-            throw new RuntimeException("http请求出错",ex);
+            throw new RuntimeException("http请求出错000",ex);
         }
         finally {
             if (in != null) {

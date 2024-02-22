@@ -1,10 +1,15 @@
 package io.github.lancelothuxi.mock.agent.config.registry;
 
+import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
+import io.github.lancelothuxi.mock.agent.polling.QueryMockConfigsRequest;
 import io.github.lancelothuxi.mock.agent.polling.local.LocalFileConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.remote.HttpConfigFetcher;
+import io.github.lancelothuxi.mock.agent.util.HttpUtil;
 import io.github.lancelothuxi.mock.agent.util.MapCompare;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import static io.github.lancelothuxi.mock.agent.config.GlobalConfig.CONFIG_MODE;
+import static io.github.lancelothuxi.mock.agent.config.GlobalConfig.applicationName;
 import static io.github.lancelothuxi.mock.agent.util.ConfigUtil.getPropertyFromEnvOrSystemProperty;
 import static io.github.lancelothuxi.mock.agent.util.Util.getOrDefault;
 
@@ -21,32 +27,28 @@ import static io.github.lancelothuxi.mock.agent.util.Util.getOrDefault;
  */
 public class MockConfigRegistry {
     private static final Logger logger = LoggerFactory.getLogger(MockConfigRegistry.class);
-    public static String lastMd5;
     private static final Map<Key, MockConfig> registry = new ConcurrentHashMap<>();
     private static final Map<Key, MockConfig> registerRegistry = new ConcurrentHashMap<>();
     private static MockConfigFetcher mockConfigFetcher;
-
     private static final Timer timer = new Timer();
 
     public static void init(){
-
         //init config fetcher
         String configMode = getPropertyFromEnvOrSystemProperty(CONFIG_MODE);
-
         if("file".equals(configMode)){
             mockConfigFetcher = new LocalFileConfigFetcher();
         }else {
             mockConfigFetcher = new HttpConfigFetcher();
         }
 
+        QueryMockConfigsRequest mockConfigsRequest =new QueryMockConfigsRequest();
+        mockConfigsRequest.setApplicationName(applicationName);
 
-        List<MockConfig> mockConfigs = mockConfigFetcher.getMockConfigs();
-        sync(mockConfigs);
+        sync(mockConfigsRequest);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                List<MockConfig> mockConfigs = mockConfigFetcher.getMockConfigs();
-                sync(mockConfigs);
+                sync(mockConfigsRequest);
             }
         }, 5000L, 5000L);
     }
@@ -60,38 +62,25 @@ public class MockConfigRegistry {
         registerRegistry.put(key, mockConfig);
     }
 
-    public static Set<Key> keys() {
-        return registry.keySet();
-    }
-
     /**
      * 同步到到本地存储
      *
-     * @param configs
      */
-    public static void sync(List<MockConfig> configs) {
-
+    public static void sync(QueryMockConfigsRequest mockConfigsRequest) {
+        List<MockConfig> configs = mockConfigFetcher.getMockConfigs(mockConfigsRequest);
         if (configs == null || configs.isEmpty()) {
             registry.clear();
         }
-
         Map<Key, MockConfig> tmp = new HashMap<>();
-        assert configs != null;
         for (MockConfig config : configs) {
             Key key = new Key(config);
             tmp.put(key, config);
         }
-
         MapCompare.compareMaps(registry, tmp);
     }
 
     public static List<MockConfig> getMockConfigs(String type) {
         return registry.values().stream().filter(t->type.equals(t.getType())).collect(Collectors.toList());
-    }
-
-
-    public static List<MockConfig> registryValues() {
-        return new ArrayList<>(registerRegistry.values());
     }
 
     public static MockConfig getMockConfig(MockConfig query) {
@@ -109,6 +98,8 @@ public class MockConfigRegistry {
         return mockConfig;
     }
 
+    @Data
+    @EqualsAndHashCode
     public static class Key {
 
         /**
@@ -138,50 +129,6 @@ public class MockConfigRegistry {
             this.groupName = getOrDefault(mockConfig.getGroupName(),"");
             this.version = getOrDefault(mockConfig.getVersion(),"");
             this.type= mockConfig.getType();
-        }
-
-        public String getInterfaceName() {
-            return interfaceName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public String getGroupName() {
-            return groupName;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Key key = (Key) o;
-            return Objects.equals(type, key.type) && Objects.equals(interfaceName, key.interfaceName) && Objects.equals(methodName, key.methodName) && Objects.equals(groupName, key.groupName) && Objects.equals(version, key.version);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(type, interfaceName, methodName, groupName, version);
-        }
-
-        @Override
-        public String toString() {
-            return "Key{" +
-                    "type='" + type + '\'' +
-                    ", interfaceName='" + interfaceName + '\'' +
-                    ", methodName='" + methodName + '\'' +
-                    ", groupName='" + groupName + '\'' +
-                    ", version='" + version + '\'' +
-                    '}';
         }
     }
 }

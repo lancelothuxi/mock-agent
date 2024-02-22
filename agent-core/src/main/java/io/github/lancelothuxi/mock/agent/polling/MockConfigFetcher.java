@@ -6,9 +6,8 @@ import java.util.List;
 
 public interface MockConfigFetcher {
 
-
     /**
      * 获取mock配置
      */
-    public List<MockConfig> getMockConfigs();
+    List<MockConfig> getMockConfigs(QueryMockConfigsRequest mockConfigsRequest);
 }

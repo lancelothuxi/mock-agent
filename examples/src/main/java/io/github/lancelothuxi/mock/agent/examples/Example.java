@@ -2,12 +2,17 @@ package io.github.lancelothuxi.mock.agent.examples;
 
 import com.ea.agentloader.AgentLoader;
 import io.github.lancelothuxi.mock.agent.core.MockAgent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
 
 public class Example {
     public static void main(String[] args) throws Exception{
+
+       final Logger logger = LoggerFactory.getLogger(MockAgent.class);
+        logger.info("aaa");
 
         System.setProperty("MOCK_APPLICATION_NAME","Example");
         System.setProperty("mock.agent.config.mode","file");

@@ -22,10 +22,9 @@ public class FeignInvokeInterceptor extends CommonMockService implements Interce
             return supercall.call();
         }
 
-        String interfacename = realMethod.getDeclaringClass().getName();
-
+        String interfaceName = realMethod.getDeclaringClass().getName();
         MockConfig query = new MockConfig();
-        query.setInterfaceName(interfacename);
+        query.setInterfaceName(interfaceName);
         query.setEnabled(1);
         query.setMethodName(methodName);
         query.setGroupName("");
@@ -33,7 +32,7 @@ public class FeignInvokeInterceptor extends CommonMockService implements Interce
         query.setType("feign");
         query.setApplicationName(GlobalConfig.applicationName);
 
-        return super.doMock(interfacename, methodName, "", "", supercall, allArguments,
+        return super.doMock(interfaceName, methodName, "", "", supercall, allArguments,
                 method.getGenericReturnType());
     }
 

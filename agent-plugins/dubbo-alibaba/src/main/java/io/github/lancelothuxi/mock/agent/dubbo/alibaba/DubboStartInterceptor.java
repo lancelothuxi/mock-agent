@@ -39,13 +39,11 @@ public class DubboStartInterceptor implements Interceptor {
 
                 logger.info("获取到dubbo应用依赖的provider interfacename={} methodname={} groupName={} version={}",
                         interfaceName, dubboMethod.getName(), groupName, version);
-                MockConfigRegistry.add4Register(mockConfig);
             }
 
         } catch (Throwable throwable) {
             logger.error("intercept dubbo 启动类失败", throwable);
         }
-
         try {
             return supercall.call();
         } catch (Exception e) {

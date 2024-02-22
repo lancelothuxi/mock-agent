@@ -16,7 +16,7 @@ public class FeignExample {
     public static void main(String[] args) throws Exception{
 
         System.setProperty("MOCK_APPLICATION_NAME","Example");
-        System.setProperty("mock.agent.config.mode","file");
+        System.setProperty("MOCK_SERVER_URL","http://localhost:8080");
 
         URL resource = Example.class.getClassLoader().getResource("mockconfig.json");
         File file = new File(resource.toURI());

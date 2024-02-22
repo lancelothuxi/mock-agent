@@ -15,8 +15,8 @@
         <flatten-maven-transformer.version>1.3.0</flatten-maven-transformer.version>
         <testng.version>6.9.10</testng.version>
         <mockito.version>4.0.0</mockito.version>
-        <slf4j-api.version>2.0.5</slf4j-api.version>
-        <slf4j-simple.version>2.0.5</slf4j-simple.version>
+        <slf4j-api.version>1.7.25</slf4j-api.version>
+        <slf4j-simple.version>1.7.25</slf4j-simple.version>
         <fastjson.version>2.0.1</fastjson.version>
         <httpcore.version>4.4.5</httpcore.version>
         <httpclient.version>4.5.13</httpclient.version>

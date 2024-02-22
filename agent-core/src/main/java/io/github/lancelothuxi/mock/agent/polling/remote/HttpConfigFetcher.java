@@ -1,34 +1,35 @@
 package io.github.lancelothuxi.mock.agent.polling.remote;
 
+import com.alibaba.fastjson2.JSON;
 import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.util.HttpUtil;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.QueryMockConfigsRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import static io.github.lancelothuxi.mock.agent.config.Constant.QUERY_MOCK_CONFIG_LIST_URL;
-import static io.github.lancelothuxi.mock.agent.util.Util.readFileToString;
+import static io.github.lancelothuxi.mock.agent.config.Constant.SYNC_MOCK_CONFIG_LIST_URL;
 
 /**
  * @author lancelot
  */
 public class HttpConfigFetcher implements MockConfigFetcher {
-
+    private static final Logger logger = LoggerFactory.getLogger(HttpConfigFetcher.class);
     @Override
-    public List<MockConfig> getMockConfigs() {
+    public List<MockConfig> getMockConfigs(QueryMockConfigsRequest mockConfigsRequest) {
         QueryMockConfigsRequest queryMockConfigsRequest = new QueryMockConfigsRequest();
-        queryMockConfigsRequest.setAppName(GlobalConfig.applicationName);
-
-        final String result = HttpUtil.sendPostRequest(QUERY_MOCK_CONFIG_LIST_URL,queryMockConfigsRequest, 3000);
-
+        queryMockConfigsRequest.setApplicationName(GlobalConfig.applicationName);
+        final String content = HttpUtil.sendPostRequest(SYNC_MOCK_CONFIG_LIST_URL,queryMockConfigsRequest, 3000);
         try {
-            String content = readFileToString(new File(result));
-            return com.alibaba.fastjson2.JSON.parseArray(content, MockConfig.class);
-        } catch (IOException e) {
+            if(logger.isDebugEnabled()){
+                logger.debug("getMockConfigs return {}",content);
+            }
+            return JSON.parseArray(content, MockConfig.class);
+        } catch (Exception e) {
+            logger.error("getMockConfigs failed",e);
             throw new RuntimeException(e);
         }
     }

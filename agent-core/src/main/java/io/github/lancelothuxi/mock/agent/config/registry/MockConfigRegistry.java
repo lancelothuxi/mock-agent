@@ -1,5 +1,6 @@
 package io.github.lancelothuxi.mock.agent.config.registry;
 
+import com.alibaba.fastjson2.JSON;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.QueryMockConfigsRequest;
@@ -64,6 +65,10 @@ public class MockConfigRegistry {
      */
     public static void sync(QueryMockConfigsRequest mockConfigsRequest) {
         mockConfigsRequest.setMockConfigList(registerRegistry.values().stream().collect(Collectors.toList()));
+        if(logger.isDebugEnabled()){
+            logger.debug("mockConfigsRequest={}", JSON.toJSONString(mockConfigsRequest));
+        }
+
         List<MockConfig> configs = mockConfigFetcher.getMockConfigs(mockConfigsRequest);
         if (configs == null || configs.isEmpty()) {
             registry.clear();

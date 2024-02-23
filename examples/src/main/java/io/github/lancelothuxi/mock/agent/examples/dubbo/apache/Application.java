@@ -13,20 +13,22 @@ public class Application {
     public static void main(String[] args) throws Exception {
 
         System.setProperty("MOCK_APPLICATION_NAME","Example");
-        System.setProperty("mock.agent.config.mode","file");
-
-        URL resource = Example.class.getClassLoader().getResource("mockconfig.json");
-        File file = new File(resource.toURI());
-
-        String path = file.getPath();
-        System.setProperty("mock.agent.config.file.path",path);
+        System.setProperty("MOCK_SERVER_URL","http://localhost:8080");
 
         AgentLoader.loadAgentClass(MockAgent.class.getName(),"");
 
-        DubboApacheExampleService dubboApacheExampleService =new DubboApacheExampleService();
-        String sayHelloByDubbo = dubboApacheExampleService.sayHelloByDubbo();
+        while (true){
 
-        //输出： sayHelloByDubbo =  this is mock data
-        System.out.println("sayHelloByDubbo = " + sayHelloByDubbo);
+            try {
+                DubboApacheExampleService dubboApacheExampleService =new DubboApacheExampleService();
+                String sayHelloByDubbo = dubboApacheExampleService.sayHelloByDubbo();
+                //输出： sayHelloByDubbo =  this is mock data
+                System.out.println("sayHelloByDubbo = " + sayHelloByDubbo);
+            }catch (Exception ex){
+                //
+            }finally {
+                Thread.sleep(1000);
+            }
+        }
     }
 }

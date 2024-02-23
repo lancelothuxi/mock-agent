@@ -1,13 +1,12 @@
 package io.github.lancelothuxi.mock.agent.dubbo.apache;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.fastjson.JSON;
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import io.github.lancelothuxi.mock.agent.mock.CommonMockService;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.Origin;
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import net.bytebuddy.implementation.bind.annotation.This;
+import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.rpc.AsyncRpcResult;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker;
@@ -33,10 +32,9 @@ public class DubboInvokeInterceptor extends CommonMockService implements Interce
         final String interfaceName = mockClusterInvoker.getInterface().getCanonicalName();
 
         String methodName = invocation.getMethodName();
-        final String groupName = mockClusterInvoker.getUrl().getParameter(Constants.GROUP_KEY, "");
-        final String version = mockClusterInvoker.getUrl().getParameter(Constants.VERSION_KEY, "");
-        final Method dubboMethod =
-                mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
+        final String groupName = mockClusterInvoker.getUrl().getParameter(CommonConstants.GROUP_KEY, "");
+        final String version = mockClusterInvoker.getUrl().getParameter(CommonConstants.VERSION_KEY, "");
+        final Method dubboMethod = mockClusterInvoker.getInterface().getMethod(methodName, invocation.getParameterTypes());
 
         Object o = super.doMock(interfaceName, methodName, groupName, version, supercall, allArguments,
                 dubboMethod.getGenericReturnType());

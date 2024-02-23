@@ -15,13 +15,7 @@ public class Example {
         logger.info("aaa");
 
         System.setProperty("MOCK_APPLICATION_NAME","Example");
-        System.setProperty("mock.agent.config.mode","file");
-
-        URL resource = Example.class.getClassLoader().getResource("mockconfig.json");
-        File file = new File(resource.toURI());
-
-        String path = file.getPath();
-        System.setProperty("mock.agent.config.file.path",path);
+        System.setProperty("MOCK_SERVER_URL","http://localhost:8080");
 
         AgentLoader.loadAgentClass(MockAgent.class.getName(),"a=b");
 

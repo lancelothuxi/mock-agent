@@ -18,16 +18,16 @@ public class RegisterTransformer implements Transformer {
 
     @Override
     public ElementMatcher<TypeDescription> classMatcher() {
-        return ElementMatchers.<TypeDescription>named("org.apache.dubbo.config.spring.ReferenceBean");
+        return ElementMatchers.<TypeDescription>named("org.apache.dubbo.config.ReferenceConfig");
     }
 
     @Override
     public ElementMatcher<? super MethodDescription> methodMatcher() {
-        return named("afterPropertiesSet");
+        return named("createProxy");
     }
 
     @Override
     public Class<? extends Interceptor> interceptor() {
-        return DubboInvokeInterceptor.class;
+        return DubboStartInterceptor.class;
     }
 }

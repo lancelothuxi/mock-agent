@@ -5,7 +5,7 @@ import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.config.registry.MockConfigRegistry;
 import io.github.lancelothuxi.mock.agent.core.Interceptor;
 import io.github.lancelothuxi.mock.agent.util.StringUtils;
-import org.apache.dubbo.config.spring.ReferenceBean;
+import org.apache.dubbo.config.ReferenceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,16 +17,14 @@ import java.util.concurrent.Callable;
  */
 public class DubboStartInterceptor implements Interceptor {
     private static Logger logger = LoggerFactory.getLogger(DubboStartInterceptor.class);
-
     @Override
     public Object intercept(Method method, Object[] allArguments, Object self, Callable supercall) {
         try {
 
-            ReferenceBean referenceBean = (ReferenceBean) self;
+            ReferenceConfig referenceBean = (ReferenceConfig) self;
             final String interfaceName = referenceBean.getInterface();
             final String groupName = referenceBean.getGroup();
             final String version = referenceBean.getVersion();
-
 
             for (Method dubboMethod : referenceBean.getInterfaceClass().getMethods()) {
                 MockConfig mockConfig = new MockConfig();
@@ -45,7 +43,6 @@ public class DubboStartInterceptor implements Interceptor {
         } catch (Throwable throwable) {
             logger.error("intercept dubbo 启动类失败", throwable);
         }
-
         try {
             return supercall.call();
         } catch (Exception e) {

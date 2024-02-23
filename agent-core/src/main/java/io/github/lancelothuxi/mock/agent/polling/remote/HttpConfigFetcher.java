@@ -20,9 +20,7 @@ public class HttpConfigFetcher implements MockConfigFetcher {
     private static final Logger logger = LoggerFactory.getLogger(HttpConfigFetcher.class);
     @Override
     public List<MockConfig> getMockConfigs(QueryMockConfigsRequest mockConfigsRequest) {
-        QueryMockConfigsRequest queryMockConfigsRequest = new QueryMockConfigsRequest();
-        queryMockConfigsRequest.setApplicationName(GlobalConfig.applicationName);
-        final String content = HttpUtil.sendPostRequest(SYNC_MOCK_CONFIG_LIST_URL,queryMockConfigsRequest, 3000);
+        final String content = HttpUtil.sendPostRequest(SYNC_MOCK_CONFIG_LIST_URL,mockConfigsRequest, 3000);
         try {
             if(logger.isDebugEnabled()){
                 logger.debug("getMockConfigs return {}",content);

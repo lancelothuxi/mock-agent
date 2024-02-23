@@ -6,7 +6,6 @@ import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 
 public class DubboApacheExampleService {
-
     public String sayHelloByDubbo(){
         ReferenceConfig<GreetingsService> reference = new ReferenceConfig<>();
         reference.setApplication(new ApplicationConfig("first-dubbo-consumer"));

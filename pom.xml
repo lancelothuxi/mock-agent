@@ -26,6 +26,7 @@
         <httpmime.version>4.4</httpmime.version>
         <mockito-inline.version>4.11.0</mockito-inline.version>
         <ognl.version>3.4.0</ognl.version>
+        <lombok.version>1.18.10</lombok.version>
     </properties>
 
     <modules>
@@ -125,6 +126,12 @@
                     <target>8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>1.16.6.1</version>
             </plugin>
 
             <plugin>

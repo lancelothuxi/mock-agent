@@ -1,12 +1,10 @@
 package io.github.lancelothuxi.mock.agent.config.registry;
 
-import io.github.lancelothuxi.mock.agent.config.GlobalConfig;
 import io.github.lancelothuxi.mock.agent.config.MockConfig;
 import io.github.lancelothuxi.mock.agent.polling.MockConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.QueryMockConfigsRequest;
 import io.github.lancelothuxi.mock.agent.polling.local.LocalFileConfigFetcher;
 import io.github.lancelothuxi.mock.agent.polling.remote.HttpConfigFetcher;
-import io.github.lancelothuxi.mock.agent.util.HttpUtil;
 import io.github.lancelothuxi.mock.agent.util.MapCompare;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,17 +38,15 @@ public class MockConfigRegistry {
         }else {
             mockConfigFetcher = new HttpConfigFetcher();
         }
-
         QueryMockConfigsRequest mockConfigsRequest =new QueryMockConfigsRequest();
         mockConfigsRequest.setApplicationName(applicationName);
-
         sync(mockConfigsRequest);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 sync(mockConfigsRequest);
             }
-        }, 5000L, 5000L);
+        }, 1000L, 5000L);
     }
     public static void add(MockConfig mockConfig) {
         Key key = new Key(mockConfig);
@@ -67,6 +63,7 @@ public class MockConfigRegistry {
      *
      */
     public static void sync(QueryMockConfigsRequest mockConfigsRequest) {
+        mockConfigsRequest.setMockConfigList(registerRegistry.values().stream().collect(Collectors.toList()));
         List<MockConfig> configs = mockConfigFetcher.getMockConfigs(mockConfigsRequest);
         if (configs == null || configs.isEmpty()) {
             registry.clear();

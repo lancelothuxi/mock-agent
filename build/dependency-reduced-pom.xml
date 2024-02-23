@@ -37,7 +37,7 @@
                   </manifestEntries>
                 </transformer>
                 <transformer>
-                  <resource>mock-transformer.def</resource>
+                  <resource>mock-plugin.def</resource>
                 </transformer>
               </transformers>
               <filters>
